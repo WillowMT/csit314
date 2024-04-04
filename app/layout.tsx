@@ -23,6 +23,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Nav />
           {children}
+          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider>
