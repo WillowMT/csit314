@@ -1,20 +1,20 @@
-import { auth } from '@clerk/nextjs'
 import { SignInButton, UserButton } from '@clerk/nextjs';
+import {auth} from '@clerk/nextjs';
 
-export default function Nav() {
-    const { userId } = auth();
+export function Nav() {
+
+    const {userId} = auth();
 
     return (
         <div className='flex  justify-between px-10 py-4 border-b'>
             <div className=' grid place-items-center font-bold text-lg'>
-                Demo
+                <a href="">
+                    Demo
+                </a>
             </div>
             <div className=' flex space-x-5'>
                 {
-                    !userId && <SignInButton />
-                }
-                {
-                    userId && <UserButton />
+                    userId ? <UserButton /> : <SignInButton />
                 }
             </div>
         </div>
