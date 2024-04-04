@@ -1,11 +1,15 @@
 import Link from 'next/link'
+import Nav from '@/components/nav'
 
 export default function Page() {
   return (
     <div>
-      <h1>Home</h1>
-      <Link href="/about">About</Link>
-      <button>hola</button>
+      <main className=' flex place-content-center place-items-center min-h-screen'>
+        <h2>
+          add your content here
+        </h2>
+      </main>
+      <footer></footer>
     </div>
   )
 }
