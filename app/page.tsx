@@ -1,9 +1,13 @@
-export default function Page() {
+'use client'
+
+import prisma from "@/utils/prisma"
+
+export default  function Page() {
   return (
     <div>
       <div className=' flex place-content-center place-items-center min-h-screen'>
         <h2>
-          add your content here
+          hello world
         </h2>
       </div>
       <footer></footer>
