@@ -28,3 +28,5 @@ return (
     </div>
 )
 }
+
+export const revalidate = 60

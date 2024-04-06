@@ -1,6 +1,7 @@
 'use server'
 import prisma from "@/utils/prisma";
 import { encryptPassword } from "@/utils/hash";
+import { revalidatePath } from "next/cache";
 
 export async function submit(previousState:any, form: FormData) {
     'use server'
@@ -62,6 +63,8 @@ export async function submit(previousState:any, form: FormData) {
             }
         })
     }
+
+    revalidatePath('/admin')
 
     return {success:true, message: `User ${user.id} created successfully!`}
 
