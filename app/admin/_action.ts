@@ -12,7 +12,6 @@ export async function deleteUser(form:FormData) {
     })
 
     revalidatePath('/admin')
-    revalidatePath('/mongodb')
 
 }
 
@@ -25,5 +24,4 @@ export async function setRole(id:string, role:string) {
             role: role as "USER" | "AGENT" | "ADMIN"
         }
     })
-    revalidatePath('/mongodb')
 }

@@ -66,7 +66,6 @@ export async function submit(previousState:any, form: FormData) {
     }
 
     revalidatePath('/admin')
-    revalidatePath('/mongodb')
 
     return {success:true, message: `User ${user.id} created successfully!`}
 
