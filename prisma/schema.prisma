@@ -23,6 +23,7 @@ model User {
   phoneNumber  String
   agent        Agent?   @relation(fields: [agentId], references: [id])
   agentId      String?  @db.ObjectId
+  role Role @default(USER)
 }
 
 model Agent {
@@ -33,4 +34,11 @@ model Agent {
   jobDesignation String
   createdAt      DateTime @default(now())
   User           User[]
+}
+
+enum Role {
+  ADMIN
+  USER
+  AGENT
+  SUPERUSER
 }

@@ -43,7 +43,8 @@ export async function submit(previousState:any, form: FormData) {
             firstName: firstName,
             lastName: lastName,
             country: country,
-            phoneNumber: phoneNumber
+            phoneNumber: phoneNumber,
+            role: ceaNumber && agency && license && jobDesignation ? 'AGENT' : 'USER'
         }
     })
 

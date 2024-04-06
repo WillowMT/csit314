@@ -8,6 +8,7 @@ export default async function Page() {
             email: true,
             firstName: true,
             lastName: true,
+            role:true
         }
     })
 
@@ -20,7 +21,7 @@ return (
             <ul>
                 {users.map((user) => (
                     <li key={user.id}>
-                        <UserRow id={user.id} email={user.email} />
+                        <UserRow id={user.id} email={user.email} role={user.role} />
                     </li>
                 ))}
             </ul>
