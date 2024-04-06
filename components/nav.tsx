@@ -10,6 +10,7 @@ export default function Navigation() {
                     <Link className="grid place-items-center hover:underline" href={"/agent"}>Agent</Link>
                     <Link className="grid place-items-center hover:underline" href={"/admin"}>Admin</Link>
                     <Link className="grid place-items-center hover:underline" href={"/property"}>Property</Link>
+                    <Link className="grid place-items-center hover:underline" href={"/mongodb"}>Mongodb</Link>
                 </div>
                 <div className="flex space-x-2">
                 <div className="border border-black px-2 py-1 w-fit rounded-sm"><Link href={"/register"}>Register</Link></div>
