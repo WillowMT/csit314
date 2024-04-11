@@ -1,10 +1,11 @@
 'use server'
-import prisma from "@/utils/prisma";
-import { encryptPassword } from "@/utils/hash";
 import { revalidatePath } from "next/cache";
+import { User } from "@/utils/controller";
 
 export async function submit(previousState:any, form: FormData) {
     'use server'
+
+    // extract data from form
     const email = form.get('email') as string
     const password = form.get('password') as string
     const passwordConfirm = form.get('passwordConfirm') as string
@@ -17,56 +18,26 @@ export async function submit(previousState:any, form: FormData) {
     const license = form.get('license') as string | null
     const jobDesignation = form.get('jobDesignation') as string | null
 
-
-    if (password !== passwordConfirm) {
-        return {success:false, message: "Passwords do not match"}
+    const userObj = {
+        email,
+        password,
+        passwordConfirm,
+        firstName,
+        lastName,
+        country,
+        phoneNumber,
+        ceaNumber,
+        agency,
+        license,
+        jobDesignation
     }
 
-    // check if user exists already
-    const userExists = await prisma.user.findUnique({
-        where:{
-            email: email
-        }
-    })
+    // call user object
+    const user = new User(email)
+    const {success, message} = await user.create(userObj)
 
-    if (userExists) {
-        return {success:false, message: "User already exists"}
-    }
-
-    const passwordHash = await encryptPassword(password);
-
-
-    const user = await prisma.user.create({
-        data: {
-            email: email,
-            passwordHash: passwordHash,
-            firstName: firstName,
-            lastName: lastName,
-            country: country,
-            phoneNumber: phoneNumber,
-            role: ceaNumber && agency && license && jobDesignation ? 'AGENT' : 'USER'
-        }
-    })
-
-    // check if agent
-    if (ceaNumber && agency && license && jobDesignation) {
-        await prisma.agent.create({
-            data: {
-                ceaNumber: ceaNumber,
-                agency: agency,
-                license: license,
-                jobDesignation: jobDesignation,
-                User: {
-                    connect: {
-                        id: user.id
-                    }
-                }
-            }
-        })
-    }
 
     revalidatePath('/admin')
-
-    return {success:true, message: `User ${user.id} created successfully!`}
+    return {success,message}
 
 }
