@@ -1,6 +1,16 @@
+'use client'
+
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 
+const hiddenRoutes = ['/signup','/signin']
+
 export default function Navigation() {
+    const pathname = usePathname()
+    console.log(pathname);
+
+    if (hiddenRoutes.includes(pathname)) return null
+    
     return(
         <div className="border-b">
             <nav className=" flex justify-between p-4">
