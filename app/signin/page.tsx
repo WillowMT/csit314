@@ -7,7 +7,7 @@ export default async function Page() {
 
     return (
         <div className="">
-            <h1 className=" mb-4 bg-orange-800 text-center py-4 text-2xl font-bold text-white">Sign In</h1>
+            <h1 className=" bg-brand-200 text-center py-4 text-2xl font-bold text-black">Sign In</h1>
             <Form />
         </div>
     );

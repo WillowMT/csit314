@@ -26,8 +26,8 @@ export default function Form() {
 
 
     return (
-        <div className="flex w-full flex-col ">
-            <Card className="mx-4 mt-14" >
+        <div className="flex w-full flex-col my-4 py-8">
+            <Card className="mx-4" >
                 <CardBody className="">
 
                     <form action={formAction} className="w-full px-4 py-[7rem]">
@@ -77,7 +77,6 @@ export default function Form() {
                         </div>
                     </form>
                 </CardBody>
-
             </Card>
         </div>
     );
@@ -89,7 +88,7 @@ function Btn() {
     const { pending } = useFormStatus();
     return (
         <div className="  grid place-items-center">
-            <Button type="submit" className=" rounded-full bg-orange-800 font-bold text-white">
+            <Button type="submit" className=" rounded-full bg-brand-200 font-bold text-white">
                 {pending ? 'Loading...' : 'Create Account'}
             </Button>
             <br />

@@ -5,7 +5,7 @@ import {
 } from "@nextui-org/react";
 import { useFormState, useFormStatus } from "react-dom";
 import { submit } from "./_action";
-import {countries} from '@/utils/countries'
+import { countries } from '@/utils/countries'
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast'
 
@@ -20,7 +20,7 @@ export default function Form() {
         if (!selectedCountry) return
 
         setDialCode(selectedCountry.dial_code)
-    },[country])
+    }, [country])
 
 
     useEffect(() => {
@@ -254,7 +254,7 @@ function Btn() {
     const { pending } = useFormStatus();
     return (
         <div className="  grid place-items-center">
-            <Button type="submit" className=" rounded-full bg-orange-800 font-bold text-white">
+            <Button type="submit" className=" rounded-full bg-brand-200 font-bold text-white">
                 {pending ? 'Loading...' : 'Create Account'}
             </Button>
             <br />
