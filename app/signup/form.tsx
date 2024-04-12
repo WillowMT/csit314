@@ -6,21 +6,34 @@ import {
 import { useFormState, useFormStatus } from "react-dom";
 import { submit } from "./_action";
 import {countries} from '@/utils/countries'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from 'react-hot-toast'
+
 
 export default function Form() {
     const [state, formAction] = useFormState(submit, null);
+    const [country, setCountry] = useState('Singapore')
+    const [dialCode, setDialCode] = useState('+65')
 
     useEffect(() => {
+        const selectedCountry = countries.find((c) => c.name === country)
+        if (!selectedCountry) return
+
+        setDialCode(selectedCountry.dial_code)
+    },[country])
+
+
+    useEffect(() => {
+        if (!state?.message) return
+
         if (state?.success) {
             toast.success('Account created successfully')
         }
 
-        if (!state?.success) {
+        if (!state?.success && state?.message) {
             toast.error(state?.message || 'An error occurred. Please try again.')
         }
-    },[state])
+    }, [state])
 
 
     return (
@@ -68,6 +81,7 @@ export default function Form() {
                                         label="Country"
                                         labelPlacement={'outside'}
                                         placeholder="Country"
+                                        onChange={(e) => setCountry(e.target.value)}
                                     >
                                         {countries.map((country) => (
                                             <SelectItem key={country.name} value={country.name}>
@@ -83,6 +97,7 @@ export default function Form() {
                                         label="Phone Number"
                                         labelPlacement={'outside'}
                                         placeholder="Phone Number"
+                                        startContent={<span className=" text-gray-500 text-sm">{dialCode}</span>}
                                     />
                                     <Input
                                         isRequired
@@ -150,6 +165,7 @@ export default function Form() {
                                         label="Country"
                                         labelPlacement={'outside'}
                                         placeholder="Country"
+                                        onChange={(e) => setCountry(e.target.value)}
                                     >
                                         {countries.map((country) => (
                                             <SelectItem key={country.name} value={country.name}>
@@ -201,6 +217,7 @@ export default function Form() {
                                         label="Phone Number"
                                         labelPlacement={'outside'}
                                         placeholder="Phone Number"
+                                        startContent={<span className=" text-gray-500 text-sm">{dialCode}</span>}
                                     />
                                     <Input
                                         isRequired

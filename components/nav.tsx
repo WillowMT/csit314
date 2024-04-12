@@ -2,16 +2,17 @@
 
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { Button } from "@nextui-org/react"
 
-const hiddenRoutes = ['/signup','/signin']
+const hiddenRoutes = ['/signup', '/signin']
 
 export default function Navigation() {
     const pathname = usePathname()
     console.log(pathname);
 
     if (hiddenRoutes.includes(pathname)) return null
-    
-    return(
+
+    return (
         <div className="border-b">
             <nav className=" flex justify-between p-4">
                 <div className=" grid place-content-center"><Link href={"/"}>PropertyGuru</Link></div>
@@ -23,8 +24,8 @@ export default function Navigation() {
                     <Link className="grid place-items-center hover:underline" href={"/mongodb"}>Mongodb</Link>
                 </div>
                 <div className="flex space-x-2">
-                <div className="border border-black px-2 py-1 w-fit rounded-sm"><Link href={"/register"}>Register</Link></div>
-                <div className="border border-black px-2 py-1 w-fit rounded-sm"><Link href={"/login"}>Login</Link></div>
+                    <Button className="" ><Link href={"/signup"}>Sign Up</Link></Button>
+                    <Button className="" ><Link href={"/signin"}>Sign In</Link></Button>
 
                 </div>
             </nav>
