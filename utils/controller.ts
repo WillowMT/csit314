@@ -1,4 +1,4 @@
-import { encryptPassword } from "@/utils/hash";
+import { comparePassword, encryptPassword } from "@/utils/hash";
 import prisma from "@/utils/prisma";
 
 interface UserFormData {
@@ -23,7 +23,7 @@ export class User {
     }
 
     // create user or agent
-    async create(formObj: UserFormData): Promise<{success: boolean, message: string}>{
+    async create(formObj: UserFormData): Promise<{ success: boolean, message: string }> {
 
         const { email, password, passwordConfirm, firstName, lastName, country, phoneNumber, ceaNumber, agency, license, jobDesignation } = formObj;
 
@@ -74,8 +74,23 @@ export class User {
                 }
             })
         }
-        
-        return {success:true, message: "User created successfully"};
+
+        return { success: true, message: "User created successfully" };
+    }
+
+    // get user id
+    async getId() {
+        // get user id from db
+        const userId = await prisma.user.findUnique({
+            where: {
+                email: this.email
+            },
+            select: {
+                id: true
+            }
+        })
+
+        return userId
     }
 
     // get user info
@@ -90,7 +105,8 @@ export class User {
                 firstName: true,
                 lastName: true,
                 country: true,
-                phoneNumber: true
+                phoneNumber: true,
+                role: true,
                 // TODO: add bookmark later
             }
         })
@@ -144,7 +160,38 @@ export class User {
     async saveProperty() {
         // save property
     }
-    
+
+    async login(password: string, role:string) {
+        // check if user exists
+        const user = await prisma.user.findUnique({
+            where: {
+                email: this.email,
+                role: role as 'USER' | 'AGENT'
+            }
+        })
+
+        if (!user) {
+            return { success: false, message: "User does not exist" }
+        }
+
+        // check if password matches
+        const passwordMatch = await comparePassword(password, user.passwordHash);
+
+        if (!passwordMatch) {
+            return { success: false, message: "Password is incorrect" }
+        }
+
+        return { success: true, message: "Login Success!", user: {
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            country: user.country,
+            phoneNumber: user.phoneNumber,
+            role: user.role
+        } }
+
+    }
+
 }
 
 export class Agent extends User {
@@ -195,6 +242,9 @@ export class Admin extends User {
             }
         })
     }
+
+    // get info
+    async get() {}
 
     // get all agents
     async getAgents() {

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import Navigation from "@/components/nav";
 import { Analytics } from "@vercel/analytics/react"
 import Provider from "./provider";
 import { Toaster } from "react-hot-toast";
@@ -25,7 +24,6 @@ export default function RootLayout({
       <body className="">
         <Provider>
           <div className="flex flex-col min-h-screen">
-            <Navigation />
             <div className=" flex-grow">
             {children}
             </div>

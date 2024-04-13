@@ -4,24 +4,17 @@ import {
     Tabs, Tab, Card, CardBody, Button, Link, Input, Select, SelectItem
 } from "@nextui-org/react";
 import { useFormState, useFormStatus } from "react-dom";
-import { checkUser } from "./_action";
 import { countries } from '@/utils/countries'
-import { useEffect } from "react";
-import toast from 'react-hot-toast'
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { login } from "@/utils/actions";
 
 export default function Form() {
-    const [state, formAction] = useFormState(checkUser, null);
+    const [state, formAction] = useFormState(login, null);
+    const router = useRouter()
 
     useEffect(() => {
-        if (!state?.message) return
-
-        if (state?.success) {
-            toast.success('Account created successfully')
-        }
-
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
-        }
+        
     }, [state])
 
 
@@ -36,7 +29,7 @@ export default function Form() {
 
                                 <Select
                                     isRequired
-                                    name="account"
+                                    name="role"
                                     className="max-w-[400px] mx-auto"
                                     defaultSelectedKeys={['User']}
                                     label="Login As"
@@ -61,7 +54,7 @@ export default function Form() {
                                 />
                                 <Input
                                     isRequired
-                                    name="firstName"
+                                    name="password"
                                     className=" max-w-[400px] mx-auto"
                                     type="password"
                                     label="Password"
