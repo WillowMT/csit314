@@ -171,17 +171,17 @@ export class User {
         })
 
         if (!user) {
-            return { success: false, message: "User does not exist" }
+            return { error: true, message: "User does not exist" }
         }
 
         // check if password matches
         const passwordMatch = await comparePassword(password, user.passwordHash);
 
         if (!passwordMatch) {
-            return { success: false, message: "Password is incorrect" }
+            return { error: true, message: "Password is incorrect" }
         }
 
-        return { success: true, message: "Login Success!", user: {
+        return { error: false, message: "Login Success!", user: {
             email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
@@ -197,6 +197,17 @@ export class User {
 export class Agent extends User {
     constructor(email: string) {
         super(email);
+    }
+
+    // get agent info
+    async getAgentInfo() {
+        // get agent info from db
+
+        await prisma.agent.findUnique({
+            where: {
+                id: this.email // Replace 'id' with the correct field name for the agent's identifier
+            }
+        });
     }
 
     // create listing

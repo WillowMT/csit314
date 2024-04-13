@@ -25,7 +25,7 @@ export default async function Navigation() {
                 <div className="">
                     {
                         session.isLoggedIn ? 
-                        <Profile session={session} />
+                        <Profile email={session.email} firstName={session.firstName} />
                         :
                         <div>
                             <Link href={"/signup"}>

@@ -8,15 +8,18 @@ import { countries } from '@/utils/countries'
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "@/utils/actions";
+import toast from 'react-hot-toast'
 
 export default function Form() {
     const [state, formAction] = useFormState(login, null);
-    const router = useRouter()
 
     useEffect(() => {
-        
-    }, [state])
+        if (!state || !state.error) return;
 
+        if (state.error) {
+            toast.error(state.message)
+        }
+    }, [state])
 
     return (
         <div className="flex w-full flex-col my-4 py-8">

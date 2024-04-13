@@ -44,13 +44,15 @@ export async function login(prevState:any, formData: FormData) {
 
     const usr = new User(email)
 
-    // const result = await usr.login(password, role)
+    const result = await usr.login(password, role.toUpperCase())
 
-    // if (!result.success) {
-    //     return result;
-    // }
+    if (result.error) {
+        return result;
+    }
 
     const userInfo = await usr.getInfo();
+
+    
 
     session.email = userInfo?.email || ""
     session.firstName = userInfo?.firstName || ""

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SessionData } from "@/utils/lib";
 import { logout } from "@/utils/actions";
 
-export default function Profile({ session }: { session: SessionData }) {
+export default function Profile({ email, firstName }: { email:string, firstName:string }) {
     return (
         <Dropdown
             radius="sm"
@@ -14,7 +14,7 @@ export default function Profile({ session }: { session: SessionData }) {
             }}
         >
             <DropdownTrigger>
-                <Avatar src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${session.email}`} />
+                <Avatar src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${email}`} />
             </DropdownTrigger>
             <DropdownMenu
                 aria-label="Custom item styles"
@@ -41,15 +41,15 @@ export default function Profile({ session }: { session: SessionData }) {
                         className="h-14 gap-2 opacity-100"
                     >
                         <User
-                            name={session.firstName}
-                            description={session.email}
+                            name={firstName}
+                            description={email}
                             classNames={{
                                 name: "text-default-600",
                                 description: "text-default-500",
                             }}
                             avatarProps={{
                                 size: "sm",
-                                src: `https://api.dicebear.com/8.x/adventurer/svg?seed=${session.email}`,
+                                src: `https://api.dicebear.com/8.x/adventurer/svg?seed=${email}`,
                             }}
                         />
                     </DropdownItem>
