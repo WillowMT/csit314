@@ -1,24 +1,11 @@
-import { useState, useEffect } from "react"
-import {useLocalStorage} from '@uidotdev/usehooks'
-import { getSession } from "@/utils/actions"
-import Navigation from "@/components/nav"
+import { redirect } from "next/navigation"
 
-export default async function Page() {
-
-    const session = await getSession()
-
-
-    if (!session.email) return <div>loading...</div>
-    
-
+export default function Page() {
+    redirect('/account/personal')
 
     return (
         <div>
-            <Navigation />
-            <pre>
-                {JSON.stringify(session,null,2)}
-            </pre>
-
+            Redirect Page
         </div>
     )
 }

@@ -59,6 +59,7 @@ export async function login(prevState:any, formData: FormData) {
     session.lastName = userInfo?.lastName || ""
     session.role = userInfo?.role || ""
     session.country = userInfo?.country || ""
+    session.phoneNumber = userInfo?.phoneNumber || ""
     session.isLoggedIn = true;
     await session.save();
     redirect("/")

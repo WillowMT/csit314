@@ -1,12 +1,9 @@
 import Navigation from "@/components/nav";
-import { redirect } from "next/navigation";
-
 
 export default function Page() {
-    redirect('/account/personal')
-    return(
+    return (
         <div>
-            hi
+            <h1>Password Page</h1>
         </div>
     )
 }
