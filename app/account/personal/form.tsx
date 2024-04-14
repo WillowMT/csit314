@@ -57,6 +57,16 @@ export default function UserForm({fname, lname, email, phone}:{fname:string, lna
                     placeholder="Phone Number"
                     defaultValue={phone}
                 />
+
+                <Input
+                    name="email"
+                    className="mb-8 max-w-[400px] mx-auto hidden"
+                    type="email"
+                    label="Email"
+                    labelPlacement={'outside'}
+                    placeholder="Email"
+                    defaultValue={email}
+                />
             </div>
             <Button type="submit">Save Changes</Button>
         </form>
