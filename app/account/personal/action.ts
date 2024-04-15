@@ -1,6 +1,8 @@
 'use server'
 
 import prisma from "@/utils/prisma";
+import { getSession } from "@/utils/actions";
+import { revalidatePath } from "next/cache";
 
 // form to update user info in db
 
@@ -12,6 +14,8 @@ export async function submit(prev: any, formData: FormData) {
 
     try {
 
+        const session  = await getSession()
+
         const result = await prisma.user.update({
             where: {
                 email: email
@@ -22,6 +26,15 @@ export async function submit(prev: any, formData: FormData) {
                 phoneNumber: formData.get("phoneNumber") as string
             }
         })
+
+        session.firstName = formData.get("firstName") as string
+        session.lastName = formData.get("lastName") as string
+        session.phoneNumber = formData.get("phoneNumber") as string
+
+        session.save()
+
+        revalidatePath('/account/personal')
+
 
         return { success: true, message: "User info updated" };
 
