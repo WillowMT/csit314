@@ -10,6 +10,9 @@ export default async function Page() {
     const user = await prisma.user.findUnique({
         where: {
             email: email
+        },
+        include:{
+            agent:true
         }
     })
     
@@ -18,7 +21,7 @@ export default async function Page() {
     return (
         <div>
             <h1 className=" text-4xl">Personal Page</h1>
-            <UserForm fname={user.firstName} lname={user.lastName} email={email} phone={user.phoneNumber} />
+            <UserForm fname={user.firstName} lname={user.lastName} email={email} phone={user.phoneNumber} agent={user.agent} />
         </div>
     )
 }

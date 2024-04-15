@@ -16,6 +16,7 @@ export async function submit(prev: any, formData: FormData) {
 
         const session  = await getSession()
 
+
         const result = await prisma.user.update({
             where: {
                 email: email
@@ -27,9 +28,18 @@ export async function submit(prev: any, formData: FormData) {
             }
         })
 
+        // update details for agent
+
+        // awauit prisma.agent.update({
+
+        // })
+
         session.firstName = formData.get("firstName") as string
         session.lastName = formData.get("lastName") as string
         session.phoneNumber = formData.get("phoneNumber") as string
+
+        // update session for agent
+
 
         session.save()
 

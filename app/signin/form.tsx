@@ -85,7 +85,7 @@ function Btn() {
     return (
         <div className="  grid place-items-center">
             <Button type="submit" className=" rounded-full bg-brand-200 font-bold text-white">
-                {pending ? 'Loading...' : 'Create Account'}
+                {pending ? 'Loading...' : 'Sign In'}
             </Button>
             <br />
             <small>Dont have an account? <Link className=" text-sm underline" href="/signup">Sign Up</Link></small>

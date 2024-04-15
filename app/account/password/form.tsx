@@ -1,7 +1,7 @@
 'use client'
 
 import { Input, Button } from "@nextui-org/react"
-import { useFormState } from "react-dom"
+import { useFormState, useFormStatus } from "react-dom"
 import { submit } from "./action"
 import toast from "react-hot-toast"
 import { useEffect } from "react"
@@ -50,7 +50,18 @@ export default function Form() {
                 labelPlacement={'outside'}
                 placeholder="Repeat Password"
             />
-            <Button type="submit">Submit</Button>
+            <Btn />
         </form>
     )
+}
+
+function Btn() {
+    const { pending } = useFormStatus();
+    return (
+        <div className="  grid place-items-center">
+            <Button type="submit" className=" rounded-full bg-brand-200 font-bold text-white">
+                {pending ? 'Loading...' : 'Save Changes'}
+            </Button>
+        </div>
+    );
 }

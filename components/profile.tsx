@@ -14,7 +14,7 @@ export default function Profile({ email, firstName }: { email:string, firstName:
             }}
         >
             <DropdownTrigger>
-                <Avatar src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${email}`} />
+                <Avatar src={`https://api.dicebear.com/8.x/initials/svg?seed=${firstName}`} />
             </DropdownTrigger>
             <DropdownMenu
                 aria-label="Custom item styles"
@@ -49,7 +49,7 @@ export default function Profile({ email, firstName }: { email:string, firstName:
                             }}
                             avatarProps={{
                                 size: "sm",
-                                src: `https://api.dicebear.com/8.x/adventurer/svg?seed=${email}`,
+                                src: `https://api.dicebear.com/8.x/initials/svg?seed=${firstName}`,
                             }}
                         />
                     </DropdownItem>
