@@ -53,5 +53,10 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5",
     "vitest": "^1.4.0"
-  }
+  },
+  "description": "```\r Frontend: Nextjs\r Backend: Nextjs\r Testing: Vitest, Husky\r Automation: Github Actions\r Deployment: Vercel\r Database: Mongodb\r ```",
+  "main": "postcss.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

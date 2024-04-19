@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* font styles */
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Century Gothic', sans-serif;
+    font-weight: bold;
+}
+
+p, li, section, button{
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ------------------^standardised----------------- */
+
+/* navbar styles */
+.navbar-list div {
+    padding: 20px;
+}
+
+/* ------------------------- */
+
+.button-group {
+    width: 20%;
+}
+
+.button-row {
+    float: left;
+}
+
+.left {
+    float: left;
+    width: 20%;
+    overflow: hidden;
+    
+}
+
+.right {
+    margin-left: 15%;
+    overflow: hidden;
+    
+}
+
+.menu-container {
+    background-color: lightgray;
+
+}
+
+.profile img {
+    border-radius: 50%;
+    max-width: 50%;
+    max-height: 50%;
+    margin: auto;
+    padding: 10px;
+}
+
+.profile {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+button {
+    border-radius: 10px;
+    background-color: #fcb1a4;
+    padding: 7px;
+}
+/* table styles */
+.p-4 table {
+    width: 60%;
+    padding: 20px;
+    margin-top: 20px;
+}
+.p-4 table th {
+    padding: 10px;
+    background-color: #CCBEAE;
+    
+}
+
+.p-4 table tr {
+    background-color: #fffed4;
+}
+
+.p-4 table tr:nth-child(odd) {
+    background-color: #fcedca;
+}
+
+.p-4 table td {
+    padding: 5px;
+}
+
+
+
+
+
+
+
+
+
