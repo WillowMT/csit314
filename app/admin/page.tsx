@@ -80,7 +80,7 @@ export default async function Page() {
                     </div>
 
                 </div>
-                
+
                 {/* <td>
                                 <ul>
                                     <li key={user.id}>
@@ -90,32 +90,35 @@ export default async function Page() {
                             </td> */}
 
                 <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                    </tr>
-                    
-                    {users.map((user) => (
-                        <tr>
-                            <td>
-                                {user.id}
-                            </td>
-                            <td>
-                                {user.email}
-                            </td>
-                            <td>
-                                {user.role}
-                            </td>
+                    <tbody>
 
-                            <td>
-                                <button>Edit</button>
-                                &nbsp;
-                                <button>Suspend</button>
-                            </td>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
+
+                        {users.map((user, i) => (
+                            <tr key={i}>
+                                <td>
+                                    {user.id}
+                                </td>
+                                <td>
+                                    {user.email}
+                                </td>
+                                <td>
+                                    {user.role}
+                                </td>
+
+                                <td>
+                                    <button>Edit</button>
+                                    &nbsp;
+                                    <button>Suspend</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
             </div>
         </div>
