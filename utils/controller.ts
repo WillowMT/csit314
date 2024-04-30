@@ -1,5 +1,7 @@
 import { comparePassword, encryptPassword } from "@/utils/hash";
 import prisma from "@/utils/prisma";
+import { getSession } from "./actions";
+import { revalidatePath } from "next/cache";
 
 interface UserFormData {
     email: string;
@@ -161,7 +163,7 @@ export class User {
         // save property
     }
 
-    async login(password: string, role:string) {
+    async login(password: string, role: string) {
         // check if user exists
         const user = await prisma.user.findUnique({
             where: {
@@ -181,14 +183,16 @@ export class User {
             return { error: true, message: "Password is incorrect" }
         }
 
-        return { error: false, message: "Login Success!", user: {
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            country: user.country,
-            phoneNumber: user.phoneNumber,
-            role: user.role
-        } }
+        return {
+            error: false, message: "Login Success!", user: {
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                country: user.country,
+                phoneNumber: user.phoneNumber,
+                role: user.role
+            }
+        }
 
     }
 
@@ -255,11 +259,88 @@ export class Admin extends User {
     }
 
     // get info
-    async get() {}
+    async get() { }
 
     // get all agents
     async getAgents() {
         const agents = await prisma.agent.findMany()
         return agents;
+    }
+}
+
+
+export class EdiAccountInfoController {
+
+    static async SaveInfoChange({ email, firstName, lastName, phoneNumber, ceaNumber, agency, license, jobDesignation }: {
+        email: string;
+        firstName: string;
+        lastName: string;
+        phoneNumber: string;
+        ceaNumber: string | null;
+        agency: string | null;
+        license: string | null;
+        jobDesignation: string | null;
+
+    }) {
+        // update user info in db
+        try {
+
+            const session = await getSession()
+
+
+            const user = await prisma.user.update({
+                where: {
+                    email: email
+                },
+                data: {
+                    firstName,
+                    lastName,
+                    phoneNumber
+                }
+            })
+
+            // update details for agent
+
+            if (user.agentId && agency && license && jobDesignation && ceaNumber) {
+
+                const agent = await prisma.agent.update({
+                    where: {
+                        id: user.agentId
+                    },
+                    data: {
+                        agency,
+                        license,
+                        jobDesignation,
+                        ceaNumber
+                    }
+                })
+
+                session.agency = agency
+                session.license = license
+                session.jobDesignation = jobDesignation
+                session.ceaNumber = ceaNumber
+            }
+
+
+
+
+            session.firstName = firstName
+            session.lastName = lastName
+            session.phoneNumber = phoneNumber
+
+            // update session for agent
+
+
+            session.save()
+
+            revalidatePath('/account/personal')
+
+
+            return { success: true, message: "User info updated" };
+
+        } catch (e) {
+            return { success: false, message: "Error updating user info" };
+        }
+
     }
 }

@@ -30,7 +30,7 @@ test('create agent', async () => {
 }
 )
 
-test('get basic user info', async () => {
+test('read basic user info', async () => {
     const user = await prisma.user.findUnique({
         where: {
             email: 'agent@gmail.com'

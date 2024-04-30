@@ -4,9 +4,7 @@ import {
     Tabs, Tab, Card, CardBody, Button, Link, Input, Select, SelectItem
 } from "@nextui-org/react";
 import { useFormState, useFormStatus } from "react-dom";
-import { countries } from '@/utils/countries'
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { login } from "@/utils/actions";
 import toast from 'react-hot-toast'
 
