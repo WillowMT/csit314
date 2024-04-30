@@ -1,4 +1,5 @@
-import { comparePassword } from "./hash";
+import { comparePassword, encryptPassword } from "./hash";
+import { UserFormData } from "./lib";
 import prisma from "./prisma";
 
 export class User {
@@ -54,5 +55,62 @@ export class User {
             }
         }
     }
+
+     
+    static async create(formObj: UserFormData): Promise<{ success: boolean, message: string }> {
+
+        const { email, password, passwordConfirm, firstName, lastName, country, phoneNumber, ceaNumber, agency, license, jobDesignation } = formObj;
+
+        if (password !== passwordConfirm) {
+            return { success: false, message: "Passwords do not match" }
+        }
+
+        // check if user exists already
+        const userExists = await prisma.user.findUnique({
+            where: {
+                email: email
+            }
+        })
+
+        if (userExists) {
+            return { success: false, message: "User already exists" }
+        }
+
+        // hash raw password
+        const passwordHash = await encryptPassword(password);
+
+
+        const user = await prisma.user.create({
+            data: {
+                email: email,
+                passwordHash: passwordHash,
+                firstName: firstName,
+                lastName: lastName,
+                country: country,
+                phoneNumber: phoneNumber,
+                role: ceaNumber && agency && license && jobDesignation ? 'AGENT' : 'USER'
+            }
+        })
+
+        // check if agent
+        if (ceaNumber && agency && license && jobDesignation) {
+            await prisma.agent.create({
+                data: {
+                    ceaNumber: ceaNumber,
+                    agency: agency,
+                    license: license,
+                    jobDesignation: jobDesignation,
+                    User: {
+                        connect: {
+                            id: user.id
+                        }
+                    }
+                }
+            })
+        }
+
+        return { success: true, message: "User created successfully" };
+    }
+
 }
 

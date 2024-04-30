@@ -3,9 +3,9 @@
 import { Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownSection, DropdownItem, User } from "@nextui-org/react";
 import Link from "next/link";
 import { SessionData } from "@/utils/lib";
-import { logout } from "@/utils/actions";
+import { logout } from "@/utils/auth";
 
-export default function Profile({ email, firstName }: { email:string, firstName:string }) {
+export default function Profile({ email, firstName }: { email: string, firstName: string }) {
     return (
         <Dropdown
             radius="sm"

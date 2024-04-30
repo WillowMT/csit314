@@ -1,11 +1,11 @@
 import Link from "next/link"
 import { Button, Avatar, Dropdown, DropdownTrigger, DropdownItem, DropdownMenu, DropdownSection, User } from "@nextui-org/react"
-import { getSession } from "@/utils/actions"
+import { getSession } from "@/utils/auth"
 import Profile from "./profile"
 
 export default async function Navigation() {
     const session = await getSession()
-    
+
 
     return (
         <div className="border-b bg-brand-200">
@@ -25,17 +25,17 @@ export default async function Navigation() {
                 </div>
                 <div className="">
                     {
-                        session.isLoggedIn ? 
-                        <Profile email={session.email} firstName={session.firstName} />
-                        :
-                        <div>
-                            <Link href={"/signup"}>
-                                <Button className="mr-2">Sign Up</Button>
-                            </Link>
-                            <Link href={"/signin"}>
-                                <Button className="mr-2">Sign In</Button>
-                            </Link>
-                        </div>
+                        session.isLoggedIn ?
+                            <Profile email={session.email} firstName={session.firstName} />
+                            :
+                            <div>
+                                <Link href={"/signup"}>
+                                    <Button className="mr-2">Sign Up</Button>
+                                </Link>
+                                <Link href={"/signin"}>
+                                    <Button className="mr-2">Sign In</Button>
+                                </Link>
+                            </div>
                     }
                 </div>
             </nav>
