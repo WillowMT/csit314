@@ -14,6 +14,20 @@ export interface SessionData {
     isLoggedIn: boolean;
 }
 
+export interface UserFormData {
+    email: string;
+    password: string;
+    passwordConfirm: string;
+    firstName: string;
+    lastName: string;
+    country: string;
+    phoneNumber: string;
+    ceaNumber: string | null;
+    agency: string | null;
+    license: string | null;
+    jobDesignation: string | null;
+}
+
 export const defaultSession: SessionData = {
     email: "",
     isLoggedIn: false,

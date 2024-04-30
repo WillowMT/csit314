@@ -6,7 +6,7 @@ import { getIronSession, IronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import prisma from "./prisma";
-import { User } from "./controller";
+import { User } from "./entity";
 import { redirect } from "next/navigation";
 
 export async function getSession(shouldSleep = true) {
@@ -42,15 +42,26 @@ export async function login(prevState:any, formData: FormData) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const usr = new User(email)
 
-    const result = await usr.login(password, role.toUpperCase())
+    const result = await User.login(email,password, role.toUpperCase())
 
     if (result.error) {
         return result;
     }
 
-    const userInfo = await usr.getInfo();
+    const userInfo = await prisma.user.findUnique({
+        where: {
+            email: email
+        },
+        select: {
+            email: true,
+            firstName: true,
+            lastName: true,
+            country: true,
+            phoneNumber: true,
+            role: true,
+        }
+    })
 
     
 

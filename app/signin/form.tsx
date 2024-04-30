@@ -5,7 +5,7 @@ import {
 } from "@nextui-org/react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useEffect, useState } from "react";
-import { login } from "@/utils/actions";
+import { login } from "@/utils/auth";
 import toast from 'react-hot-toast'
 
 export default function Form() {

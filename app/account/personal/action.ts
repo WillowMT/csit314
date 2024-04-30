@@ -1,7 +1,7 @@
 'use server'
 
 import prisma from "@/utils/prisma";
-import { getSession } from "@/utils/actions";
+import { getSession } from "@/utils/auth";
 import { revalidatePath } from "next/cache";
 import { EdiAccountInfoController } from "@/utils/controller"
 
