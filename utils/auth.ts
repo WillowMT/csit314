@@ -8,6 +8,7 @@ import { revalidatePath } from "next/cache";
 import prisma from "./prisma";
 import { User } from "./entity";
 import { redirect } from "next/navigation";
+import {loginUser, create} from "./lib"
 
 export async function getSession(shouldSleep = true) {
     const session = await getIronSession<SessionData>(cookies(), sessionOptions);
@@ -43,7 +44,7 @@ export async function login(prevState:any, formData: FormData) {
     const password = formData.get("password") as string;
 
 
-    const result = await User.login(email,password, role.toUpperCase())
+    const result = await loginUser(email,password, role.toUpperCase())
 
     if (result.error) {
         return result;

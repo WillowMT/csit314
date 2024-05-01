@@ -1,6 +1,7 @@
 'use server'
 import { revalidatePath } from "next/cache";
 import { User } from "@/utils/entity";
+import { create } from "@/utils/lib";
 
 export async function submit(previousState:any, form: FormData) {
     'use server'
@@ -33,7 +34,7 @@ export async function submit(previousState:any, form: FormData) {
     }
 
     // call user object
-    const {success, message} = await User.create(userObj)
+    const {success, message} = await create(userObj)
 
 
     revalidatePath('/admin')

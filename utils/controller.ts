@@ -1,9 +1,7 @@
 import { comparePassword, encryptPassword } from "@/utils/hash";
-import prisma from "@/utils/prisma";
 import { getSession } from "./auth";
 import { revalidatePath } from "next/cache";
 import { User } from "./entity";
-
 
 
 export class EdiAccountInfoController {
@@ -25,7 +23,7 @@ export class EdiAccountInfoController {
             const session = await getSession()
 
 
-            const user = await User.SetInfo({ email, firstName, lastName, phoneNumber })
+            const user = await User.setInfo({ email, firstName, lastName, phoneNumber })
 
             // update details for agent
 
@@ -57,5 +55,52 @@ export class EdiAccountInfoController {
             return { success: false, message: "Error updating user info" };
         }
 
+    }
+}
+
+
+export class ViewRealEstateAgentRatingsAndReviews {
+    static async getRatingsAndReviews() {
+
+    }
+}
+
+export class ViewAgentAccountController {
+    static async getAgentDetails() {}
+}
+
+export class UserAcountSearchController {
+    static async SearchUserAcount( email:string) {
+
+    }
+}
+
+export class SearchAgentController {
+    static async getUser(email:string) {
+        const user = await User.matchUserAccount(email)
+
+        return user
+    }
+}
+
+export class LoginAccountController {
+    static async getUser(email:string, password:string) {
+    }
+}
+
+
+export class ReviewAgentController {
+    static async writeReview( review:string) {
+    }
+}
+
+export class CreateUserAccController {
+    static async recordUserAccountDetails( email:string, password:string) {
+    }
+}
+
+
+export class RateAgentController {
+    static async rating( rate:number) {
     }
 }
