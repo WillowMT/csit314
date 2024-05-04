@@ -1,5 +1,7 @@
-export async function submit() {
 
+
+export async function submit(prev:string, formData: FormData) {
+    
 }
 
 export async function uploadImage(filename:string, file:Buffer) {

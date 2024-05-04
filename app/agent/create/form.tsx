@@ -61,15 +61,6 @@ export default function PropertyForm() {
                     />
                     <Input
                         isRequired
-                        name="agentComment"
-                        className="mb-8 max-w-[400px] mx-auto"
-                        type="string"
-                        label="Agent Comment"
-                        labelPlacement={'outside'}
-                        placeholder="Agent Comment"    
-                    />
-                    <Input
-                        isRequired
                         name="bedroom"
                         className="mb-8 max-w-[400px] mx-auto"
                         type="number"
@@ -87,22 +78,6 @@ export default function PropertyForm() {
                         placeholder="Bathroom"    
                     />
 
-                    <Select
-                        isRequired
-                        name="propertyType"
-                        className="mb-4 max-w-[400px] mx-auto"
-                        defaultSelectedKeys={['Singapore']}
-                        label="Property Type"
-                        labelPlacement={'outside'}
-                        placeholder="Property Type"
-                        onChange={(e) => setPropertyType(e.target.value)}
-                    >
-                        {['HDB','LAND','CONDOMINIUM','APARTMENT'].map((item) => (
-                            <SelectItem key={item} value={item}>
-                                {item}
-                            </SelectItem>
-                        ))}
-                    </Select>
                     
                     <Input
                         isRequired
@@ -142,14 +117,13 @@ export default function PropertyForm() {
                     />
                     <Input
                         isRequired
-                        name="imageFile"
+                        name="imageUrl"
                         className="mb-8 max-w-[400px] mx-auto"
-                        type="file"
-                        label="Image"
+                        type="string"
+                        label="Image Url"
                         labelPlacement={'outside'}
-                        placeholder="Image"    
+                        placeholder="Image Url"    
                     />
-                    
                 </div>
             </div>
             <Btn />

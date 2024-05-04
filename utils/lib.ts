@@ -1,34 +1,9 @@
 import { SessionOptions } from "iron-session";
 import prisma from "./prisma";
 import { comparePassword, encryptPassword } from "./hash";
+import { SessionData, UserFormData } from "./types";
 
-export interface SessionData {
-    email: string;
-    firstName: string;
-    lastName: string;
-    role: string;
-    country: string;
-    phoneNumber: string;
-    license?: string;
-    ceaNumber?: string;
-    agency?: string;
-    jobDesignation?: string;
-    isLoggedIn: boolean;
-}
-
-export interface UserFormData {
-    email: string;
-    password: string;
-    passwordConfirm: string;
-    firstName: string;
-    lastName: string;
-    country: string;
-    phoneNumber: string;
-    ceaNumber: string | null;
-    agency: string | null;
-    license: string | null;
-    jobDesignation: string | null;
-}
+export const role = ['USER','SELLER','BUYER','REA_AGENT']
 
 export const defaultSession: SessionData = {
     email: "",
@@ -58,8 +33,7 @@ export async function loginUser(email: string, password: string, role: string) {
     // check if user exists
     const user = await prisma.user.findUnique({
         where: {
-            email,
-            role: role as 'USER' | 'AGENT'
+            email
         }
     })
 
@@ -81,7 +55,6 @@ export async function loginUser(email: string, password: string, role: string) {
             lastName: user.lastName,
             country: user.country,
             phoneNumber: user.phoneNumber,
-            role: user.role
         }
     }
 }
@@ -117,27 +90,9 @@ export async function create(formObj: UserFormData): Promise<{ success: boolean,
             firstName: firstName,
             lastName: lastName,
             country: country,
-            phoneNumber: phoneNumber,
-            role: ceaNumber && agency && license && jobDesignation ? 'AGENT' : 'USER'
+            phoneNumber: phoneNumber
         }
     })
-
-    // check if agent
-    if (ceaNumber && agency && license && jobDesignation) {
-        await prisma.agent.create({
-            data: {
-                ceaNumber: ceaNumber,
-                agency: agency,
-                license: license,
-                jobDesignation: jobDesignation,
-                User: {
-                    connect: {
-                        id: user.id
-                    }
-                }
-            }
-        })
-    }
 
     return { success: true, message: "User created successfully" };
 }

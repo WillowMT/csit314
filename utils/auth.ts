@@ -1,6 +1,6 @@
 'use server'
 
-import { SessionData } from "./lib";
+import { SessionData } from "./types";
 import { defaultSession, sessionOptions, sleep } from "./lib";
 import { getIronSession, IronSession } from "iron-session";
 import { cookies } from "next/headers";
@@ -60,7 +60,6 @@ export async function login(prevState:any, formData: FormData) {
             lastName: true,
             country: true,
             phoneNumber: true,
-            role: true,
         }
     })
 
@@ -69,7 +68,6 @@ export async function login(prevState:any, formData: FormData) {
     session.email = userInfo?.email || ""
     session.firstName = userInfo?.firstName || ""
     session.lastName = userInfo?.lastName || ""
-    session.role = userInfo?.role || ""
     session.country = userInfo?.country || ""
     session.phoneNumber = userInfo?.phoneNumber || ""
     session.isLoggedIn = true;

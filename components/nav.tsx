@@ -22,6 +22,7 @@ export default async function Navigation() {
                     <Link className="grid place-items-center hover:underline" href={"/mortage"}>Calculate Mortage</Link>
                     <Link className="grid place-items-center hover:underline" href={"/mongodb"}>Mongodb</Link>
                     <Link className="grid place-items-center hover:underline" href={"/admin"}>Admin</Link>
+                    <Link className="grid place-items-center hover:underline" href={"/property"}>Property</Link>
                 </div>
                 <div className="">
                     {

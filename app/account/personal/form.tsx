@@ -7,10 +7,8 @@ import { useFormState, useFormStatus } from "react-dom";
 import toast from 'react-hot-toast'
 
 
-export default function UserForm({ fname, lname, email, phone, agent }: { fname: string, lname: string, email: string, phone: string, agent?: any }) {
+export default function UserForm({ fname, lname, email, phone, agency, license, ceaNumber }: { fname: string, lname: string, email: string, phone: string, agency:string, license:string, ceaNumber:string }) {
     const [state, formAction] = useFormState(submit, null);
-
-    console.log(agent);
     
     useEffect(() => {
         if (!state?.message) return
@@ -71,7 +69,7 @@ export default function UserForm({ fname, lname, email, phone, agent }: { fname:
                         defaultValue={email}
                     />
                 </div>
-                {
+                {/* {
                     agent && (
 
                         <div>
@@ -117,7 +115,7 @@ export default function UserForm({ fname, lname, email, phone, agent }: { fname:
                             />
                         </div>
                     )
-                }
+                } */}
             </div>
             <Btn />
         </form>

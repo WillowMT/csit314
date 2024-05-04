@@ -1,48 +1,34 @@
 import { comparePassword, encryptPassword } from "@/utils/hash";
 import { getSession } from "./auth";
 import { revalidatePath } from "next/cache";
-import { User } from "./entity";
+import { user, userProfile, property } from "./entity";
 
 
 export class EdiAccountInfoController {
 
-    static async SaveInfoChange({ email, firstName, lastName, phoneNumber, ceaNumber, agency, license, jobDesignation }: {
+    async saveInfoChange({ email, firstName, lastName, phoneNumber, ceaNumber, agency, license, country }: {
         email: string;
         firstName: string;
         lastName: string;
         phoneNumber: string;
-        ceaNumber: string | null;
-        agency: string | null;
-        license: string | null;
-        jobDesignation: string | null;
+        country: string;
+        ceaNumber: string | "";
+        agency: string | "";
+        license: string | "";
 
     }) {
-        // update user info in db
         try {
 
             const session = await getSession()
 
-
-            const user = await User.setInfo({ email, firstName, lastName, phoneNumber })
-
-            // update details for agent
-
-            // if (user.agentId && agency && license && jobDesignation && ceaNumber) {
-
-            //     const agent = await Agent.SetInfo({ agentId: user.agentId, agency, license, jobDesignation, ceaNumber })
-
-            //     session.agency = agency
-            //     session.license = license
-            //     session.jobDesignation = jobDesignation
-            //     session.ceaNumber = ceaNumber
-            // }
+            const ussr = await user.setInfo({ email, firstName, lastName, phoneNumber, country, ceaNumber, agency, license })
 
             session.firstName = firstName
             session.lastName = lastName
             session.phoneNumber = phoneNumber
-
-            // update session for agent
-
+            session.agency = agency
+            session.license = license
+            session.ceaNumber = ceaNumber
 
             session.save()
 
@@ -58,49 +44,73 @@ export class EdiAccountInfoController {
     }
 }
 
+export class ViewUserProfileController {
+    async getUserProfiles() {
+        return await user.getAllUsers()
+    }
+}
+
+export class ViewSellerProperty {
+    async getCreatedProperty(): Promise<any[]> {
+        return await property.getCreatedProperty()
+    }
+}
 
 export class ViewRealEstateAgentRatingsAndReviews {
-    static async getRatingsAndReviews() {
-
+    async getRatingsAndReviews() {
     }
 }
 
 export class ViewAgentAccountController {
-    static async getAgentDetails() {}
+    async getAgentDetails() { }
 }
 
+
 export class UserAcountSearchController {
-    static async SearchUserAcount( email:string) {
+    async SearchUserAcount(email: string) {
 
     }
 }
 
 export class SearchAgentController {
-    static async getUser(email:string) {
-        const user = await User.matchUserAccount(email)
+    async getUser(email: string) {
+        // const user = await User.matchUserAccount(email)
 
-        return user
+        // return user
     }
 }
 
 export class LoginAccountController {
-    static async getUser(email:string, password:string) {
+    async getUser(email: string, password: string) {
     }
 }
 
 
 export class ReviewAgentController {
-    static async writeReview( review:string) {
+    async writeReview(review: string) {
     }
 }
 
 export class CreateUserAccController {
-    static async recordUserAccountDetails( email:string, password:string) {
+    async recordUserAccountDetails(email: string, password: string) {
     }
 }
 
 
 export class RateAgentController {
-    static async rating( rate:number) {
+    async rating(rate: number) {
     }
 }
+
+
+export const editAccountInfo = new EdiAccountInfoController()
+export const viewRealEstateAgentRatingsAndReviews = new ViewRealEstateAgentRatingsAndReviews()
+export const viewAgentAccount = new ViewAgentAccountController()
+export const userAcountSearch = new UserAcountSearchController()
+export const searchAgent = new SearchAgentController()
+export const loginAccount = new LoginAccountController()
+export const reviewAgent = new ReviewAgentController()
+export const createUserAcc = new CreateUserAccController()
+export const rateAgent = new RateAgentController()
+export const viewUserProfile = new ViewUserProfileController()
+export const viewSellerProperty = new ViewSellerProperty()

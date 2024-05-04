@@ -10,72 +10,85 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://csit314:B2nPpGdzik0VF7GQ@cluster0.rusgro8.mongodb.net/csit314?retryWrites=true&w=majority&appName=Cluster0"
+  url      = "mongodb+srv://csit314:B2nPpGdzik0VF7GQ@cluster0.rusgro8.mongodb.net/csit314b2?retryWrites=true&w=majority&appName=Cluster0"
 }
 
 model User {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
-  email        String  @unique
-  passwordHash String
-  firstName    String
-  lastName     String
-  country      String
-  phoneNumber  String
-  agent        Agent?  @relation(fields: [agentId], references: [id])
-  agentId      String? @db.ObjectId
-  role         Role    @default(USER)
-  comment Comment[]
-}
-
-model Agent {
-  id             String     @id @default(auto()) @map("_id") @db.ObjectId
-  ceaNumber      String     @unique
-  agency         String
-  license        String
-  jobDesignation String
-  createdAt      DateTime   @default(now())
-  User           User[]
-  property       Property[]
+  id              String              @id @default(auto()) @map("_id") @db.ObjectId
+  profileId       String?             @db.ObjectId
+  email           String              @unique
+  firstName       String
+  lastName        String
+  passwordHash    String
+  country         String
+  phoneNumber     String
+  ceaNumber       String?             @unique
+  agency          String?             @default("")
+  license         String?             @default("")
+  ratingAndReview RatingsAndReviews[]
+  userProfile     UserProfile[]
+  shortList       Shortlist[]
+  listing         Listing[]
+  ownership       Ownership[]
 }
 
 model Property {
-  id           String       @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  address      String
-  description  String
-  agentComment String
-  onSale Boolean
-  views        Int? @default(0)
-  bedroom      Int
-  bathroom     Int
-  propertyType PropertyType
-  leaseYear    Int
-  squareFt     Int
-  builtYear    Int
-  price        Int
-  imageUrl String
-  agent        Agent?       @relation(fields: [agentId], references: [id])
-  agentId      String?      @db.ObjectId
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  address     String
+  description String
+  onSale      Boolean
+  views       Int?        @default(0)
+  bedroom     Int
+  bathroom    Int
+  leaseYear   Int
+  squareFt    Int
+  builtYear   Int
+  price       Int
+  imageUrl    String
+  shortList   Shortlist[]
+  listing     Listing[]
+  ownership   Ownership[]
 }
 
-model Comment {
-  id           String       @id @default(auto()) @map("_id") @db.ObjectId
-  user User? @relation(fields:[userId], references:[id])
+model RatingsAndReviews {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
   userId String? @db.ObjectId
-  comment String
-  likeCount Int? @default(0)
+  rating Int?    @default(0)
+  review String
+  user   User?   @relation(fields: [userId], references: [id])
 }
 
-enum Role {
-  ADMIN
-  USER
-  AGENT
-  SUPERUSER
+// buyer
+model Shortlist {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String?   @db.ObjectId
+  propertyId String    @db.ObjectId
+  user       User?     @relation(fields: [userId], references: [id])
+  property   Property? @relation(fields: [propertyId], references: [id])
 }
 
-enum PropertyType {
-  HDB
-  LAND
-  CONDOMINIUM
-  APARTMENT
+// agent
+model Listing {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String?   @db.ObjectId
+  propertyId String    @db.ObjectId
+  user       User?     @relation(fields: [userId], references: [id])
+  property   Property? @relation(fields: [propertyId], references: [id])
+}
+
+model Ownership {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String?   @db.ObjectId
+  propertyId String    @db.ObjectId
+  user       User?     @relation(fields: [userId], references: [id])
+  property   Property? @relation(fields: [propertyId], references: [id])
+}
+
+model UserProfile {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String? @db.ObjectId
+  activated Boolean
+  role      String
+  user      User?   @relation(fields: [userId], references: [id])
 }

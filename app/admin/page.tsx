@@ -1,25 +1,21 @@
 import prisma from "@/utils/prisma"
 import UserRow from "./form"
-import "../styles/admin.css"
+import "./admin.css"
 import { User } from "@nextui-org/react"
+import { viewUserProfile } from "@/utils/controller"
+import Navigation from "@/components/nav"
 
 export default async function Page() {
-    const users = await prisma.user.findMany({
-        select: {
-            id: true,
-            email: true,
-            firstName: true,
-            lastName: true,
-            role: true
-        }
-    })
+    const users = await viewUserProfile.getUserProfiles()
 
     if (!users) {
         return;
     }
 
+
     return (
         <div className="">
+            <Navigation />
             <div className=" bg-slate-700 text-white text-4xl py-4 px-4">Admin Page</div>
             <div className="menu-container left">
                 <div className="profile">
@@ -81,13 +77,6 @@ export default async function Page() {
 
                 </div>
 
-                {/* <td>
-                                <ul>
-                                    <li key={user.id}>
-                                        <UserRow id={user.id} email={user.email} role={user.role} />
-                                    </li>
-                                </ul>
-                            </td> */}
 
                 <table>
                     <tbody>
@@ -102,13 +91,13 @@ export default async function Page() {
                         {users.map((user, i) => (
                             <tr key={i}>
                                 <td>
-                                    {user.id}
+                                    {i+1}
                                 </td>
                                 <td>
                                     {user.email}
                                 </td>
                                 <td>
-                                    {user.role}
+                                    {user.agency ? "AGENT" : "USER"}
                                 </td>
 
                                 <td>
