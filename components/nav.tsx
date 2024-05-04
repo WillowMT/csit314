@@ -8,7 +8,7 @@ export default async function Navigation() {
 
 
     return (
-        <div className="border-b bg-brand-200">
+        <div className=" bg-brand-200">
             <nav className=" flex p-4">
                 <div className=" grid place-content-center mr-auto sm:mr-0">
                     <Link href={"/"}>
@@ -21,8 +21,9 @@ export default async function Navigation() {
                     <Link className="grid place-items-center hover:underline" href={"/buy"}>Buy</Link>
                     <Link className="grid place-items-center hover:underline" href={"/mortage"}>Calculate Mortage</Link>
                     <Link className="grid place-items-center hover:underline" href={"/mongodb"}>Mongodb</Link>
-                    <Link className="grid place-items-center hover:underline" href={"/admin"}>Admin</Link>
                     <Link className="grid place-items-center hover:underline" href={"/property"}>Property</Link>
+                    <Link className="grid place-items-center hover:underline" href={"/property/create"}>Register Property</Link>
+                    <Link className="grid place-items-center hover:underline" href={"/admin"}>Admin</Link>
                 </div>
                 <div className="">
                     {

@@ -10,20 +10,19 @@ import toast from 'react-hot-toast'
 
 export default function PropertyForm() {
     const [state, formAction] = useFormState(submit, null);
-    const [propertyType, setPropertyType] = useState('HDB')
 
     
-    // useEffect(() => {
-    //     if (!state?.message) return
+    useEffect(() => {
+        if (!state?.message) return
 
-    //     if (state?.success) {
-    //         toast.success('User info updated')
-    //     }
+        if (state?.success) {
+            toast.success('Property created successfully')
+        }
 
-    //     if (!state?.success && state?.message) {
-    //         toast.error(state?.message || 'An error occurred. Please try again.')
-    //     }
-    // }, [state])
+        if (!state?.success && state?.message) {
+            toast.error(state?.message || 'An error occurred. Please try again.')
+        }
+    }, [state])
 
 
     return (
@@ -43,7 +42,7 @@ export default function PropertyForm() {
                     />
                     <Input
                         isRequired
-                        name="Address"
+                        name="address"
                         className="mb-8 max-w-[400px] mx-auto"
                         type="string"
                         label="Address"

@@ -62,7 +62,7 @@ export async function loginUser(email: string, password: string, role: string) {
 
 export async function create(formObj: UserFormData): Promise<{ success: boolean, message: string }> {
 
-    const { email, password, passwordConfirm, firstName, lastName, country, phoneNumber, ceaNumber, agency, license, jobDesignation } = formObj;
+    const { email, password, passwordConfirm, firstName, lastName, country, phoneNumber, ceaNumber, agency, license } = formObj;
 
     if (password !== passwordConfirm) {
         return { success: false, message: "Passwords do not match" }
@@ -85,14 +85,19 @@ export async function create(formObj: UserFormData): Promise<{ success: boolean,
 
     const user = await prisma.user.create({
         data: {
-            email: email,
-            passwordHash: passwordHash,
-            firstName: firstName,
-            lastName: lastName,
-            country: country,
-            phoneNumber: phoneNumber
+            email,
+            passwordHash,
+            firstName,
+            lastName,
+            country,
+            phoneNumber,
+            ceaNumber,
+            agency,
+            license,
         }
     })
 
     return { success: true, message: "User created successfully" };
 }
+
+export type { SessionData };

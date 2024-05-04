@@ -26,3 +26,8 @@ p, li, section, button{
 .active {
     color: white; 
 }
+
+/* tr,td, th {
+    border: 1px solid black;
+    padding: 1rem;
+} */

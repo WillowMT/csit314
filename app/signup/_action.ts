@@ -17,7 +17,6 @@ export async function submit(previousState:any, form: FormData) {
     const ceaNumber = form.get('ceaNumber') as string | null
     const agency = form.get('agency') as string | null
     const license = form.get('license') as string | null
-    const jobDesignation = form.get('jobDesignation') as string | null
 
     const userObj = {
         email,
@@ -30,8 +29,10 @@ export async function submit(previousState:any, form: FormData) {
         ceaNumber,
         agency,
         license,
-        jobDesignation
     }
+
+    console.log(userObj);
+    
 
     // call user object
     const {success, message} = await create(userObj)

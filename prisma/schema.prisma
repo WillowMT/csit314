@@ -22,7 +22,7 @@ model User {
   passwordHash    String
   country         String
   phoneNumber     String
-  ceaNumber       String?             @unique
+  ceaNumber       String?             @default("")
   agency          String?             @default("")
   license         String?             @default("")
   ratingAndReview RatingsAndReviews[]

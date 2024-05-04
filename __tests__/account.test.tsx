@@ -4,116 +4,73 @@ import userEvent from '@testing-library/user-event'
 import Page from '../app/page'
 import prisma from '@/utils/prisma'
 
+const email = "aaa@gmail.com"
+
 test('create agent', async () => {
     const newUser = await prisma.user.create({
         data: {
-            email: 'test12345@gmail.com',
-            passwordHash: '',
-            firstName: '',
-            lastName: '',
-            country: '',
-            phoneNumber: '',
-            agent: {
-                create: {
-                    license: '123123123',
-                    agency: '123123123',
-                    jobDesignation: '',
-                    ceaNumber: '123123123'
-
-                }
-
-            }
+            email: email,
+            passwordHash: 'aaa',
+            firstName: 'aaa',
+            lastName: 'aaa',
+            country: 'Singapore',
+            phoneNumber: 'aaa',
+            ceaNumber: '',
+            agency: '',
+            license: ''
         }
     })
 
-    expect(newUser.email).equal('test12345@gmail.com')
+    expect(newUser.email).equal(email)
 }
 )
 
 test('read basic user info', async () => {
     const user = await prisma.user.findUnique({
         where: {
-            email: 'agent@gmail.com'
-        },
-        include: {
-            agent: true
+            email: email
         }
     })
-    expect(user?.email).equal("agent@gmail.com")
+    expect(user?.email).equal(email)
 })
 
 
 test('update user info', async () => {
     const user = await prisma.user.findUnique({
         where: {
-            email: 'test12345@gmail.com'
+            email: email
         }
     })
 
-    expect(user?.email).equal('test12345@gmail.com')
+    expect(user?.email).equal(email)
 
     const updatedUser = await prisma.user.update({
         where: {
-            email: 'test12345@gmail.com'
+            email: email
         },
         data: {
-            firstName: 'fname',
+            firstName: '321321',
         }
     })
 
-    expect(updatedUser.firstName).equal('fname')
-
-})
-
-test('update agent info', async () => {
-    // get user id
-    const user = await prisma.user.findUnique({
-        where: {
-            email: 'test12345@gmail.com'
-        }
-    })
-
-    // check if user exist
-    expect(user?.email).equal('test12345@gmail.com')
-    expect(user?.agentId).toBeDefined()
-
-    // update agent
-    const updatedAgent = await prisma.agent.update({
-        where: {
-            id: user?.agentId!
-        },
-        data: {
-            license: '123123123',
-        }
-    })
-
-    // check if updated
-    expect(updatedAgent.license).equal('123123123')
+    expect(updatedUser.firstName).equal('321321')
 
 })
 
 
-test('delete user and agent', async () => {
+test('delete user', async () => {
     // find user
     const user = await prisma.user.findUnique({
         where: {
-            email: 'test12345@gmail.com'
-        }
-    })
-
-    // delete agent
-    const deletedAgent = await prisma.agent.delete({
-        where: {
-            id: user?.agentId!
+            email: email
         }
     })
 
     // delete user
     const deletedUser = await prisma.user.delete({
         where: {
-            email: 'test12345@gmail.com'
+            id: user?.id
         }
     })
-
 
 })

@@ -183,15 +183,6 @@ export default function Form() {
                                         placeholder="Agency"
                                     />
                                     <Input
-                                        name="jobDesignation"
-                                        isRequired
-                                        className="mb-4 max-w-[400px] mx-auto"
-                                        type="jobDesignation"
-                                        label="Job Designation"
-                                        labelPlacement={'outside'}
-                                        placeholder="Job Designation"
-                                    />
-                                    <Input
                                         isRequired
                                         name="license"
                                         className="mb-4 max-w-[400px] mx-auto"

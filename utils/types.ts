@@ -24,5 +24,4 @@ export interface UserFormData {
     ceaNumber: string | null;
     agency: string | null;
     license: string | null;
-    jobDesignation: string | null;
 }

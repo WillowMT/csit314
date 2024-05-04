@@ -14,9 +14,6 @@ export default async function Page() {
     const data = await prisma.user.findUnique({
         where: {
             email: session.email
-        },
-        include: {
-            agent: true
         }
     })
 

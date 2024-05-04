@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Page from '../app/page'
 import prisma from '@/utils/prisma'
-import { uploadImage } from '@/app/agent/create/action'
+import { uploadImage } from '@/app/property/create/action'
 import fs from 'fs'
 
 // hello world

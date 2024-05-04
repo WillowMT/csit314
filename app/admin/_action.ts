@@ -14,14 +14,3 @@ export async function deleteUser(form:FormData) {
     revalidatePath('/admin')
 
 }
-
-export async function setRole(id:string, role:string) {
-    await prisma.user.update({
-        where: {
-            id: id
-        },
-        data: {
-            role: role as "USER" | "AGENT" | "ADMIN"
-        }
-    })
-}
