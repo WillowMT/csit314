@@ -46,6 +46,7 @@ model Property {
   builtYear   Int
   price       Int
   imageUrl    String
+  activated Boolean @default(true)
   shortList   Shortlist[]
   listing     Listing[]
   ownership   Ownership[]

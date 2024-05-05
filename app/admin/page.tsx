@@ -2,7 +2,8 @@ import prisma from "@/utils/prisma"
 import UserRow from "./form"
 // import "./admin.css"
 import { Button, Input, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, User } from "@nextui-org/react"
-import { viewUserProfile } from "@/utils/controller"
+// import { viewUserProfile } from "@/utils/controller"
+import * as controller from '@/utils/controllers/globalControllers'
 import Navigation from "@/components/nav"
 import UserTable from "./table"
 import AddUserForm from "./add-user-form"
@@ -17,7 +18,8 @@ const columns = [
 
 
 export default async function Page() {
-    const users = await viewUserProfile.getUserProfiles()
+    // const users = await viewUserProfile.getUserProfiles()
+    const users = await controller.viewUserAccountController.getUserInfo()
     const session = await getSession()
 
     if (!users) {

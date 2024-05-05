@@ -3,7 +3,7 @@
 import prisma from "@/utils/prisma";
 import { getSession } from "@/utils/auth";
 import { revalidatePath } from "next/cache";
-import { editAccountInfo } from "@/utils/controller"
+import * as controller from '@/utils/controllers/globalControllers'
 
 // form to update user info in db
 
@@ -23,7 +23,7 @@ export async function submit(prev: any, formData: FormData) {
 
     // update user info in db
 
-    const result = await editAccountInfo.saveInfoChange(userObj)
+    const result = await controller.ediAccountInfoController.saveInfoChange(userObj)
 
     return result
 

@@ -73,29 +73,42 @@ export class User {
 
     }
 
-    async getAllUsers() { 
+    async getAllUsers() {
         return await prisma.user.findMany({
-            select: {
-                email: true,
-                firstName: true,
-                lastName: true,
-                phoneNumber: true,
-                country: true,
-                ceaNumber: true,
-                agency: true,
-                license: true
+            include: {
+                listing: true,
+                shortList: true,
+                ownership: true,
+                ratingAndReview: true,
+                userProfile: true
+                
             }
         })
     }
 
-    async addPropertyToShortList() { }
+    async addPropertyToShortList({ email, propertyId }: { email: string, propertyId: string }) {
+        const id = await userProfile.getUserId({ email })
+        return await prisma.shortlist.create({
+            data: {
+                userId: id,
+                propertyId
+            }
+        })
+    }
 
-    async searchAgent() { }
+    async searchAgent({ email }: { email: string }) {
+        return await prisma.user.findFirst({
+            where: {
+                email
+            }
+        })
+    }
 
     async getRatingsAndReviews() {
         return await prisma.ratingsAndReviews.findMany()
     }
 
+    // anonymous rating
     async createRating({ email, rating, review }: {
         email: string, rating: number, review: string
     }) {
@@ -148,16 +161,8 @@ export class UserProfile {
         })
     }
 
-    async getUserProfile({ email }: { email: string }) {
-        const id = await this.getUserId({ email })
-        if (!id) return null
-        const up = await prisma.userProfile.findFirst({
-            where: {
-                userId: id
-            }
-        })
-
-        return up
+    async getUserProfile() {
+        return await prisma.userProfile.findMany()
     }
 
     async setRoleName({ email, role }: { email: string, role: string }) {
