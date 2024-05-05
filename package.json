@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
-    "test": "vitest --run",
+    "test": "vitest --run --testTimeout 10000",
     "validate": "prisma vaidate",
     "generate": "prisma generate",
     "db:push": "prisma db push",

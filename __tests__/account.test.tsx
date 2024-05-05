@@ -1,10 +1,9 @@
 import { expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Page from '../app/page'
 import prisma from '@/utils/prisma'
 
-const email = "aaa@gmail.com"
+const email = "ddddd@gmail.com"
 
 test('create agent', async () => {
     const newUser = await prisma.user.create({

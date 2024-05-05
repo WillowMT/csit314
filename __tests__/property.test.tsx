@@ -38,7 +38,7 @@ test('create property', async () => {
 
 // TODO: delete property
 
-test.only('delete property', async () => {
+test('delete property', async () => {
     const property = await prisma.property.deleteMany({
         where: {
             name: "test property"
