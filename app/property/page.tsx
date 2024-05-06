@@ -1,6 +1,7 @@
 import Navigation from "@/components/nav";
 // import { viewSellerProperty } from "@/utils/controller";
 import * as controller from '@/utils/controllers/globalControllers'
+import { demo } from "@/utils/demo";
 
 export default async function Page() {
     // const properties = await viewSellerProperty.getCreatedProperty()
@@ -11,7 +12,7 @@ export default async function Page() {
             <h1>Property Page</h1>
             <pre>
                 {
-                    properties.map((property: any) => {
+                    demo.properties.map((property: any) => {
                         return (
                             JSON.stringify(property, null, 2)
                         )

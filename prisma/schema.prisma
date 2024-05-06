@@ -26,10 +26,10 @@ model User {
   agency          String?             @default("")
   license         String?             @default("")
   ratingAndReview RatingsAndReviews[]
-  userProfile     UserProfile[]
   shortList       Shortlist[]
   listing         Listing[]
   ownership       Ownership[]
+  profile UserProfile? @relation(fields: [profileId], references: [id])
 }
 
 model Property {
@@ -88,8 +88,7 @@ model Ownership {
 
 model UserProfile {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String? @db.ObjectId
   activated Boolean
   role      String
-  user      User?   @relation(fields: [userId], references: [id])
+  user User[]
 }
