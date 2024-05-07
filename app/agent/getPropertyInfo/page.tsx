@@ -29,9 +29,9 @@ export default async function Page() {
                 <div className="col">
                     <main className="container mx-auto py-36- px-8">
                         <div className="grid lg:grid-cols-3 gap-6">
-                            {demo.properties.map((property: any) => {
+                            {demo.properties.map((property: any,i) => {
                                 return (
-                                    <div className="shadow-lg">
+                                    <div key={i} className="shadow-lg">
                                         <Image className="rounded-t-lg" src={property.imageUrl} alt="image"/>
                                         <div className="p-5">
                                             <h2>Name: {property.name}</h2>
