@@ -58,7 +58,7 @@ class CreateUserAccController {
             const session = await getSession()
             
             // call to entity
-            const usr = await user.createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country })
+            const usr = await user.createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, role})
 
             session.email = email
             session.firstName = firstName
