@@ -92,12 +92,15 @@ export default function AddUserForm() {
                                             placeholder="Role"
                                             onChange={(e) => setRole(e.target.value)}
                                         >
-                                            {['BUYER', 'SELLER', 'ADMIN', 'AGENT'].map((item) => (
+                                            {//Todo: Link to UserProfile table through a controller, viewUserProfileController, and use its getUserProfile() function??
+                                            //Make sure in the prisma tables BUYER, SELLER, SYSADMIN, REALESTATEAGENT always exists...
+                                            ['BUYER', 'SELLER', 'ADMIN', 'AGENT'].map((item) => (
                                                 <SelectItem key={item} value={item}>
                                                     {item}
                                                 </SelectItem>
                                             ))}
                                         </Select>
+                                        
                                         <Input
                                             isRequired
                                             name="phoneNumber"
