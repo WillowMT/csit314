@@ -54,10 +54,24 @@ export class User {
     }
     //system admin creates new user account
     async createUserAccount({
-        email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license
+    email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license, role
     }: {
-        email: string, firstName: string, lastName: string, passwordHash: string, phoneNumber: string, country: string, ceaNumber?: string, agency?: string, license?: string
+        email: string, firstName: string, lastName: string, passwordHash: string, phoneNumber: string, country: string, ceaNumber?: string, agency?: string, license?: string, role: string
     }) {
+        // Attempt to find the userProfile by role
+        const profile = await prisma.userProfile.findUnique({
+            where: {
+                role: role
+            },
+            select: {
+                id: true  // Select only the ID field
+            }
+        });
+
+        // Check if a userProfile was found and extract the ID, otherwise use null
+        const profileId = profile ? profile.id : null;
+
+        // Create the user with the potentially null userProfile ID
         return await prisma.user.create({
             data: {
                 email,
@@ -68,10 +82,10 @@ export class User {
                 country,
                 ceaNumber: ceaNumber || "",
                 agency: agency || "",
-                license: license || ""
+                license: license || "",
+                profileId: profileId  // Assign the ID which may be null
             }
-        })
-
+        });
     }
     // #71, will change from getUserInfo to this
     async getAllUsers() {
@@ -90,23 +104,6 @@ export class User {
                     select:{
                         role:true
                     }
-                },
-                shortList: {
-                    select: {
-                        propertyId: true
-                    }
-                },
-                ratingAndReview: {
-                    select: {
-                        rating: true,
-                        review: true
-                    }
-                },
-                ownership: {
-                    select: {
-                        propertyId: true
-                    }
-
                 }
             }
         })
