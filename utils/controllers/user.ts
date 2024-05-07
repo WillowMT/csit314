@@ -1,5 +1,5 @@
 import { getSession } from "../auth";
-import { user } from "../entity";
+import { userEntity } from "../entity";
 import { revalidatePath } from "next/cache";
 
 
@@ -21,7 +21,7 @@ class EdiAccountInfoController {
 
             const session = await getSession()
 
-            const ussr = await user.setInfo({ email, firstName, lastName, phoneNumber, country, ceaNumber, agency, license })
+            const usr = await userEntity.setInfo({ email, firstName, lastName, phoneNumber, country, ceaNumber, agency, license })
 
             session.firstName = firstName
             session.lastName = lastName
@@ -45,49 +45,38 @@ class EdiAccountInfoController {
 }
 
 class CreateUserAccController {
-    async createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, role }: {
+    async createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, license, agency, ceaNumber }: {
         email: string;
         passwordHash: string;
         firstName: string;
         lastName: string;
         phoneNumber: string;
         country: string;
-        role: string;
+        license: string | undefined;
+        agency: string | undefined;
+        ceaNumber: string | undefined;
     }) {
         try {
-            const session = await getSession()
-            
             // call to entity
-            const usr = await user.createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country })
-
-            session.email = email
-            session.firstName = firstName
-            session.lastName = lastName
-            session.phoneNumber = phoneNumber
-            session.country = country
-            session.role = role
-
-            session.save()
-
-            revalidatePath('/account/personal')
+            const usr = await userEntity.createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, license, agency, ceaNumber })
 
             return { success: true, message: "User created" };
 
         } catch (e) {
-            return { success: false, message: "Error creating user" };
+            return { success: false, message: `Error: ${e}` };
         }
     }
 }
 
 class ViewUserAccountController {
     async getUserInfo() {
-        return await user.getAllUsers()
+        return await userEntity.getAllUsers()
     }
 }
 
 class UserAcountSearchController {
     async SearchUserAcount(email: string) {
-        return await user.getUser({ email })
+        return await userEntity.getUser({ email })
     }
 }
 
@@ -99,7 +88,7 @@ class LoginAccountController {
 
 class ShortlistController {
     async shortlist(email:string, propertyId:string) {
-        return await user.addPropertyToShortList({ email, propertyId })
+        return await userEntity.addPropertyToShortList({ email, propertyId })
     }
 }
 //Just write down controllers for the user entity

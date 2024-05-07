@@ -1,34 +1,34 @@
-import { property, user } from "../entity";
+import { propertyEntity, userEntity } from "../entity";
 
 class ViewRealEstateAgentRatingsAndReviews {
     async getRatingsAndReviews({email}:{email:string}) {
-        return await user.getRatingsAndReviews({email})
+        return await userEntity.getRatingsAndReviews({email})
     }
 }
 
 class ViewAgentAccountController {
     // used to return the information of the agent...
     async getAgentDetails({propertyId}:{propertyId:string}) {
-        return await property.getAgentDetails({propertyId})
+        return await propertyEntity.getAgentDetails({propertyId})
     }
 }
 
 class SearchAgentController {
     async getAgentDetails(email: string) {
-        return await user.getUser({ email })
+        return await userEntity.getUser({ email })
     }
 }
 
 class RateAgentController {
     // create review for agent x
     async writeReview(email: string, rating: number, review: string) {
-        return await user.createRating({ email, rating, review })
+        return await userEntity.createRating({ email, rating, review })
     }
 }
 
 class ViewRealEstateAgentRatingsAndReviewsController {
     async getRatingsAndReviews({email}:{email:string}) {
-        return await user.getRatingsAndReviews({email})
+        return await userEntity.getRatingsAndReviews({email})
     }
 }
 

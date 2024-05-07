@@ -98,12 +98,12 @@ export async function create(formObj: UserFormData): Promise<{ success: boolean,
     })
 
     // assign default role of USER
-    await prisma.userProfile.create({
-        data: {
-            role: "USER",
-            activated: true
-        }
-    })
+    // await prisma.userProfile.create({
+    //     data: {
+    //         role: "USER",
+    //         activated: true
+    //     }
+    // })
 
     return { success: true, message: "User created successfully" };
 }

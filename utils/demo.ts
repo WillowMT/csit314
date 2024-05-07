@@ -1,19 +1,19 @@
 
 import { faker } from '@faker-js/faker';
 
-function createRandomUser() {
+export function createRandomUser() {
     return {
         id: faker.string.uuid(),
         profileId: faker.string.uuid(),
         email: faker.internet.email(),
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
-        phoneNumber: faker.number.int(),
+        phoneNumber: faker.phone.number(),
         passwordHash: faker.internet.password(),
         country: faker.location.country(),
-        ceaNumber: faker.number.int(),
+        ceaNumber: faker.string.nanoid(),
         agency: faker.company.name(),
-        license: faker.number.int(),
+        license: faker.string.nanoid(),
         profile: {
             role: faker.helpers.arrayElement(['USER', 'AGENT', 'ADMIN']),
             activated: faker.helpers.arrayElement([true, false])
@@ -22,7 +22,7 @@ function createRandomUser() {
     };
 }
 
-function createRandomUserProfile() {
+export function createRandomUserProfile() {
     return {
         id: faker.string.uuid(),
         role: faker.helpers.arrayElement(['USER', 'AGENT', 'ADMIN']),
@@ -30,7 +30,7 @@ function createRandomUserProfile() {
     };
 }
 
-function createRandomProperty() {
+export function createRandomProperty() {
     return {
         id: faker.string.uuid(),
         name: faker.commerce.productName(),

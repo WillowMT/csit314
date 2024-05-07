@@ -4,8 +4,6 @@ import prisma from '@/utils/prisma'
 
 // hello world
 test("prisma connection test", async () => {
-    
-
     expect(1).toBe(1)
 })
 
