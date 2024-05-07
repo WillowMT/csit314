@@ -17,13 +17,27 @@ class UpdateUserProfileController {
     }
 }
 
+class UserProfileSearchController {
+    async SearchUserProfile(role:string){
+        return await userProfile.matchUserProfile({role})
+    }
+}
+class SuspendProfileController{
+    async SuspendProfile(role:string){
+        return await userProfile.suspendProfile({role})
+    }
+}
 
 const createUserProfileController = new CreateUserProfileController()
 const viewUserProfileController = new ViewUserProfileController()
 const updateUserProfileController = new UpdateUserProfileController()
+const userProfileSearchController= new UserProfileSearchController()
+const suspendProfileController= new SuspendProfileController()
 
 export {
     createUserProfileController,
     viewUserProfileController,
-    updateUserProfileController
+    updateUserProfileController,
+    userProfileSearchController,
+    suspendProfileController
 }

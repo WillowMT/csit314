@@ -102,6 +102,10 @@ class ShortlistController {
         return await user.addPropertyToShortList({ email, propertyId })
     }
 }
+//Just write down controllers for the user entity
+class UserAccountSearchController{
+
+}
 
 const ediAccountInfoController = new EdiAccountInfoController()
 const createUserAccController = new CreateUserAccController()

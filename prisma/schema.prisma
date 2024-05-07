@@ -25,6 +25,7 @@ model User {
   ceaNumber       String?             @default("")
   agency          String?             @default("")
   license         String?             @default("")
+  activated       Boolean             @default(true)
   ratingAndReview RatingsAndReviews[]
   shortList       Shortlist[]
   listing         Listing[]
