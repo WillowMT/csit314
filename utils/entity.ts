@@ -57,28 +57,24 @@ export class User {
     }
     //system admin creates new user account
     async createUserAccount({
-        email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license
+    email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license, role
     }: {
-        email: string, firstName: string, lastName: string, passwordHash: string, phoneNumber: string, country: string, ceaNumber?: string, agency?: string, license?: string
+        email: string, firstName: string, lastName: string, passwordHash: string, phoneNumber: string, country: string, ceaNumber?: string, agency?: string, license?: string, role: string
     }) {
-        const session = await getSession()
+        // Attempt to find the userProfile by role
+        const profile = await prisma.userProfile.findUnique({
+            where: {
+                role: role
+            },
+            select: {
+                id: true  // Select only the ID field
+            }
+        });
 
-        session.email = email
-        session.firstName = firstName
-        session.lastName = lastName
-        session.phoneNumber = phoneNumber
-        session.country = country
-        session.license = license || ""
-        session.agency = agency || ""
-        session.ceaNumber = ceaNumber || ""
+        // Check if a userProfile was found and extract the ID, otherwise use null
+        const profileId = profile ? profile.id : null;
 
-        session.save()
-
-        revalidatePath('/account/personal')
-
-        
-        // create new record in database
-
+        // Create the user with the potentially null userProfile ID
         return await prisma.user.create({
             data: {
                 email,
@@ -87,9 +83,10 @@ export class User {
                 passwordHash,
                 phoneNumber,
                 country,
-                ceaNumber,
-                agency,
-                license
+                ceaNumber: ceaNumber || "",
+                agency: agency || "",
+                license: license || "",
+                profileId: profileId  // Assign the ID which may be null
             }
         })
 

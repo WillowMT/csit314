@@ -45,7 +45,7 @@ class EdiAccountInfoController {
 }
 
 class CreateUserAccController {
-    async createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, license, agency, ceaNumber }: {
+    async createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, license, agency, ceaNumber, role }: {
         email: string;
         passwordHash: string;
         firstName: string;
@@ -55,10 +55,11 @@ class CreateUserAccController {
         license: string | undefined;
         agency: string | undefined;
         ceaNumber: string | undefined;
+        role: string;
     }) {
         try {
             // call to entity
-            const usr = await userEntity.createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, license, agency, ceaNumber })
+            const usr = await userEntity.createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, license, agency, ceaNumber, role })
 
             return { success: true, message: "User created" };
 

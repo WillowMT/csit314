@@ -16,6 +16,7 @@ export async function createUser(prev:any, form:FormData) {
     const ceaNumber = form.get('ceaNumber') as string | undefined
     const agency = form.get('agency') as string | undefined
     const license = form.get('license') as string | undefined
+    const role = form.get('role') as string
 
     // check if password match
 
@@ -37,6 +38,7 @@ export async function createUser(prev:any, form:FormData) {
         ceaNumber,
         agency,
         license,
+        role
     }
 
     return await globalController.createUserAccController.createUserAccount(userObj)
