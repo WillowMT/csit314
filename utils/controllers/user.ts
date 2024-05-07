@@ -12,33 +12,19 @@ class EdiAccountInfoController {
         lastName: string;
         phoneNumber: string;
         country: string;
-        ceaNumber: string | "";
-        agency: string | "";
-        license: string | "";
+        ceaNumber?: string | undefined;
+        agency?: string | undefined;
+        license?: string | undefined;
 
     }) {
         try {
 
-            const session = await getSession()
-
             const usr = await userEntity.setInfo({ email, firstName, lastName, phoneNumber, country, ceaNumber, agency, license })
 
-            session.firstName = firstName
-            session.lastName = lastName
-            session.phoneNumber = phoneNumber
-            session.agency = agency
-            session.license = license
-            session.ceaNumber = ceaNumber
-
-            session.save()
-
-            revalidatePath('/account/personal')
-
-
-            return { success: true, message: "User info updated" };
+            return { success: true, message: "User info updated", user: usr};
 
         } catch (e) {
-            return { success: false, message: "Error updating user info" };
+            return { success: false, message: "Error updating user info", user: null};
         }
 
     }
@@ -52,19 +38,19 @@ class CreateUserAccController {
         lastName: string;
         phoneNumber: string;
         country: string;
-        license: string | undefined;
-        agency: string | undefined;
-        ceaNumber: string | undefined;
+        license?: string | undefined;
+        agency?: string | undefined;
+        ceaNumber?: string | undefined;
         role: string;
     }) {
         try {
             // call to entity
             const usr = await userEntity.createUserAccount({ email, passwordHash, firstName, lastName, phoneNumber, country, license, agency, ceaNumber, role })
 
-            return { success: true, message: "User created" };
+            return { success: true, message: "User created", user: usr};
 
         } catch (e) {
-            return { success: false, message: `Error: ${e}` };
+            return { success: false, message: `Error: ${e}`, user:null };
         }
     }
 }
@@ -75,7 +61,7 @@ class ViewUserAccountController {
     }
 }
 
-class UserAcountSearchController {
+class UserAccountSearchController {
     async SearchUserAcount(email: string) {
         return await userEntity.getUser({ email })
     }
@@ -92,15 +78,12 @@ class ShortlistController {
         return await userEntity.addPropertyToShortList({ email, propertyId })
     }
 }
-//Just write down controllers for the user entity
-class UserAccountSearchController{
 
-}
 
 const ediAccountInfoController = new EdiAccountInfoController()
 const createUserAccController = new CreateUserAccController()
 const viewUserAccountController = new ViewUserAccountController()
-const userAcountSearchController = new UserAcountSearchController()
+const userAccountSearchController = new UserAccountSearchController()
 const loginAccountController = new LoginAccountController()
 const shortlistController = new ShortlistController()
 
@@ -108,7 +91,7 @@ export {
     ediAccountInfoController,
     createUserAccController,
     viewUserAccountController,
-    userAcountSearchController,
+    userAccountSearchController,
     loginAccountController,
     shortlistController
 }

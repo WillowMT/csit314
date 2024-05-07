@@ -37,16 +37,26 @@ export function createRandomProperty() {
         address: faker.location.streetAddress(),
         description: faker.commerce.productDescription(),
         onSale: faker.helpers.arrayElement([true, false]),
-        bedrooms: faker.number.int(),
-        bathrooms: faker.number.int(),
-        leaseYears: faker.number.int(),
+        views: faker.number.int(),
+        bedroom: faker.number.int(),
+        bathroom: faker.number.int(),
+        leaseYear: faker.number.int(),
         squareFt: faker.number.int(),
         builtYear: faker.number.int(),
-        price: faker.commerce.price(),
-        views: faker.number.int(),
+        price: faker.number.int({min: 100000, max: 1000000}),
         imageUrl: faker.image.url(),
         activated: faker.helpers.arrayElement([true, false]),
     };
+
+}
+
+export function createRatingsAndReviews () {
+    return {
+        id: faker.string.nanoid(),
+        userId: faker.string.nanoid(),
+        rating: faker.number.int({min: 1, max: 5}),
+        review: faker.lorem.sentence()
+    }
 
 }
 

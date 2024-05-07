@@ -83,10 +83,10 @@ export class User {
                 passwordHash,
                 phoneNumber,
                 country,
-                ceaNumber: ceaNumber || "",
-                agency: agency || "",
-                license: license || "",
-                profileId: profileId  // Assign the ID which may be null
+                ceaNumber,
+                agency,
+                license,
+                profileId: profileId
             }
         })
 

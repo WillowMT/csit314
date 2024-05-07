@@ -1,10 +1,5 @@
 import { propertyEntity, userEntity } from "../entity";
 
-class ViewRealEstateAgentRatingsAndReviews {
-    async getRatingsAndReviews({email}:{email:string}) {
-        return await userEntity.getRatingsAndReviews({email})
-    }
-}
 
 class ViewAgentAccountController {
     // used to return the information of the agent...
@@ -32,14 +27,12 @@ class ViewRealEstateAgentRatingsAndReviewsController {
     }
 }
 
-const viewRealEstateAgentRatingsAndReviews = new ViewRealEstateAgentRatingsAndReviews()
 const viewAgentAccountController = new ViewAgentAccountController()
 const searchAgentController = new SearchAgentController()
 const rateAgentController = new RateAgentController()
 const viewRealEstateAgentRatingsAndReviewsController = new ViewRealEstateAgentRatingsAndReviewsController()
 
 export {
-    viewRealEstateAgentRatingsAndReviews,
     viewAgentAccountController,
     searchAgentController,
     rateAgentController,
