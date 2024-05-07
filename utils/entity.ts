@@ -75,13 +75,38 @@ export class User {
 
     async getAllUsers() {
         return await prisma.user.findMany({
-            include: {
-                listing: true,
-                shortList: true,
-                ownership: true,
-                ratingAndReview: true,
-                userProfile: true
-                
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                phoneNumber: true,
+                country: true,
+                ceaNumber: true,
+                agency: true,
+                license: true,
+                profile:{
+                    select:{
+                        role:true
+                    }
+                },
+                shortList: {
+                    select: {
+                        propertyId: true
+                    }
+                },
+                ratingAndReview: {
+                    select: {
+                        rating: true,
+                        review: true
+                    }
+                },
+                ownership: {
+                    select: {
+                        propertyId: true
+                    }
+
+                }
             }
         })
     }
@@ -154,7 +179,6 @@ export class UserProfile {
 
         return await prisma.userProfile.create({
             data: {
-                userId: id,
                 role,
                 activated: true
             }
@@ -165,27 +189,9 @@ export class UserProfile {
         return await prisma.userProfile.findMany()
     }
 
+    // TODO: implement this
     async setRoleName({ email, role }: { email: string, role: string }) {
 
-        const id = await this.getUserId({ email })
-        if (!id) return null
-
-        const userProfile = await prisma.userProfile.findFirst({
-            where: {
-                userId: id
-            }
-        })
-
-        if (!userProfile) return null
-
-        return await prisma.userProfile.update({
-            where: {
-                id: userProfile.id
-            },
-            data: {
-                role
-            }
-        })
     }
 
 }

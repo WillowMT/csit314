@@ -1,23 +1,24 @@
 'use client'
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Select, SelectItem } from "@nextui-org/react";
 import { countries } from "@/utils/countries";
 import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
-import { submit } from "../signup/_action";
+import { submit } from "../../signup/_action";
 import toast from "react-hot-toast";
 
 export default function AddUserForm() {
-    const { isOpen, onOpen,onClose, onOpenChange } = useDisclosure();
+    const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
     const [state, formAction] = useFormState(submit, null);
+    const [role, setRole] = useState('BUYER')
 
     useEffect(() => {
         if (!state?.message) return
 
         if (state?.success) {
             toast.success('Account created successfully')
-             onClose()
+            onClose()
         }
 
         if (!state?.success && state?.message) {
@@ -73,11 +74,27 @@ export default function AddUserForm() {
                                             label="Country"
                                             labelPlacement={'outside'}
                                             placeholder="Country"
-                                            // onChange={(e) => setCountry(e.target.value)}
+                                        // onChange={(e) => setCountry(e.target.value)}
                                         >
                                             {countries.map((country) => (
                                                 <SelectItem key={country.name} value={country.name}>
                                                     {country.name}
+                                                </SelectItem>
+                                            ))}
+                                        </Select>
+                                        <Select
+                                            isRequired
+                                            name="role"
+                                            className="mb-4 max-w-[400px] mx-auto"
+                                            defaultSelectedKeys={['BUYER']}
+                                            label="Role"
+                                            labelPlacement={'outside'}
+                                            placeholder="Role"
+                                            onChange={(e) => setRole(e.target.value)}
+                                        >
+                                            {['BUYER', 'SELLER', 'ADMIN', 'AGENT'].map((item) => (
+                                                <SelectItem key={item} value={item}>
+                                                    {item}
                                                 </SelectItem>
                                             ))}
                                         </Select>
@@ -89,7 +106,7 @@ export default function AddUserForm() {
                                             label="Phone Number"
                                             labelPlacement={'outside'}
                                             placeholder="Phone Number"
-                                            // startContent={<span className=" text-gray-500 text-sm">{dialCode}</span>}
+                                        // startContent={<span className=" text-gray-500 text-sm">{dialCode}</span>}
                                         />
                                         <Input
                                             isRequired
@@ -109,33 +126,41 @@ export default function AddUserForm() {
                                             labelPlacement={'outside'}
                                             placeholder="Confirm Password"
                                         />
-                                        <Input
-                                            name="agency"
-                                            
-                                            className="mb-4 max-w-[400px] mx-auto"
-                                            type="agency"
-                                            label="Agency"
-                                            labelPlacement={'outside'}
-                                            placeholder="Agency"
-                                        />
-                                        <Input
-                                            
-                                            name="license"
-                                            className="mb-4 max-w-[400px] mx-auto"
-                                            type="license"
-                                            label="License"
-                                            labelPlacement={'outside'}
-                                            placeholder="License"
-                                        />
-                                        <Input
-                                            
-                                            name="ceaNumber"
-                                            className="mb-4 max-w-[400px] mx-auto"
-                                            type="ceaNumber"
-                                            label="CEA Number"
-                                            labelPlacement={'outside'}
-                                            placeholder="CEA Number"
-                                        />
+                                        {
+                                            role == 'AGENT' && (
+                                                <>
+
+                                                    <Input
+                                                        name="agency"
+
+                                                        className="mb-4 max-w-[400px] mx-auto"
+                                                        type="agency"
+                                                        label="Agency"
+                                                        labelPlacement={'outside'}
+                                                        placeholder="Agency"
+                                                    />
+                                                    <Input
+
+                                                        name="license"
+                                                        className="mb-4 max-w-[400px] mx-auto"
+                                                        type="license"
+                                                        label="License"
+                                                        labelPlacement={'outside'}
+                                                        placeholder="License"
+                                                    />
+                                                    <Input
+
+                                                        name="ceaNumber"
+                                                        className="mb-4 max-w-[400px] mx-auto"
+                                                        type="ceaNumber"
+                                                        label="CEA Number"
+                                                        labelPlacement={'outside'}
+                                                        placeholder="CEA Number"
+                                                    />
+                                                </>
+
+                                            )
+                                        }
                                     </div>
                                     <Btn />
                                 </form>

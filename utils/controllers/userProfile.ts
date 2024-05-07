@@ -10,6 +10,7 @@ class ViewUserProfileController {
         return await userProfile.getUserProfile()
     }
 }
+
 class UpdateUserProfileController {
     async saveRoleName(email:string, role:string) {
         return await userProfile.setRoleName({ email, role})
