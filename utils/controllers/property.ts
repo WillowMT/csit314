@@ -1,8 +1,8 @@
-import { property } from "../entity"
+import { user, property } from "../entity"
 
 class ViewSellerPropertyController {
-    async getCreatedProperty() {
-        return await property.getCreatedProperty()
+    async getOwnedProperty({email}:{email:string}) {
+        return await user.getOwnedProperty({email})
     }
 }
 

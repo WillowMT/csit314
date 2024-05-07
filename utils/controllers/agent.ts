@@ -1,15 +1,15 @@
-import { user } from "../entity";
+import { property, user } from "../entity";
 
 class ViewRealEstateAgentRatingsAndReviews {
-    async getRatingsAndReviews() {
-        return await user.getRatingsAndReviews()
+    async getRatingsAndReviews({email}:{email:string}) {
+        return await user.getRatingsAndReviews({email})
     }
 }
 
 class ViewAgentAccountController {
-    // returns all agents
-    async getAgentDetails() {
-        return await user.getAgentDetails()
+    // used to return the information of the agent...
+    async getAgentDetails({propertyId}:{propertyId:string}) {
+        return await property.getAgentDetails({propertyId})
     }
 }
 
@@ -27,8 +27,8 @@ class RateAgentController {
 }
 
 class ViewRealEstateAgentRatingsAndReviewsController {
-    async getRatingsAndReviews() {
-        return await user.getRatingsAndReviews()
+    async getRatingsAndReviews({email}:{email:string}) {
+        return await user.getRatingsAndReviews({email})
     }
 }
 
