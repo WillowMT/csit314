@@ -55,7 +55,7 @@ export default function Page() {
                         isRequired
                         name="agent-name"
                         className="mb-4 max-w-[400px] mx-auto"
-                        type="number"
+                        type="text"
                         label="Agent Contact"
                         labelPlacement={"outside"}
                         placeholder="Name"
