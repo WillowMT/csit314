@@ -89,6 +89,6 @@ model Ownership {
 model UserProfile {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   activated Boolean
-  role      String
+  role      String  @unique
   user User[]
 }

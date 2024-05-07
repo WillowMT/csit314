@@ -1,8 +1,8 @@
 import { userProfile } from "../entity";
 
 class CreateUserProfileController {
-    async recordUserProfile(email: string, role:string) {
-        return await userProfile.createUserProfile({ email, role })
+    async recordUserProfile(role:string) {
+        return await userProfile.createUserProfile({role})
     }
 }
 class ViewUserProfileController {
@@ -12,8 +12,8 @@ class ViewUserProfileController {
 }
 
 class UpdateUserProfileController {
-    async saveRoleName(email:string, role:string) {
-        return await userProfile.setRoleName({ email, role})
+    async saveRoleName(role:string, newrole:string) {
+        return await userProfile.setRoleName({role, newrole})
     }
 }
 

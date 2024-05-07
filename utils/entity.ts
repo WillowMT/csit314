@@ -5,6 +5,16 @@ import prisma from "./prisma";
 export class User {
     email = ""
 
+    async getUserId({ email }: { email: string }): Promise<string | null> {
+        const user = await prisma.user.findUnique({
+            where: {
+                email
+            }
+        })
+
+        return user?.id || null
+    }
+
     setEmail(email: string) {
         this.email = email
     }
@@ -112,7 +122,7 @@ export class User {
     }
 
     async addPropertyToShortList({ email, propertyId }: { email: string, propertyId: string }) {
-        const id = await userProfile.getUserId({ email })
+        const id = await this.getUserId({ email })
         return await prisma.shortlist.create({
             data: {
                 userId: id,
@@ -137,7 +147,7 @@ export class User {
     async createRating({ email, rating, review }: {
         email: string, rating: number, review: string
     }) {
-        const id = await userProfile.getUserId({ email })
+        const id = await this.getUserId({ email })
         if (!id) return null
 
         return await prisma.ratingsAndReviews.create({
@@ -150,7 +160,7 @@ export class User {
     }
 
     async matchUserAccount({ email }: { email: string }) {
-        const id = await userProfile.getUserId({ email })
+        const id = await this.getUserId({ email })
         return await prisma.ratingsAndReviews.findFirst({
             where: {
                 userId: id
@@ -162,21 +172,18 @@ export class User {
 
 export class UserProfile {
 
-    async getUserId({ email }: { email: string }): Promise<string | null> {
-        const user = await prisma.user.findUnique({
+    async getUserProfileId({ role }: { role: string }): Promise<string | null> {
+        const userProfile = await prisma.userProfile.findUnique({
             where: {
-                email
+                role:role
             }
         })
 
-        return user?.id || null
+        return userProfile?.id || null
     }
 
-    async createUserProfile({
-        email, role
-    }: { email: string, role: string }) {
-        const id = await this.getUserId({ email })
-
+    async createUserProfile({role}: 
+        { role: string }) {
         return await prisma.userProfile.create({
             data: {
                 role,
@@ -190,10 +197,16 @@ export class UserProfile {
     }
 
     // TODO: implement this
-    async setRoleName({ email, role }: { email: string, role: string }) {
-
+    async setRoleName({ role, newrole }: { role: string, newrole: string }) {
+        return await prisma.userProfile.update({
+            where: {
+                role: role
+            },
+            data: {
+                role: newrole
+            }
+        });
     }
-
 }
 
 export class Property {
