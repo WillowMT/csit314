@@ -8,8 +8,9 @@ import Link from "next/link";
 import { submit } from "../../signup/_action";
 import { createUser } from "./_action";
 import toast from "react-hot-toast";
+import { UserProfileInterface } from "@/utils/demo";
 
-export default function AddUserForm() {
+export default function AddUserForm({roles}: {roles: UserProfileInterface[]}) {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
     const [state, formAction] = useFormState(createUser, null);
     const [role, setRole] = useState('BUYER')
@@ -95,9 +96,9 @@ export default function AddUserForm() {
                                         >
                                             {//Todo: Link to UserProfile table through a controller, viewUserProfileController, and use its getUserProfile() function??
                                             //Make sure in the prisma tables BUYER, SELLER, SYSADMIN, REALESTATEAGENT always exists...
-                                            ['BUYER', 'SELLER', 'ADMIN', 'AGENT'].map((item) => (
-                                                <SelectItem key={item} value={item}>
-                                                    {item}
+                                            roles.map((item) => (
+                                                <SelectItem key={item.role} value={item.role}>
+                                                    {item.role}
                                                 </SelectItem>
                                             ))}
                                         </Select>

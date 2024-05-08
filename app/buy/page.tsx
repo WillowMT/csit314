@@ -1,11 +1,25 @@
 import Navigation from "@/components/nav";
-import Listing from "./listing";
+import React from 'react';
+import './styles.css';
+import PropertyBox from './PropertyBox'
+import Collapse from "./collapse";
 
-export default function Page() {
-    return(
+export default async function Page() {
+
+  return (
+    <div>
+        <Navigation />
         <div>
-            <Navigation />
-            <Listing />
+        <Collapse />
         </div>
-    )
-}
+        <div className="title">
+            Listed properties
+        </div>
+        <PropertyBox />
+        <div className="no-more">
+            - You have reached the end of the page -
+        </div>
+    </div>
+    
+  );
+};

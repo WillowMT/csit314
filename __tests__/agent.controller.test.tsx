@@ -1,5 +1,4 @@
 import { expect, test, describe } from 'vitest'
-import prisma from '@/utils/prisma'
 import * as globalController from '@/utils/controllers/globalControllers'
 import { createRandomUser, createRandomProperty, createRatingsAndReviews } from '@/utils/demo'
 import { encryptPassword } from '@/utils/hash'

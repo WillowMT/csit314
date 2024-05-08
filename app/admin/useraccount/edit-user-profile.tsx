@@ -117,7 +117,7 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                                 defaultValue={user.email}
                                             />
                                             {
-                                                user.ceaNumber && (
+                                                user.ceaNumber && user.agency && user.license && (
                                                     <>
                                                         <Input
                                                             name="agency"
@@ -135,7 +135,7 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                                             label="license"
                                                             labelPlacement={'outside'}
                                                             placeholder="license"
-                                                            defaultValue={user.license.toString()}
+                                                            defaultValue={user.license}
                                                         />
                                                         <Input
                                                             name="ceaNumber"
@@ -144,7 +144,7 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                                             label="ceaNumber"
                                                             labelPlacement={'outside'}
                                                             placeholder="ceaNumber"
-                                                            defaultValue={user.ceaNumber.toString()}
+                                                            defaultValue={user.ceaNumber}
                                                         />
                                                     </>
                                                 )

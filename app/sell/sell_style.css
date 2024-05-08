@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidescroll::-webkit-scrollbar {
+    display: none;
+}
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidescroll {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+/* font styles */
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Century Gothic', sans-serif;
+    font-weight: bold;
+}
+
+p, li, section, button{
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* header starts */
+.header{
+    background: url(/house.png) no-repeat center/cover;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header .text-container h1{
+    font-size: 4rem;
+    color: white;
+    padding-top: 10rem;
+}
+.header .text-container p{
+    font-size: 2rem;
+    color: white;
+    width: 55vw;
+    margin: auto;
+    padding: 2.5rem;
+    font-weight: 600;
+}
+.search-container{
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10rem;
+}
+.search-container input{
+    width: 30vw;
+    border: 3px solid #CCBEAE;
+    outline: none;
+    border-radius: 1rem;
+    padding: .5rem;
+}
+
+.search-container .bx-search{
+    position: absolute;
+    top: 7.5%;
+    right: 2%;
+}
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .header .text-container h1 {
+        font-size: 3rem;
+        padding-top: 5rem;
+    }
+  
+    .header .text-container p {
+        font-size: 1.5rem;
+        width: 80vw;
+        padding: 1.5rem;
+    }
+  
+    .search-container {
+        padding-bottom: 5rem;
+    }
+  
+    .search-container input {
+        width: 80vw;
+    }
+}
+/* header ends */
+
+/* three steps starts */
+.three-steps h1{
+    text-align: center;
+    font-size: 3rem;
+    padding: 3rem;
+}
+.three-steps .steps{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.three-steps .steps .first-step, .three-steps .steps .second-step, .three-steps .steps .third-step{
+    display: flex;
+    gap: 1.5rem;
+    width: 400px;
+    align-items: center;
+}
+.three-steps .steps img{
+    width: 130px;
+    height: 130px;
+}
+.three-steps{
+    padding-top: 3rem;
+    padding-bottom: 6rem;
+}
+.steps .text-container .title{
+    font-weight: bold;
+}
+/* three steps ends */
+
+/* services starts */
+.services {
+    display: flex;
+}
+
+.services .text-container h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.services .text-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+.services .text-container .subtitle-and-desc {
+    padding: 2rem;
+}
+
+.services .text-container .subtitle-and-desc p {
+    padding: .2rem;
+}
+
+.services .text-container .subtitle-and-desc .sub-title {
+    font-weight: bold;
+}
+
+.services .img-container {
+    width: 50%;
+}
+.services .img-container img{
+    min-height: 100%;
+    object-fit: cover;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .services {
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    .services .text-container, .services .img-container {
+        width: 100%; /* Full width for each container on smaller screens */
+    }
+}
+/* services ends */
+
+/* faq starts */
+.faq{
+    display: flex;
+}
+.faq .img-container{
+    width: 50%;
+}
+.faq .text-container{
+    width: 50%;
+}
+.faq .img-container img{
+    min-height: 100%;
+    object-fit: cover;
+}
+.faq .text-container h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+.faq .text-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    flex-wrap: wrap;
+}
+.faq .text-container .subtitle-and-desc {
+    padding: 2rem;
+}
+
+.faq .text-container .subtitle-and-desc p {
+    padding: .2rem;
+}
+.faq .text-container .subtitle-and-desc .sub-title {
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    .faq {
+        flex-direction: column-reverse; /* Stack items vertically */
+    }
+
+    .faq .text-container, .faq .img-container {
+        width: 100%; /* Full width for each container on smaller screens */
+    }
+}
+/* faq ends */

@@ -14,7 +14,8 @@ export default async function Page() {
     // const users = await viewUserProfile.getUserProfiles()
     // const users = await controller.viewUserAccountController.getUserInfo()
     const users = await globalController.viewUserAccountController.getUserInfo()
-    const session = await getSession()
+    
+    const roles = await globalController.viewUserProfileController.getUserProfile()
 
     if (!users) {
         return;
@@ -26,7 +27,7 @@ export default async function Page() {
             <h2 className=" text-2xl">Manage User Account</h2>
             <div className="button-group">
             </div>
-            <UserTable users={users} />
+            <UserTable users={users} roles={roles} />
         </div>
     )
 }
