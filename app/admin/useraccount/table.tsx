@@ -73,7 +73,7 @@ export default function UserTable({ users, roles }: { users: UserInterface[], ro
                                     <TableCell className=" space-x-4">
                                         <div className="flex place-content-center place-items-center space-x-2">
                                             <EditUserAccount user={user} />
-                                            <SuspendButton />
+                                            <SuspendButton email={user.email} />
                                         </div>
                                     </TableCell>
                                 </TableRow>

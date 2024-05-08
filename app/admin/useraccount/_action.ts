@@ -52,3 +52,19 @@ export async function createUser(prev:any, form:FormData) {
     return result
    
 }
+
+
+export async function suspendUser(prev:any, formData:FormData) {
+    'use server'
+    const email = formData.get('email') as string
+
+    // TODO: suspend user controller
+    return await prisma.user.update({
+        where: {
+            email: email
+        },
+        data: {
+            activated: false
+        }
+    })
+}

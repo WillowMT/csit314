@@ -1,8 +1,26 @@
-import React from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+'use state'
 
-export default function SuspendButton() {
+import React from "react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
+import { useState, useEffect } from "react";
+import { suspendUser } from "./_action";
+import { useFormState } from "react-dom";
+import toast from "react-hot-toast";
+
+export default function SuspendButton({email}: {email: string}) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [state, formAction] = useFormState(suspendUser, null);
+
+    useEffect(() => {
+        if (!state) return
+
+        if (state) {
+            toast.success('User suspended successfully')
+        }
+
+    }, [state])
+
+
 
     return (
         <>
@@ -24,9 +42,16 @@ export default function SuspendButton() {
                                 <Button color="success" variant="flat" onPress={onClose}>
                                     Close
                                 </Button>
-                                <Button color="danger" onPress={onClose}>
-                                    Confirm
-                                </Button>
+                                <form action={formAction}>
+                                    <Input 
+                                    name="email"
+                                    defaultValue={email}
+                                    className="hidden"
+                                    />
+                                    <Button type="submit" color="danger" onPress={onClose}>
+                                        Confirm
+                                    </Button>
+                                </form>
                             </ModalFooter>
                         </>
                     )}
