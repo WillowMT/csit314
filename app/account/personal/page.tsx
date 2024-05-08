@@ -21,7 +21,7 @@ export default async function Page() {
     return (
         <div>
             <h1 className=" text-4xl">Personal Page</h1>
-            <UserForm fname={user.firstName} lname={user.lastName} email={email} phone={user.phoneNumber.toString()} agency={user.agency} license={user.license.toString()} ceaNumber={user.ceaNumber.toString()} />
+            <UserForm firstName={user.firstName} lastName={user.lastName} email={email} phoneNumber={user.phoneNumber} agency={user.agency} license={user.license} ceaNumber={user.ceaNumber} />
         </div>
     )
 }

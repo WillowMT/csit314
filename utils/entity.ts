@@ -3,7 +3,7 @@ import { getSession } from "./auth";
 import { comparePassword, encryptPassword } from "./hash";
 
 import prisma from "./prisma";
-import { UserInterface } from "./demo";
+import { PropertyInterface, UserInterface } from "./demo";
 
 export class User {
     email = ""
@@ -23,25 +23,20 @@ export class User {
     }
 
     //We can use this for system admin and buyer,seller, rea for their personal details. #44, #57, #72, #smth idr
-    async setInfo({
-        email, firstName, lastName, phoneNumber, country, ceaNumber, agency, license
-    }: {
-        email: string, firstName: string, lastName: string, phoneNumber: string, country: string, ceaNumber?: string, agency?: string, license?: string
-
-    }) {
+    async setInfo(user: UserInterface) {
         // update user info
         return await prisma.user.update({
             where: {
-                email
+                email:user.email
             },
             data: {
-                firstName,
-                lastName,
-                phoneNumber,
-                country,
-                ceaNumber: ceaNumber || "",
-                agency: agency || "",
-                license: license || ""
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phoneNumber: user.phoneNumber,
+                country: user.country,
+                ceaNumber:user.ceaNumber,
+                agency: user.agency,
+                license: user.license
             }
         })
     }
@@ -58,7 +53,7 @@ export class User {
     //showdis
     // # 70 system admin creates new user account
     async createUserAccount({
-    email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license, role
+        email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license, role
     }: {
         email: string, firstName: string, lastName: string, passwordHash: string, phoneNumber: string, country: string, ceaNumber?: string, agency?: string, license?: string, role: string
     }) {
@@ -69,7 +64,7 @@ export class User {
             },
             select: {
                 id: true  // Select only the ID field
-            } 
+            }
         });
 
         // Check if a userProfile was found and extract the ID, otherwise use null
@@ -156,7 +151,7 @@ export class User {
     }) {
         const id = await this.getUserId({ email })
         if (!id) return null
-        
+
         return await prisma.ratingsAndReviews.create({
             data: {
                 userId: id,
@@ -446,52 +441,45 @@ export class Property {
 
     //just a few more entity functions... (8 more, from the property)
     //#60 
-    async createPropertyListing({name,address,description,bedroom,bathroom,leaseyear,squareft,builtyear,price,imageurl,listeremail,owneremail}:
-        {name:string,address:string,description:string,bedroom:number,
-            bathroom:number,leaseyear:number,squareft:number,builtyear:number,price:number,imageurl:string,listeremail:string,owneremail:string})
-            {
-                const lister=await prisma.user.findUnique({
-                    where:{
-                        email:listeremail
-                    }
-                })
-                const listerId=lister?lister.id:null
-                const owner=await prisma.user.findUnique({
-                    where:{
-                        email:owneremail
-                    }
-                })
-                const ownerId=owner?owner.id:null
+    async createPropertyListing(lister_email: string, owner_email: string, property: PropertyInterface) {
 
-                const propertyListing= await prisma.property.create({
-                    data:{
-                        name,
-                        address,
-                        description,
-                        bedroom,
-                        bathroom,
-                        leaseYear:leaseyear,
-                        squareFt:squareft,
-                        builtYear:builtyear,
-                        price,
-                        imageUrl:imageurl
-                    }
-                })
-                const Listing= await prisma.listing.create({
-                    data:{
-                        userId:listerId,
-                        propertyId:propertyListing.id
-                    }
-                })
-                const Ownership=await prisma.ownership.create({
-                    data:{
-                        userId:ownerId,
-                        propertyId:propertyListing.id
-                    }
-                })
-                return {propertyListing,Listing,Ownership}
+        const lister = await prisma.user.findUnique({
+            where: {
+                email: lister_email
             }
-        
+        })
+
+        if (!lister?.id) return null
+
+        const owner = await prisma.user.findUnique({
+            where: {
+                email: owner_email
+            }
+        })
+
+        if (!owner?.id) return null
+
+        const propertyListing = await prisma.property.create({
+            data: property
+        })
+
+        const listing = await prisma.listing.create({
+            data: {
+                userId: lister.id,
+                propertyId: propertyListing.id
+            }
+        })
+
+        const ownership = await prisma.ownership.create({
+            data: {
+                userId: owner.id,
+                propertyId: propertyListing.id
+            }
+        })
+
+        return { propertyListing, listing, ownership }
+    }
+
 
 
 }

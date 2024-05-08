@@ -5,9 +5,10 @@ import { submit } from './action'
 import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import toast from 'react-hot-toast'
+import { UserInterface } from "@/utils/demo";
 
 
-export default function UserForm({ fname, lname, email, phone, agency, license, ceaNumber }: { fname: string, lname: string, email: string, phone: string, agency:string, license:string, ceaNumber:string }) {
+export default function UserForm(user:UserInterface) {
     const [state, formAction] = useFormState(submit, null);
     
     useEffect(() => {
@@ -36,7 +37,7 @@ export default function UserForm({ fname, lname, email, phone, agency, license, 
                         label="First Name"
                         labelPlacement={'outside'}
                         placeholder="First Name"
-                        defaultValue={fname}
+                        defaultValue={user.firstName}
                     />
                     <Input
 
@@ -46,7 +47,7 @@ export default function UserForm({ fname, lname, email, phone, agency, license, 
                         label="Last Name"
                         labelPlacement={'outside'}
                         placeholder="Last Name"
-                        defaultValue={lname}
+                        defaultValue={user.lastName}
                     />
                     <Input
 
@@ -56,7 +57,7 @@ export default function UserForm({ fname, lname, email, phone, agency, license, 
                         label="Phone Number"
                         labelPlacement={'outside'}
                         placeholder="Phone Number"
-                        defaultValue={phone}
+                        defaultValue={user.phoneNumber}
                     />
 
                     <Input
@@ -66,7 +67,7 @@ export default function UserForm({ fname, lname, email, phone, agency, license, 
                         label="Email"
                         labelPlacement={'outside'}
                         placeholder="Email"
-                        defaultValue={email}
+                        defaultValue={user.email}
                     />
                 </div>
                 {/* {
