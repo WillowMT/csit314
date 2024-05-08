@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className="">
         <Provider>
           <div className="flex flex-col min-h-screen">
-            <div className=" flex-grow relative overflow-scroll">
+            <div className=" flex-grow relative overflow-scroll hidescroll">
             {children}
             </div>
             <Footer />

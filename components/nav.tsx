@@ -19,6 +19,7 @@ export default async function Navigation() {
                 </div>
                 <div className=" sm:flex list-none space-x-10 hidden mr-auto ml-8 text-sm underline">
                     <Link className="grid place-items-center hover:underline" href={"/buy"}>Buy</Link>
+                    <Link className="grid place-items-center hover:underline" href={"/sell"}>Sell</Link>
                     <Link className="grid place-items-center hover:underline" href={"/mortage"}>Calculate Mortage</Link>
                     <Link className="place-items-center hover:underline hidden" href={"/mongodb"}>Mongodb</Link>
                     <Link className="grid place-items-center hover:underline" href={"/property"}>Property</Link>
