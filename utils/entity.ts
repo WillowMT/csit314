@@ -55,7 +55,8 @@ export class User {
             }
         })
     }
-    //system admin creates new user account
+    //showdis
+    // # 70 system admin creates new user account
     async createUserAccount({
     email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license, role
     }: {
@@ -92,6 +93,7 @@ export class User {
 
 
     }
+    //showdis
     // #71, will change from getUserInfo to this
     async getAllUsers() {
         return await prisma.user.findMany({
@@ -447,7 +449,7 @@ export class Property {
 
 
 }
-
+//showdis
 export const userEntity = new User()
 export const userProfileEntity = new UserProfile()
 export const propertyEntity = new Property()
