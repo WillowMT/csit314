@@ -27,7 +27,7 @@ describe("User Controller Test", async () => {
     } )
 
     test("Update User Profile Controller", async () => {
-        const profile = await globalController.updateUserProfileController.saveRoleName("FAKE_ROLE", "FAKE_ROLE")
+        const profile = await globalController.updateUserProfileController.saveRoleName("FAKE_ROLE", "FAKE_ROLE", false)
         expect(profile).toBeDefined()
     })
 

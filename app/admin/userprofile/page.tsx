@@ -4,11 +4,11 @@ import UserRow from "./form"
 import { Button, Input, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, User } from "@nextui-org/react"
 // import { viewUserProfile } from "@/utils/controller"
 import * as controller from '@/utils/controllers/globalControllers'
-import Navigation from "@/components/nav"
 import UserTable from "./table"
 import AddUserForm from "./add-user-form"
 import { getSession } from "@/utils/auth"
 import { demo } from "@/utils/demo"
+import * as globalController from '@/utils/controllers/globalControllers'
 
 const columns = [
     { name: "ID", uid: "id" },
@@ -19,11 +19,8 @@ const columns = [
 
 
 export default async function Page() {
-    // const users = await viewUserProfile.getUserProfiles()
-    // const users = await controller.viewUserAccountController.getUserInfo()
-    const session = await getSession()
 
-    const profiles = demo.userProfiles
+    const profiles = await globalController.viewUserProfileController.getUserProfile()
 
     if (!profiles) {
         return;

@@ -343,13 +343,14 @@ export class UserProfile {
         })
     }
     // TODO: implement this
-    async setRoleName({ role, newrole }: { role: string, newrole: string }) {
+    async setRoleName({ role, newrole, activated }: { role: string, newrole: string, activated:boolean }) {
         return await prisma.userProfile.updateMany({
             where: {
                 role: role
             },
             data: {
-                role: newrole
+                role: newrole,
+                activated
             }
         });
     }
