@@ -10,8 +10,6 @@ import { getSession } from "@/utils/auth"
 import { demo } from "@/utils/demo"
 import { UserInterface } from "@/utils/demo"
 
-
-
 export default async function Page() {
     // const users = await viewUserProfile.getUserProfiles()
     // const users = await controller.viewUserAccountController.getUserInfo()
@@ -32,5 +30,3 @@ export default async function Page() {
         </div>
     )
 }
-
-export const revalidate = 60

@@ -30,8 +30,6 @@ export async function submit(previousState:any, form: FormData) {
         agency,
         license,
     }
-
-    console.log(userObj);
     
 
     // call user object

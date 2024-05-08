@@ -62,13 +62,13 @@ export class User {
         email: string, firstName: string, lastName: string, passwordHash: string, phoneNumber: string, country: string, ceaNumber?: string, agency?: string, license?: string, role: string
     }) {
         // Attempt to find the userProfile by role
-        const profile = await prisma.userProfile.findUnique({
+        const profile = await prisma.userProfile.findFirst({
             where: {
                 role: role
             },
             select: {
                 id: true  // Select only the ID field
-            }
+            } 
         });
 
         // Check if a userProfile was found and extract the ID, otherwise use null
@@ -154,7 +154,7 @@ export class User {
     }) {
         const id = await this.getUserId({ email })
         if (!id) return null
-
+        
         return await prisma.ratingsAndReviews.create({
             data: {
                 userId: id,

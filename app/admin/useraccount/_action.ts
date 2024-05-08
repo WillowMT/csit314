@@ -1,4 +1,5 @@
 'use server'
+
 import * as globalController from '@/utils/controllers/globalControllers'
 import { encryptPassword } from '@/utils/hash'
 
@@ -41,6 +42,13 @@ export async function createUser(prev:any, form:FormData) {
         role
     }
 
-    return await globalController.createUserAccController.createUserAccount(userObj)
+    console.log(userObj);
+    
+    // pass object to controller
+    const result = await globalController.createUserAccController.createUserAccount(userObj)
+
+    revalidatePath('/admin/useraccount')
+
+    return result
    
 }

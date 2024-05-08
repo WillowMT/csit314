@@ -23,7 +23,7 @@ describe("User Controller Test", async () => {
             ceaNumber: demoUser.ceaNumber,
             agency: demoUser.agency,
             license: demoUser.license,
-            role: "USER"
+            role: "BUYER"
         })
 
         userid = newUser.user?.id as string

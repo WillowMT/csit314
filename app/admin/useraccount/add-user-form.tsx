@@ -6,11 +6,12 @@ import { countries } from "@/utils/countries";
 import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
 import { submit } from "../../signup/_action";
+import { createUser } from "./_action";
 import toast from "react-hot-toast";
 
 export default function AddUserForm() {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const [state, formAction] = useFormState(submit, null);
+    const [state, formAction] = useFormState(createUser, null);
     const [role, setRole] = useState('BUYER')
 
     useEffect(() => {
@@ -124,7 +125,7 @@ export default function AddUserForm() {
                                             isRequired
                                             name="passwordConfirm"
                                             className="mb-4 max-w-[400px] mx-auto"
-                                            type="passwordConfirm"
+                                            type="password"
                                             label="Confirm Password"
                                             labelPlacement={'outside'}
                                             placeholder="Confirm Password"
