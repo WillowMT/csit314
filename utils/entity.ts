@@ -12,6 +12,7 @@ export class User {
         const user = await prisma.user.findUnique({
             where: {
                 email
+                ,activated:true
             }
         })
 
@@ -186,6 +187,7 @@ export class User {
         return await prisma.user.findMany({
             where: {
                 firstName: fname
+                ,activated:true
             }
         })
     }
@@ -231,6 +233,7 @@ export class User {
                 id: {
                     in: propertyIds
                 }
+                ,activated:true
             }
         });
 
@@ -268,6 +271,7 @@ export class User {
                 id: {
                     in: propertyIds
                 }
+                ,activated:true
             }
         });
 
@@ -304,13 +308,44 @@ export class User {
                 id: {
                     in: propertyIds
                 },
-                onSale: false
+                onSale: false,
+                activated:true
             }
         });
 
         return properties;
     }
-
+    //#252 get the list of shortlisted properties
+    async getShortlist({userId}:{userId:string}){
+        const shortlistedpropid=await prisma.shortlist.findMany({
+            where:{
+                userId:userId
+            },
+            select:{
+                propertyId:true
+            }
+        })
+        const shortlistedpropids=shortlistedpropid.map(propertyId=>propertyId.propertyId)
+        const shortlistedprops=await prisma.property.findMany({
+            where:{
+                id:{
+                    in:shortlistedpropids
+                },
+                activated:true
+            }
+        })
+        return shortlistedprops
+    }
+    //#253 delete shortlist
+    async deleteShortlist({userId,propertyId}:{userId:string, propertyId:string}){
+        return await prisma.shortlist.delete({
+            where:{
+                userId_propertyId:{
+                    userId:userId,
+                    propertyId:propertyId}                
+            }
+        })
+    }
 
 }
 
@@ -377,7 +412,8 @@ export class Property {
     async getSoldProperty() {
         return await prisma.property.findMany({
             where: {
-                onSale: false
+                onSale: false,
+                activated:true
             }
         })
     }
@@ -385,6 +421,7 @@ export class Property {
     async getOnSaleProperty() {
         return await prisma.property.findMany({
             where: {
+                activated:true,
                 onSale: true
             }
         })
@@ -393,6 +430,7 @@ export class Property {
     async getSoldPropertybyLoc({ address }: { address: string }) {
         return await prisma.property.findMany({
             where: {
+                activated:true,
                 onSale: false,
                 address: {
                     contains: address
@@ -404,6 +442,7 @@ export class Property {
     async getOnSalePropertybyLoc({ address }: { address: string }) {
         return await prisma.property.findMany({
             where: {
+                activated:true,
                 onSale: true,
                 address: {
                     contains: address
@@ -491,9 +530,92 @@ export class Property {
                 })
                 return {propertyListing,Listing,Ownership}
             }
-        
-
-
+    //#63
+    async suspendListedProperty({propertyId}:{propertyId:string}){
+         return await prisma.property.update({
+            where:{
+                id:propertyId
+            },
+            data:{
+                activated:false
+            }
+        })       
+    }
+    //#64
+    async searchListedPropertyByAddress({address}:{address:string}){
+        return await prisma.property.findMany({
+            where:{
+                address:address
+            }
+        })
+    }
+    //#62
+    async setInfoChange({id,name,address,description,onSale,
+        leaseYear,squareFt,builtYear,price,imageUrl}:
+    {id:string,name:string,address:string,description:string,onSale:boolean,
+        leaseYear:number,squareFt:number,builtYear:number,price:number,imageUrl:string
+    }){
+        return await prisma.property.update({
+            where:{
+                id:id
+            },
+            data:{
+                name,
+                address,
+                description,
+                onSale,
+                leaseYear,
+                squareFt,
+                builtYear,
+                price,
+                imageUrl
+            }
+        })
+    }
+    //#55
+    async getPropertyShortlistCount({propertyid}:{propertyid:string}){
+        return await prisma.shortlist.count({
+            where:{
+                propertyId:propertyid
+            }
+        })
+    }
+    //#56
+    async getPropertyViews({propertyid}:{propertyid:string}){
+        return await prisma.property.findFirst({
+            where:{
+                id:propertyid
+            },
+            select:{
+                views:true
+            }
+        })
+    }
+    //#45
+    async calculateMortgage({propertyid, loantermyears, monthlyinterest}:{propertyid:string,loantermyears:number,monthlyinterest:number})
+    {
+        const propprice=await prisma.property.findFirst({
+            where:{
+                id:propertyid
+            },
+            select:{
+                price:true
+            }
+        })
+        const propertyprice=propprice!==null?propprice.price:0
+        const numerator=monthlyinterest*Math.pow(1+(monthlyinterest/100),loantermyears*12)
+        const denominator=Math.pow(1+(monthlyinterest/100),loantermyears*12)-1
+        const monthlyPayment= propertyprice*(numerator/denominator)
+        return monthlyPayment
+    }
+    //#243, 242, 241 - >you can use for buyer, seller, or real estate agent.
+    async getPropertyInfo({propertyid}:{propertyid:string}){
+        return await prisma.property.findFirst({
+            where:{
+                id:propertyid
+            }
+        })
+    }
 }
 //showdis
 export const userEntity = new User()
