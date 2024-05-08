@@ -74,7 +74,7 @@ model Shortlist {
 model Listing {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   userId     String?   @db.ObjectId
-  propertyId String    @db.ObjectId
+  propertyId String    @db.ObjectId @unique
   user       User?     @relation(fields: [userId], references: [id])
   property   Property? @relation(fields: [propertyId], references: [id])
 }
@@ -82,7 +82,7 @@ model Listing {
 model Ownership {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   userId     String?   @db.ObjectId
-  propertyId String    @db.ObjectId
+  propertyId String    @db.ObjectId @unique
   user       User?     @relation(fields: [userId], references: [id])
   property   Property? @relation(fields: [propertyId], references: [id])
 }
