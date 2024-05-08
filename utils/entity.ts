@@ -55,7 +55,8 @@ export class User {
             }
         })
     }
-    //system admin creates new user account
+    //showdis
+    // # 70 system admin creates new user account
     async createUserAccount({
     email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license, role
     }: {
@@ -92,6 +93,7 @@ export class User {
 
 
     }
+    //showdis
     // #71, will change from getUserInfo to this
     async getAllUsers() {
         return await prisma.user.findMany({
@@ -443,11 +445,57 @@ export class Property {
     }
 
     //just a few more entity functions... (8 more, from the property)
+    //#60 
+    async createPropertyListing({name,address,description,bedroom,bathroom,leaseyear,squareft,builtyear,price,imageurl,listeremail,owneremail}:
+        {name:string,address:string,description:string,bedroom:number,
+            bathroom:number,leaseyear:number,squareft:number,builtyear:number,price:number,imageurl:string,listeremail:string,owneremail:string})
+            {
+                const lister=await prisma.user.findUnique({
+                    where:{
+                        email:listeremail
+                    }
+                })
+                const listerId=lister?lister.id:null
+                const owner=await prisma.user.findUnique({
+                    where:{
+                        email:owneremail
+                    }
+                })
+                const ownerId=owner?owner.id:null
 
+                const propertyListing= await prisma.property.create({
+                    data:{
+                        name,
+                        address,
+                        description,
+                        bedroom,
+                        bathroom,
+                        leaseYear:leaseyear,
+                        squareFt:squareft,
+                        builtYear:builtyear,
+                        price,
+                        imageUrl:imageurl
+                    }
+                })
+                const Listing= await prisma.listing.create({
+                    data:{
+                        userId:listerId,
+                        propertyId:propertyListing.id
+                    }
+                })
+                const Ownership=await prisma.ownership.create({
+                    data:{
+                        userId:ownerId,
+                        propertyId:propertyListing.id
+                    }
+                })
+                return {propertyListing,Listing,Ownership}
+            }
+        
 
 
 }
-
+//showdis
 export const userEntity = new User()
 export const userProfileEntity = new UserProfile()
 export const propertyEntity = new Property()
