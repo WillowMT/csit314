@@ -1,0 +1,48 @@
+.image_box{
+  width: 60%;
+  height: 300px;
+  white-space: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.image{
+    width: 35%;
+    float: none;
+    height: 90%;
+    margin: 0 0.25%;
+    display: inline-block;
+    zoom: 1;
+}
+
+.image img{
+  width: 450px;
+  height: 300px;
+  object-fit: fill;
+  border-radius: 15px;
+}
+
+.bed_icon{
+  width: 30px;
+  height: 30px;
+}
+
+.image_layout{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info_box{
+  position: absolute;
+  left: 22%;
+}
+
+.agent_card{
+  width: 500px;
+  position: absolute;
+  left: 55%;
+  top: 45%;
+}
