@@ -1,30 +1,30 @@
-import { userProfile } from "../entity";
+import { userProfileEntity } from "../entity";
 
 class CreateUserProfileController {
     async recordUserProfile(role:string) {
-        return await userProfile.createUserProfile({role})
+        return await userProfileEntity.createUserProfile({role})
     }
 }
 class ViewUserProfileController {
     async getUserProfile() {
-        return await userProfile.getUserProfile()
+        return await userProfileEntity.getUserProfile()
     }
 }
 
 class UpdateUserProfileController {
     async saveRoleName(role:string, newrole:string) {
-        return await userProfile.setRoleName({role, newrole})
+        return await userProfileEntity.setRoleName({role, newrole})
     }
 }
 
 class UserProfileSearchController {
     async SearchUserProfile(role:string){
-        return await userProfile.matchUserProfile({role})
+        return await userProfileEntity.matchUserProfile({role})
     }
 }
 class SuspendProfileController{
     async SuspendProfile(role:string){
-        return await userProfile.suspendProfile({role})
+        return await userProfileEntity.suspendProfile({role})
     }
 }
 
