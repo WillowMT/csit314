@@ -129,7 +129,8 @@ export class User {
     async searchAgent({ fname }: { fname: string }) {
         return await prisma.user.findMany({
             where: {
-                firstName: fname
+                firstName: fname,
+                activated:true
             }
         })
     }
@@ -206,7 +207,7 @@ export class User {
         });
 
         if (!user) {
-            return null
+            throw new Error('User not found');
         }
 
         // Fetch all property IDs associated with the user from the Listing model

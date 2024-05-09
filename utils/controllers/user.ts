@@ -79,6 +79,12 @@ class ShortlistController {
     }
 }
 
+class SuspendUserAccountController{
+    async suspendUserAccount(email:string){
+        return await userEntity.suspendUserAccount({email})
+    }
+}
+
 //showdis
 const ediAccountInfoController = new EdiAccountInfoController()
 const createUserAccController = new CreateUserAccController()
@@ -86,6 +92,8 @@ const viewUserAccountController = new ViewUserAccountController()
 const userAccountSearchController = new UserAccountSearchController()
 const loginAccountController = new LoginAccountController()
 const shortlistController = new ShortlistController()
+const suspendUserAccountController=new SuspendUserAccountController()
+
 
 export {
     ediAccountInfoController,
@@ -93,5 +101,6 @@ export {
     viewUserAccountController,
     userAccountSearchController,
     loginAccountController,
-    shortlistController
+    shortlistController,
+    suspendUserAccountController
 }
