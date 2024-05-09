@@ -1,6 +1,5 @@
 import Navigation from "@/components/nav";
 import './user_acc_style.css'
-import UserForm from "./form";
 import { demo } from "@/utils/demo";
 
 export default async function UserAccountPage() {
@@ -48,8 +47,20 @@ export default async function UserAccountPage() {
                             {/* Content for My Listings tab */}
                             <div>
                                 {/* My Listings Content */}
-                                <UserForm firstName={user.firstName} lastName={user.lastName} email={user.email} phoneNumber={user.phoneNumber} agency={user.agency} license={user.license} ceaNumber={user.ceaNumber}
-                                    country={user.country} />
+                                <h2>First Name</h2>
+                                <p>{user.firstName}</p>
+
+                                <h2>Last Name</h2>
+                                <p>{user.lastName}</p>
+
+                                <h2>Phone Number</h2>
+                                <p>{user.phoneNumber}</p>
+
+                                <h2>Email</h2>
+                                <p>{user.email}</p>
+
+                                <h2>Country</h2>
+                                <p>{user.country}</p>
                             </div>
                         </div>
 
