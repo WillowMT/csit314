@@ -60,6 +60,7 @@ export default function AgentAccountPage() {
                                         </div>
                                     </div>
                                     <textarea name="review" id="review" placeholder="Review this agent..."></textarea>
+                                    <button type="submit" className="submit">Submit</button>
                                 </form>
                             </div>
 
