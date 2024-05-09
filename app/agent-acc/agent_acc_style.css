@@ -278,6 +278,17 @@ label[for=rs0] {
     border-radius: 1rem;
     outline: none;
     margin-top: 1rem;
+    margin-bottom: .5rem;
     padding: .5rem;
+}
+.rate-review button{
+    background-color: #CCBEAE;
+    padding: 1rem;
+    border-radius: 2rem;
+    width: 130px;
+}
+.rate-review .submit{
+    display: block;
+    margin: 0 auto;
 }
 /* form ends */
