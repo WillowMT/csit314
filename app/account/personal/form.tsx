@@ -15,15 +15,9 @@ export default function UserForm(user: UserInterface) {
     const [state, formAction] = useFormState(submit, null);
 
     useEffect(() => {
-        if (!state?.message) return
+        if (!state) return
 
-        if (state?.success) {
-            toast.success('User info updated')
-        }
-
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
-        }
+        toast.success('User updated successfully')
     }, [state])
 
 

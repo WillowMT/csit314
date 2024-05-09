@@ -1,6 +1,6 @@
 'use server'
 
-import { CreateUserAccController, EditAccountInfoController } from '@/utils/controllers/user'
+import { CreateUserAccController, EditAccountInfoController, SuspendUserAccountController } from '@/utils/controllers/user'
 import { encryptPassword } from '@/utils/hash'
 
 import prisma from "@/utils/prisma"
@@ -59,15 +59,9 @@ export async function suspendUser(prev:any, formData:FormData) {
     'use server'
     const email = formData.get('email') as string
 
-    // TODO: suspend user controller
-    return await prisma.user.update({
-        where: {
-            email: email
-        },
-        data: {
-            activated: false
-        }
-    })
+    const suspendUserAccountController = new SuspendUserAccountController()
+
+    return await suspendUserAccountController.suspendUserAccount(email)
 }
 
 export async function editUser(prev:any, formData: FormData) {

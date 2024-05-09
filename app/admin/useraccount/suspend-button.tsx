@@ -14,9 +14,7 @@ export default function SuspendButton({email}: {email: string}) {
     useEffect(() => {
         if (!state) return
 
-        if (state) {
-            toast.success('User suspended successfully')
-        }
+        toast.success('User suspended successfully')
 
     }, [state])
 
