@@ -96,6 +96,26 @@ export default function UserForm(user: UserInterface) {
                             </SelectItem>
                         ))}
                     </Select>
+
+                    <Input
+                        name="password"
+                        className="mb-8 max-w-[400px] mx-auto"
+                        type="password"
+                        label="Password"
+                        labelPlacement={'outside'}
+                        placeholder="Password"
+                        defaultValue=""
+                    />
+
+                    <Input
+                        name="confirm-password"
+                        className="mb-8 max-w-[400px] mx-auto"
+                        type="password"
+                        label="Confirm Password"
+                        labelPlacement={'outside'}
+                        placeholder="Confirm Password"
+                        defaultValue=""
+                    />
                 </div>
 
                 {/* {
