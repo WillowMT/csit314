@@ -1,6 +1,7 @@
 'use server'
 
-import * as controller from '@/utils/controllers/globalControllers'
+import { EditAccountInfoController } from "@/utils/controllers/user";
+
 
 // form to update user info in db
 
@@ -21,7 +22,9 @@ export async function submit(prev: any, formData: FormData) {
 
     // update user info in db
 
-    const result = await controller.ediAccountInfoController.saveInfoChange(userObj)
+    const editAccountInfoController = new EditAccountInfoController()
+
+    const result = await editAccountInfoController.saveInfoChange(userObj)
 
     return result
 

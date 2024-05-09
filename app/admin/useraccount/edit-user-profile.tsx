@@ -3,25 +3,19 @@
 import React, { useEffect } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Input } from "@nextui-org/react";
 import { useFormState } from "react-dom";
-import { createUser } from "./_action";
+import { editUser } from "./_action";
 import toast from "react-hot-toast";
 import { UserInterface } from "@/utils/demo";
 
 export default function EditUserAccount({ user }: { user: UserInterface }) {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const [state, formAction] = useFormState(createUser, null);
+    const [state, formAction] = useFormState(editUser, null);
 
     useEffect(() => {
-        if (!state?.message) return
+        if (!state) return
 
-        if (state?.success) {
-            toast.success('Account created successfully')
-            onClose()
-        }
+        toast.success('User updated successfully')
 
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
-        }
     }, [state])
 
     return (
@@ -93,7 +87,7 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                     <Input
                                         name="phoneNumber"
                                         className="mb-8 max-w-[400px] mx-auto"
-                                        type="number"
+                                        type="string"
                                         label="Phone Number"
                                         labelPlacement={'outside'}
                                         placeholder="Phone Number"

@@ -1,11 +1,12 @@
 import { Input } from "@nextui-org/react"
 import UserTable from "./table"
 import AddUserForm from "./add-user-form"
-import * as globalController from '@/utils/controllers/globalControllers'
+import { ViewUserProfileController } from "@/utils/controllers/userProfile"
 
 export default async function Page() {
 
-    const profiles = await globalController.viewUserProfileController.getUserProfile()
+    const viewUserProfileController = new ViewUserProfileController()
+    const profiles = await viewUserProfileController.getUserProfile()
 
     if (!profiles) {
         return;

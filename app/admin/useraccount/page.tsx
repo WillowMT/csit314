@@ -1,10 +1,15 @@
-import * as globalController from '@/utils/controllers/globalControllers'
+
+import { ViewUserAccountController } from "@/utils/controllers/user";
 import UserTable from "./table"
+import { ViewUserProfileController } from "@/utils/controllers/userProfile";
 
 export default async function Page() {      
-    const users = await globalController.viewUserAccountController.getUserInfo()
-    
-    const roles = await globalController.viewUserProfileController.getUserProfile()
+
+    const viewUserAccountController = new ViewUserAccountController()
+    const users = await viewUserAccountController.getUserInfo()
+
+    const viewUserProfileController = new ViewUserProfileController()
+    const roles = await viewUserProfileController.getUserProfile()
 
     if (!users) {
         return;

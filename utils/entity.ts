@@ -34,7 +34,6 @@ export class User {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 phoneNumber: user.phoneNumber,
-                country: user.country,
                 ceaNumber:user.ceaNumber,
                 agency: user.agency,
                 license: user.license
