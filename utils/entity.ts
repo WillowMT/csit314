@@ -51,6 +51,16 @@ export class User {
             }
         })
     }
+    //#179, #180, #181, #182 For personal account info access
+    async getAccountInfo({userId}: {
+        userId: string
+    }) {
+        return await prisma.user.findUnique({
+            where: {
+                id:userId
+            }
+        })
+    }
     //showdis
     // # 70 system admin creates new user account
     async createUserAccount({
@@ -115,7 +125,7 @@ export class User {
             }
         }) as UserInterface[]
     }
-    //buyer adds property to shortlist
+    //#36 buyer adds property to shortlist
     async addPropertyToShortList({ email, propertyId }: { email: string, propertyId: string }) {
         const id = await this.getUserId({ email })
         return await prisma.shortlist.create({
@@ -125,11 +135,23 @@ export class User {
             }
         })
     }
-    //buyer search agent. (Can be reused for #49??)
+    //#49 seller search agent. (Can be reused for #49??)
     async searchAgent({ fname }: { fname: string }) {
+        const profile = await prisma.userProfile.findFirst({
+            where: {
+                role: "AGENT"
+            },
+            select: {
+                id: true  // Select only the ID field
+            }
+        });
+
+        // Check if a userProfile was found and extract the ID, otherwise use null
+        const profileId = profile ? profile.id : null;
         return await prisma.user.findMany({
             where: {
                 firstName: fname,
+                profileId:profileId,
                 activated:true
             }
         })
@@ -277,7 +299,7 @@ export class User {
         return properties;
     }
     //#50 
-    async getSoldOwnedProperty({ email }: { email: string }) {
+    async getAgentSoldProperty({ email }: { email: string }) {
         const user = await prisma.user.findUnique({
             where: {
                 email: email
@@ -345,7 +367,6 @@ export class User {
             }
         })
     }
-
 }
 
 export class UserProfile {
@@ -474,14 +495,7 @@ export class Property {
             }
         });
     }
-    //this function is to view individual account information, should alr have their id in session because of login right? #179-#182 (decided to make them all into one function)
-    async getUserAccountInfo({ userId }: { userId: string }) {
-        return await prisma.user.findUnique({
-            where: {
-                id: userId
-            }
-        })
-    }
+    
 
     //just a few more entity functions... (8 more, from the property)
     //#60 
@@ -526,15 +540,36 @@ export class Property {
         })       
     }
     //#64
-    async searchListedPropertyByAddress({address}:{address:string}){
+    async searchListedPropertyByAddress({email,address}:{email:string,address:string}){
+        const lister=await prisma.user.findUnique({
+            where:{
+                email:email
+            },
+            select:{
+                id:true  
+            }
+        })
+        const listerID=lister?lister.id:undefined
+        const listedPropIds=await prisma.listing.findMany({
+            where:{
+                userId:listerID
+            },
+            select:{
+                propertyId:true
+            }
+        })
+        const listedPropIdList = listedPropIds.map(listing => listing.propertyId);
         return await prisma.property.findMany({
             where:{
-                address:address
+                address:address,
+                id:{
+                    in: listedPropIdList 
+                }
             }
         })
     }
     //#62
-    async setInfoChange({id,name,address,description,onSale,
+    async setPropInfoChange({id,name,address,description,onSale,
         leaseYear,squareFt,builtYear,price,imageUrl}:
     {id:string,name:string,address:string,description:string,onSale:boolean,
         leaseYear:number,squareFt:number,builtYear:number,price:number,imageUrl:string
