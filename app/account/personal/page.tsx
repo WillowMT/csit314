@@ -15,13 +15,15 @@ export default async function Page() {
     // })
 
     const user = demo.user[0]
-
+    
+    
     if (!user) return <div>loading...</div>
 
     return (
         <div>
             <h1 className=" text-4xl">Personal Page</h1>
-            <UserForm firstName={user.firstName} lastName={user.lastName} email={email} phoneNumber={user.phoneNumber} agency={user.agency} license={user.license} ceaNumber={user.ceaNumber} />
+            <UserForm firstName={user.firstName} lastName={user.lastName} email={email} phoneNumber={user.phoneNumber} agency={user.agency} license={user.license} ceaNumber={user.ceaNumber}
+            country = {user.country}/>
         </div>
     )
 }
