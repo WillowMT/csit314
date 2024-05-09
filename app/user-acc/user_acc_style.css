@@ -117,8 +117,12 @@ p, li, section, button{
 
 /* Show tab panel when its corresponding radio button is checked */
 #tab1:checked ~ .tab-content #tab1-panel,
+<<<<<<< Updated upstream
 #tab2:checked ~ .tab-content #tab2-panel,
 #tab3:checked ~ .tab-content #tab3-panel {
+=======
+#tab2:checked ~ .tab-content #tab2-panel {
+>>>>>>> Stashed changes
     display: block;
     margin-top: 1rem;
 }

@@ -5,8 +5,17 @@ import { getSession } from "@/utils/auth";
 import prisma from "@/utils/prisma";
 import { demo } from "@/utils/demo";
 
+<<<<<<< Updated upstream
 export default async function Page() {
+<<<<<<< Updated upstream
     const { email, firstName, lastName } = await getSession()
+=======
+    const { email } = await getSession()
+=======
+export default async function EditUserAccountPage() {
+    const { email, firstName, lastName } = await getSession()
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     // const user = await prisma.user.findUnique({
     //     where: {
