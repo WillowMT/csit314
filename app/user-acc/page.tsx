@@ -30,6 +30,7 @@ export default async function UserAccountPage() {
                 </div>
 
                 <div className="tabs">
+<<<<<<< Updated upstream
                     <input type="radio" name="tab" id="tab1" defaultChecked />
                     <label htmlFor="tab1" className="tab-title">Account Information</label>
 
@@ -38,11 +39,19 @@ export default async function UserAccountPage() {
 
                     <input type="radio" name="tab" id="tab3" />
                     <label htmlFor="tab3" className="tab-title">Short Listed</label>
+=======
+                    <input type="radio" name="tab" id="tab1" defaultChecked/>
+                    <label htmlFor="tab1" className="tab-title">My Listings</label>
+
+                    <input type="radio" name="tab" id="tab2" />
+                    <label htmlFor="tab2" className="tab-title">Short Listed</label>
+>>>>>>> Stashed changes
 
                     <div className="line"></div>
 
                     <div className="tab-content">
                         <div className="tab-panel" id="tab1-panel">
+<<<<<<< Updated upstream
                             {/* Content for My Listings tab */}
                             <div>
                                 {/* My Listings Content */}
@@ -64,6 +73,8 @@ export default async function UserAccountPage() {
                         </div>
 
                         <div className="tab-panel" id="tab2-panel">
+=======
+>>>>>>> Stashed changes
                             {/* Content for Short Lists */}
                             <div>
                                 {/* Short Listed Content */}
@@ -71,7 +82,11 @@ export default async function UserAccountPage() {
                             </div>
                         </div>
 
+<<<<<<< Updated upstream
                         <div className="tab-panel" id="tab3-panel">
+=======
+                        <div className="tab-panel" id="tab2-panel">
+>>>>>>> Stashed changes
                             {/* Content for Short Lists */}
                             <div>
                                 {/* Short Listed Content */}
