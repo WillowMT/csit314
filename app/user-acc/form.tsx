@@ -96,55 +96,27 @@ export default function UserForm(user: UserInterface) {
                             </SelectItem>
                         ))}
                     </Select>
+
+                    <Input
+                        name="password"
+                        className="mb-8 max-w-[400px] mx-auto"
+                        type="password"
+                        label="Password"
+                        labelPlacement={'outside'}
+                        placeholder="Password"
+                        defaultValue=""
+                    />
+
+                    <Input
+                        name="confirm-password"
+                        className="mb-8 max-w-[400px] mx-auto"
+                        type="password"
+                        label="Confirm Password"
+                        labelPlacement={'outside'}
+                        placeholder="Confirm Password"
+                        defaultValue=""
+                    />
                 </div>
-
-                {/* {
-                    agent && (
-
-                        <div>
-                            <Input
-                                name="agency"
-                                isRequired
-                                className="mb-8 max-w-[400px] mx-auto"
-                                type="agency"
-                                label="Agency"
-                                labelPlacement={'outside'}
-                                placeholder="Agency"
-                                defaultValue={agent.agency}
-                            />
-                            <Input
-                                name="jobDesignation"
-                                isRequired
-                                className="mb-8 max-w-[400px] mx-auto"
-                                type="jobDesignation"
-                                label="Job Designation"
-                                labelPlacement={'outside'}
-                                placeholder="Job Designation"
-                                defaultValue={agent.jobDesignation}
-                            />
-                            <Input
-                                isRequired
-                                name="license"
-                                className="mb-8 max-w-[400px] mx-auto"
-                                type="license"
-                                label="License"
-                                labelPlacement={'outside'}
-                                placeholder="License"
-                                defaultValue={agent.license}
-                            />
-                            <Input
-                                isRequired
-                                name="ceaNumber"
-                                className="mb-8 max-w-[400px] mx-auto"
-                                type="ceaNumber"
-                                label="CEA Number"
-                                labelPlacement={'outside'}
-                                placeholder="CEA Number"
-                                defaultValue={agent.ceaNumber}
-                            />
-                        </div>
-                    )
-                } */}
             </div>
             <Btn />
         </form>
