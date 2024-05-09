@@ -7,7 +7,7 @@ import {
     Input,
 } from "@nextui-org/react";
 
-export default function Page() {
+export default function ViewAndEditAgentAccountPage() {
     return (
         <div className="">
             <Navigation />

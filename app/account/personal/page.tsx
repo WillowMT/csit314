@@ -2,7 +2,8 @@ import UserForm from "./form";
 import { getSession } from "@/utils/auth";
 import { demo } from "@/utils/demo";
 
-export default async function Page() {
+
+export default async function EditUserAccountPage() {
     const { email, firstName, lastName } = await getSession()
 
     // const user = await prisma.user.findUnique({
