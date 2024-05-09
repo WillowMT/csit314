@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import toast from "react-hot-toast";
 import EditUserAccount from "./edit-user-profile";
 import { useEffect, useState } from "react";
-import { UserInterface } from "@/utils/demo";
+import { UserInterface, UserProfileInterface } from "@/utils/demo";
 import AddUserForm from "./add-user-form";
 import SuspendButton from "./suspend-button";
 
@@ -24,7 +24,7 @@ const columns = [
 
 
 
-export default function UserTable({ users }: { users: UserInterface[] }) {
+export default function UserTable({ users, roles }: { users: UserInterface[], roles: UserProfileInterface[]}) {
     const [filteredName, setFilteredName] = useState("")
     const [filteredUsers, setFilteredUsers] = useState(users)
 
@@ -43,7 +43,7 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
                 setFilteredUsers(filtered)
             }} />
             <div className=" mb-4">
-                <AddUserForm />
+                <AddUserForm roles={roles} />
             </div>
 
             <Table aria-label="Example table with custom cells">
@@ -73,7 +73,7 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
                                     <TableCell className=" space-x-4">
                                         <div className="flex place-content-center place-items-center space-x-2">
                                             <EditUserAccount user={user} />
-                                            <SuspendButton />
+                                            <SuspendButton email={user.email} />
                                         </div>
                                     </TableCell>
                                 </TableRow>

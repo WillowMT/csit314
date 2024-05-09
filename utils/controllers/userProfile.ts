@@ -12,8 +12,8 @@ class ViewUserProfileController {
 }
 
 class UpdateUserProfileController {
-    async saveRoleName(role:string, newrole:string) {
-        return await userProfileEntity.setRoleName({role, newrole})
+    async saveRoleName(role:string, newrole:string, activated:boolean) {
+        return await userProfileEntity.setRoleName({role, newrole, activated})
     }
 }
 
