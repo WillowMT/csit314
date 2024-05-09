@@ -15,24 +15,28 @@ export default async function Page() {
         <>
             <div className="">
                 <Navigation />
-                <h1>Properties listed by you</h1>
-                <div className="col">
+                <h1 className=" text-center text-5xl py-8">Properties listed by you</h1>
+                <div className="col py-4">
                     <main className="container mx-auto py-36- px-8">
                         <div className="grid lg:grid-cols-3 gap-6">
-                            {demo.properties.map((property: any, i) => {
+                            {demo.properties.map((property, i) => {
                                 return (
                                     <div key={i} className="shadow-lg">
-                                        <Image className="rounded-t-lg" src={property.imageUrl} alt="image" />
-                                        <div className="p-5">
-                                            <h2>Name: {property.name}</h2>
-                                            <h2>Address: {property.address}</h2>
-                                            <h2>Description: {property.description}</h2>
-                                            <h2>Price: ${property.price}</h2>
-                                            <h2>Bedrooms: {property.bedrooms}</h2>
-                                            <h2>Bathrooms: {property.bathrooms}</h2>
-                                            <h2>SqFt: {property.squareFt}</h2>
-                                            <Button>Edit</Button>
-                                            <Button>Remove</Button>
+                                        <img className="rounded-t-lg w-full" src={property.imageUrl} alt="image" />
+                                        <div className="p-5 flex flex-col min-h-[350px]">
+                                            <div className=" flex-grow">
+                                                <h2>Name: {property.name}</h2>
+                                                <h2>Address: {property.address}</h2>
+                                                <h2>Description: {property.description}</h2>
+                                                <h2>Price: ${property.price}</h2>
+                                                <h2>Bedrooms: {property.bedroom}</h2>
+                                                <h2>Bathrooms: {property.bathroom}</h2>
+                                                <h2>SqFt: {property.squareFt}</h2>
+                                            </div>
+                                            <div className=" space-x-2 mt-2">
+                                                <Button>Edit</Button>
+                                                <Button>Remove</Button>
+                                            </div>
                                         </div>
                                     </div>
                                 )
