@@ -1,8 +1,8 @@
 'use client'
 
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import { submit } from './action'
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import toast from 'react-hot-toast'
 

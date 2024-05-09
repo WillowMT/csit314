@@ -1,7 +1,4 @@
-import { useState, useEffect } from "react"
-import { useLocalStorage } from '@uidotdev/usehooks'
 import { getSession } from "@/utils/auth"
-import Navigation from "@/components/nav"
 import prisma from "@/utils/prisma"
 
 export default async function Page() {

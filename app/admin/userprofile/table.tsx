@@ -1,10 +1,7 @@
 'use client'
 
-import { Table, TableBody, TableCell, TableHeader, TableColumn, TableRow, Button, Chip, Switch } from "@nextui-org/react"
-import { useCallback } from "react";
-import toast from "react-hot-toast";
+import { Table, TableBody, TableCell, TableHeader, TableColumn, TableRow, Chip } from "@nextui-org/react"
 import EditUserProfile from "./edit-user-profile";
-import { useEffect, useState } from "react";
 import { UserProfileInterface } from "@/utils/demo";
 
 const columns = [

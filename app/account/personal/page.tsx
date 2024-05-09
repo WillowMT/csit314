@@ -1,8 +1,5 @@
-import Navigation from "@/components/nav";
-import { Input, Button } from "@nextui-org/react";
 import UserForm from "./form";
 import { getSession } from "@/utils/auth";
-import prisma from "@/utils/prisma";
 import { demo } from "@/utils/demo";
 
 export default async function Page() {

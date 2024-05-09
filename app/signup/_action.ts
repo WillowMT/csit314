@@ -1,6 +1,5 @@
 'use server'
 import { revalidatePath } from "next/cache";
-import { User } from "@/utils/entity";
 import { create } from "@/utils/lib";
 
 export async function submit(previousState:any, form: FormData) {

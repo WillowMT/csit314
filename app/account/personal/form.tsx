@@ -1,27 +1,18 @@
 'use client'
 
 import { submit } from './action'
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import toast from 'react-hot-toast'
 import { UserInterface } from "@/utils/demo";
 import { countries } from '@/utils/countries'
 import {
-    Tabs, Tab, Card, CardBody, Button, Link, Input, Select, SelectItem
+    Button, Input, Select, SelectItem
 } from "@nextui-org/react";
 
 
 export default function UserForm(user: UserInterface) {
     const [state, formAction] = useFormState(submit, null);
-    const [country, setCountry] = useState('Singapore')
-    const [dialCode, setDialCode] = useState('+65')
-
-    useEffect(() => {
-        const selectedCountry = countries.find((c) => c.name === country)
-        if (!selectedCountry) return
-
-        setDialCode(selectedCountry.dial_code)
-    }, [country])
 
     useEffect(() => {
         if (!state?.message) return
@@ -88,7 +79,6 @@ export default function UserForm(user: UserInterface) {
                         label="Country"
                         labelPlacement={'outside'}
                         placeholder="Country"
-                        onChange={(e) => setCountry(e.target.value)}
                     >
                         {countries.map((country) => (
                             <SelectItem key={country.name} value={country.name}>

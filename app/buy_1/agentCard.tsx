@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import {Card, CardHeader, CardBody, CardFooter, Avatar, Button, Chip} from "@nextui-org/react";
+import {Card, CardHeader, CardBody, Avatar, Button, Chip} from "@nextui-org/react";
 
 export default function AgentCard() {
 

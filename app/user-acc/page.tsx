@@ -4,8 +4,7 @@ import { demo } from "@/utils/demo";
 
 export default async function UserAccountPage() {
 
-    const user = demo.user[1]
-    console.log(user);
+    const user = demo.user[0]
 
     return (
         <div className=''>

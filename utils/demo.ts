@@ -83,40 +83,14 @@ type UserProfileInterface = ReturnType<typeof createRandomUserProfile>
 
 type PropertyInterface = ReturnType<typeof createRandomProperty>
 
+
+// generate demo data
+
 const user = [...new Array(10)].map(() => createRandomUser());
 
 const userProfiles = [...new Array(5)].map(() => createRandomUserProfile());
 
-// const userProfiles = [
-//     createRandomUserProfile(),
-//     createRandomUserProfile(),
-//     createRandomUserProfile(),
-//     createRandomUserProfile(),
-//     createRandomUserProfile(),
-// ]
-
 const properties = [...new Array(20)].map(() => createRandomProperty());
-
-// const properties = [
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-//     createRandomProperty(),
-// ]
 
 const ratingsAndReviews = []
 

@@ -207,8 +207,8 @@ export class User {
     async matchUserAccount({ fname }: { fname:string }) {
         return await prisma.user.findMany({
             where: {
-                firstName: fname
-                ,activated:true
+                firstName: fname,
+                activated:true
             }
         })
     }
@@ -359,11 +359,16 @@ export class User {
     }
     //#253 delete shortlist
     async deleteShortlist({userId,propertyId}:{userId:string, propertyId:string}){
+        const shortlist =  await prisma.shortlist.findFirst({
+            where:{
+                    userId:userId,
+                    propertyId:propertyId
+                }                
+        })
+        if (!shortlist) return null
         return await prisma.shortlist.delete({
             where:{
-                userId_propertyId:{
-                    userId:userId,
-                    propertyId:propertyId}                
+                id:shortlist.id
             }
         })
     }

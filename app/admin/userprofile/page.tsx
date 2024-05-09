@@ -1,22 +1,7 @@
-import prisma from "@/utils/prisma"
-import UserRow from "./form"
-// import "./admin.css"
-import { Button, Input, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, User } from "@nextui-org/react"
-// import { viewUserProfile } from "@/utils/controller"
-import * as controller from '@/utils/controllers/globalControllers'
+import { Input } from "@nextui-org/react"
 import UserTable from "./table"
 import AddUserForm from "./add-user-form"
-import { getSession } from "@/utils/auth"
-import { demo } from "@/utils/demo"
 import * as globalController from '@/utils/controllers/globalControllers'
-
-const columns = [
-    { name: "ID", uid: "id" },
-    { name: "EMAIL", uid: "role" },
-    { name: "ROLE", uid: "status" },
-    { name: "ACTION", uid: "actions" },
-];
-
 
 export default async function Page() {
 

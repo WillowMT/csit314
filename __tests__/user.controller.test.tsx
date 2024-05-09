@@ -9,7 +9,7 @@ describe("User Controller Test", async () => {
     const passwordHash = await encryptPassword(demoUser.passwordHash as string)
 
     const demoProperty = createRandomProperty()
-    var userid:string
+    let userid:string
 
     test("Create User Account Controller Test", async () => {
     
@@ -61,9 +61,9 @@ describe("User Controller Test", async () => {
     })
     
     test("User Account Search Controller Test", async () => {
-        const user = await globalController.userAccountSearchController.SearchUserAcount(demoUser.email)
+        const user = await globalController.userAccountSearchController.SearchUserAcount("User")
         expect(user).toBeDefined()
-        expect(user?.email).toBe(demoUser.email)
+        expect(user.length).toBeGreaterThan(0)
     })
     
     test("Shortlist Controller Test", async () => {

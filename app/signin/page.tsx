@@ -1,5 +1,3 @@
-import prisma from "@/utils/prisma";
-import { encryptPassword } from "@/utils/hash";
 import Form from "./form";
 import Link from "next/link";
 

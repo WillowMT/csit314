@@ -1,18 +1,7 @@
-import prisma from "@/utils/prisma"
-// import "./admin.css"
-import { Button, Input, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, User } from "@nextui-org/react"
-// import { viewUserProfile } from "@/utils/controller"
 import * as globalController from '@/utils/controllers/globalControllers'
-import Navigation from "@/components/nav"
 import UserTable from "./table"
-import AddUserForm from "./add-user-form"
-import { getSession } from "@/utils/auth"
-import { demo } from "@/utils/demo"
-import { UserInterface } from "@/utils/demo"
 
-export default async function Page() {
-    // const users = await viewUserProfile.getUserProfiles()
-    // const users = await controller.viewUserAccountController.getUserInfo()
+export default async function Page() {      
     const users = await globalController.viewUserAccountController.getUserInfo()
     
     const roles = await globalController.viewUserProfileController.getUserProfile()

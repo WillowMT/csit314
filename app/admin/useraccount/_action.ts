@@ -42,7 +42,6 @@ export async function createUser(prev:any, form:FormData) {
         role
     }
 
-    console.log(userObj);
     
     // pass object to controller
     const result = await globalController.createUserAccController.createUserAccount(userObj)

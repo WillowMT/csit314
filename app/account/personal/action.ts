@@ -1,8 +1,5 @@
 'use server'
 
-import prisma from "@/utils/prisma";
-import { getSession } from "@/utils/auth";
-import { revalidatePath } from "next/cache";
 import * as controller from '@/utils/controllers/globalControllers'
 
 // form to update user info in db
