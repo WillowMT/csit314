@@ -2,7 +2,7 @@
 
 
 
-import { CreateUserProfileController, UpdateUserProfileController } from "@/utils/controllers/userProfile"
+import { CreateUserProfileController, SuspendProfileController, UpdateUserProfileController } from "@/utils/controllers/userProfile"
 import prisma from "@/utils/prisma"
 import { revalidatePath } from "next/cache"
 
@@ -38,4 +38,13 @@ export async function updateRole(prev:any, form:FormData) {
     const updateUserProfileController = new UpdateUserProfileController()
 
     return await updateUserProfileController.saveRoleName(role, newrole, activated === 'true')
+}
+
+
+export async function suspendProfile(prev:any, form:FormData) {
+    const role = form.get('role') as string
+
+    const suspendProfileController = new SuspendProfileController()
+
+    return await suspendProfileController.SuspendProfile(role)
 }
