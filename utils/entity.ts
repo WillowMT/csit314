@@ -206,7 +206,7 @@ export class User {
         });
 
         if (!user) {
-            throw new Error('User not found');
+            return null
         }
 
         // Fetch all property IDs associated with the user from the Listing model

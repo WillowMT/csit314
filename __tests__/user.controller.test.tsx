@@ -6,7 +6,7 @@ import { encryptPassword } from '@/utils/hash'
 
 describe("User Controller Test", async () => {
     const demoUser = createRandomUser()
-    const passwordHash = await encryptPassword(demoUser.passwordHash)
+    const passwordHash = await encryptPassword(demoUser.passwordHash as string)
 
     const demoProperty = createRandomProperty()
     var userid:string
@@ -18,7 +18,7 @@ describe("User Controller Test", async () => {
             passwordHash,
             firstName: demoUser.firstName,
             lastName: demoUser.lastName,
-            country: demoUser.country,
+            country: demoUser.country as string,
             phoneNumber: demoUser.phoneNumber,
             ceaNumber: demoUser.ceaNumber,
             agency: demoUser.agency,
@@ -43,7 +43,7 @@ describe("User Controller Test", async () => {
             passwordHash,
             firstName: demoUser.firstName,
             lastName: demoUser.lastName,
-            country: demoUser.country,
+            country: demoUser.country as string,
             phoneNumber: demoUser.phoneNumber,
             role: "USER"
         })
