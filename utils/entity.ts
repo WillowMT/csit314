@@ -148,6 +148,8 @@ export class User {
 
     // anonymous rating, make it so that either rating or review is optional, since tutor tell us to split rating and review.
     // rating default 0 ,and for null review just give "".
+    // or just make it a duplicate function lol
+    //#53
     async createRating({ email, rating, review }: {
         email: string, rating: number, review: string
     }) {
@@ -163,6 +165,7 @@ export class User {
         })
     }
     //why do we have to do this too ...can you help figure out what to do with this one, by that i mean should we just combine them
+    //54
     async createReview({ email, rating, review }: {
         email: string, rating: number, review: string
     }) {
@@ -179,7 +182,7 @@ export class User {
     }
 
     //#74
-    async matchUserAccount({ fname }: { fname: string }) {
+    async matchUserAccount({ fname }: { fname:string }) {
         return await prisma.user.findMany({
             where: {
                 firstName: fname
