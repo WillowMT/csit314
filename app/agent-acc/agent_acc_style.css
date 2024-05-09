@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidescroll::-webkit-scrollbar {
+    display: none;
+}
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidescroll {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+/* font styles */
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Century Gothic', sans-serif;
+    font-weight: bold;
+}
+
+p, li, section, button{
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* cover photo starts*/
+.cover {
+    background-image: url(https://images.pexels.com/photos/87223/pexels-photo-87223.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+    width: 100vw;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+.reveal{
+    height: 300px; 
+}
+/* cover photo ends */
+
+/* acc section */
+.acc {
+    width: 85%;
+    position: absolute;
+    top: 260px;
+    z-index: 2;
+    padding-left: 2rem;
+}
+
+/* profile picture */
+.acc img{
+    width: 200px;
+    border-radius: 6rem;
+}
+
+/* name */
+.name{
+    padding-top: 1.5rem;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/* contact information */
+.contact-info{
+    display: flex;
+    gap: .5rem;
+    padding-top: 1rem;
+}
+/* phone */
+.bx-phone{
+    font-size: 30px;
+}
+.ph-no{
+    margin-top: 3px;
+}
+/* email */
+.bxl-gmail{
+    font-size: 30px;
+    margin-left: 20px;
+}
+.email{
+    margin-top: 3px;
+}
+
+/* tabs */
+.tabs{
+    margin-top: 1rem;
+}
+/* Hide all tab panels by default */
+.tab-panel {
+    display: none;
+}
+
+/* Style for tab titles */
+/* Hide all tab panels by default */
+/* Hide all tab panels by default */
+.tab-panel {
+    display: none;
+}
+
+/* Style for tab titles */
+.tab-title {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab-title:hover {
+    background-color: #e0e0e0;
+}
+
+/* Show tab panel when its corresponding radio button is checked */
+#tab1:checked ~ .tab-content #tab1-panel,
+#tab2:checked ~ .tab-content #tab2-panel {
+    display: block;
+    margin-top: 1rem;
+}
+
+/* Style for checked tab title */
+.tabs input[type="radio"]:checked + .tab-title {
+    background-color: #fff;
+    border-top: 2px solid #CCBEAE;
+    border-left: 2px solid #CCBEAE;
+    border-right: 2px solid #CCBEAE;
+}
+/* Hide radio buttons */
+input[type="radio"] {
+    display: none;
+}
+
+/* line */
+.line{
+    background-color: #CCBEAE;
+    height: 3px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* form starts */
+form{
+    width: 600px;
+    padding: 1rem;
+    background-color: #f0f0f0;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.rate-review .title{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* ratings */
+.rating-stars {
+	display: block;
+	width: 220px;
+    border: 3px solid #CCBEAE;
+	border-radius: 5vmin;
+	position: relative;
+    background-color: white;
+}
+.rating-counter {
+	font-size: 20px;
+    color: #ffffff;
+    width: 50px;
+    text-align: center;
+    background: #CCBEAE;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    border-radius: 0 5vmin 5vmin 0;
+}
+.rating-counter:before {
+	content: "0";
+	transition: all 0.25s ease 0s;	
+}
+.rating-stars label {
+	width: 20px;
+	height: 20px;
+	background: #000b;
+	display: inline-flex;
+	cursor: pointer;
+	margin: 0.5vmin 0.65vmin;
+	transition: all 1s ease 0s;	
+	clip-path: polygon(50% 0%, 66% 32%, 100% 38%, 78% 64%, 83% 100%, 50% 83%, 17% 100%, 22% 64%, 0 38%, 34% 32%);
+}
+label[for=rs0] {
+	display: none;
+}
+
+.rating-stars label:before {
+	width: 90%;
+	height: 90%;
+	content: "";
+	z-index: -1;
+	display: block;
+	margin-left: 5%;
+	margin-top: 5%;
+	clip-path: polygon(50% 0%, 66% 32%, 100% 38%, 78% 64%, 83% 100%, 50% 83%, 17% 100%, 22% 64%, 0 38%, 34% 32%);
+	background: linear-gradient(90deg, #baafa3, #CCBEAE 30% 50%, #ffff 50%, 70%, #fff 100%);
+	background-size: 205% 100%;
+	background-position: 0 0;
+}
+
+.rating-stars label:hover:before {
+	transition: all 0.25s ease 0s;		
+}
+
+.rating-stars input:checked + label ~ label:before {
+	background-position: 100%;
+	transition: all 0.25s ease 0s;	
+}
+
+.rating-stars input:checked + label ~ label:hover:before {
+	background-position: 0% 
+}
+#rs1:checked ~ .rating-counter:before {
+	content: "1";
+}
+
+#rs2:checked ~ .rating-counter:before {
+	content: "2";
+}
+
+#rs3:checked ~ .rating-counter:before {
+	content: "3";
+}
+
+#rs4:checked ~ .rating-counter:before {
+	content: "4";
+}
+#rs5:checked ~ .rating-counter:before {
+	content: "5";
+}
+.rating-stars label + input:checked ~ .rating-counter:before {
+	transition: all 0.25s ease 0s;
+}
+.rating-stars label:hover ~ .rating-counter:before {
+	color: #fff !important;
+	transition: all 0.5s ease 0s;	
+	animation: pulse 1s ease 0s infinite;
+}
+@keyframes pulse {
+	  50% { font-size: 27px; }
+}
+.rating-stars label[for=rs1]:hover ~ .rating-counter:before {
+	content: "1" !important;
+}
+.rating-stars label[for=rs2]:hover ~ .rating-counter:before {
+	content: "2" !important;
+}
+.rating-stars label[for=rs3]:hover ~ .rating-counter:before {
+	content: "3" !important;
+}
+.rating-stars label[for=rs4]:hover ~ .rating-counter:before {
+	content: "4" !important;
+}
+.rating-stars label[for=rs5]:hover ~ .rating-counter:before {
+	content: "5" !important;
+}
+.rating-stars input:checked:hover ~ .rating-counter:before {
+	animation: none !important;
+}
+/* reviews */
+#review{
+    height: 100px;
+    width: 560px;
+    border: 3px solid #CCBEAE;
+    border-radius: 1rem;
+    outline: none;
+    margin-top: 1rem;
+    padding: .5rem;
+}
+/* form ends */
