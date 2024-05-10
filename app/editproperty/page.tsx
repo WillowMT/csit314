@@ -1,4 +1,5 @@
 import Link from "next/link";
+import './editProperty.css';
 
 // edit property info from agent side
 export default function editPropertyListings() {
@@ -42,7 +43,7 @@ export default function editPropertyListings() {
             </div>
             <div className="buttons">
                 <div className="return">
-                    <Link href={"/agentmainpage"}>Return</Link>
+                    <Link href={"/agent-listing"}>Return</Link>
                 </div>
                 <div className="submit">
                     <button>Submit</button>

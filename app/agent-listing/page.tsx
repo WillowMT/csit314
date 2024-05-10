@@ -1,11 +1,11 @@
 import Navigation from "@/components/nav";
 import Link from "next/link";
 import Searchbar from "../searchagentproperty/page";
-import * as controller from '@/utils/controllers/globalControllers'
 import { useState } from "react";
 import { demo } from "@/utils/demo";
 import './agent.css';
 
+//view property listings by agent #61 sprint 3
 //main page for agent
 export default async function MainRealEstateAgentPage() {
     return (
@@ -16,7 +16,7 @@ export default async function MainRealEstateAgentPage() {
                 <div className="midTabs">
                     <div className="tab">
                         <Link className="tab-left" href={"/agentpage"}>Properties</Link>
-                        <Link className="tab-right" href={"/agentReviewAndRating"}>Reviews</Link>
+                        <Link className="tab-right" href={"/agent-review-and-rating"}>Reviews</Link>
                     </div>
                 </div>
                 <Link className="new-listing" href={"/createproperty"}>Create New Listing</Link>
@@ -39,7 +39,7 @@ export default async function MainRealEstateAgentPage() {
                         </div>
                     </div>
                     <div className="action-buttons">
-                        <Link href={"/editproperty"}>Edit</Link>
+                        <button><Link href={"/editproperty"}>Edit</Link></button>
                         <button>Remove</button>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ export default async function MainRealEstateAgentPage() {
                         </div>
                     </div>
                     <div className="action-buttons">
-                        <Link href={"/editproperty"}>Edit</Link>
+                        <button><Link href={"/editproperty"}>Edit</Link></button>
                         <button>Remove</button>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ export default async function MainRealEstateAgentPage() {
                         </div>
                     </div>
                     <div className="action-buttons">
-                        <Link href={"/editproperty"}>Edit</Link>
+                        <button><Link href={"/editproperty"}>Edit</Link></button>
                         <button>Remove</button>
                     </div>
                 </div>

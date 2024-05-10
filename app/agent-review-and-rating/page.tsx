@@ -1,6 +1,7 @@
 import Navigation from "@/components/nav";
 import Link from "next/link";
 import './agentRAndR.css';
+//import reviews from "./displayREAReviewAndRatings/form";
 
 // display agent's reviews and ratings
 export default function REAReviewandRatings() {
@@ -10,8 +11,8 @@ export default function REAReviewandRatings() {
             <div className="firstElement">
                 <div className="midTabs1">
                     <div className="tab1">
-                        <Link className="left" href={"/agentmainpage"}>Properties</Link>
-                        <Link className="right" href={"/agentReviewAndRating"}>Reviews</Link>
+                        <Link className="left" href={"/agent-listing"}>Properties</Link>
+                        <Link className="right" href={"/agent-review-and-rating"}>Reviews</Link>
                     </div>
                 </div>
             </div>
