@@ -38,7 +38,7 @@ model Property {
   name        String
   address     String
   description String
-  onSale      Boolean
+  onSale      Boolean     @default(true)
   views       Int?        @default(0)
   bedroom     Int
   bathroom    Int

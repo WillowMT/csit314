@@ -1,34 +1,34 @@
-import { user, property } from "../entity"
+import { userEntity, propertyEntity } from "../entity"
 
 class ViewSellerPropertyController {
     async getOwnedProperty({email}:{email:string}) {
-        return await user.getOwnedProperty({email})
+        return await userEntity.getOwnedProperty({email})
     }
 }
 
 
 class BuyerViewOnSalePropertyController {
     async getOnSaleProperty() {
-        return await property.getOnSaleProperty()
+        return await propertyEntity.getOnSaleProperty()
     }
 }
 
 class BuyerViewSoldPropertyController {
     async getSoldProperty() {
-        return await property.getSoldProperty()
+        return await propertyEntity.getSoldProperty()
     }
 }
 
 class SoldPropertySearchController {
     async searchSoldProperty(location:string) {    
-        return await property.getSoldPropertybyLoc({ address: location })
+        return await propertyEntity.getSoldPropertybyLoc({ address: location })
     }
 
 }
 
 class OnSalePropertySearchController {
     async searchOnSaleProperty(location:string) {
-        return await property.getOnSalePropertybyLoc({ address: location })
+        return await propertyEntity.getOnSalePropertybyLoc({ address: location })
     }
 }
 

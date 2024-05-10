@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+  .title {
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    padding: 10px;
+  }
+
+  .no-more {
+    text-align: center;
+    margin: 1px;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .search_bar{
+    position: absolute;
+    width: 500px;
+    top: 10%;
+    left: 37.5%;
+    background-color: white;
+    border-radius: 20%;
+  }
+
+  .search_button {
+    position: absolute;
+    bottom: 15px;
+    right: 5%;
+    background-color: white;
+  }
+
+  .min_price {
+    position: absolute;
+    left: 2%;
+    bottom: 90px;
+    width: 150px;
+    color: black;
+  }
+
+  .max_price {
+    position: absolute;
+    bottom: 90px;
+    left: 12%;
+    width: 150px;
+    color: black;
+  }
+
+  .bedroom_no {
+    position: absolute;
+    bottom: 90px;
+    left: 25%;
+    color: black;
+  }
+
+  .bathroom_no {
+    position: absolute;
+    bottom: 90px;
+    left: 48%;
+    color: black;
+  }
+
+  .property_type_filter {
+    position: absolute;
+    bottom: 90px;
+    left: 70%;
+    color: black;
+  }
+
+  .filter_bar{
+    position: relative;
+    background-color: #E4E4E7;
+    padding: 7%;
+  }
+
+  .filter_text{
+    position: absolute;
+    left: 46.5%;
+    font-size: 20px;
+  }

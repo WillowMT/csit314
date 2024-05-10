@@ -17,9 +17,6 @@ const columns = [
 
 
 export default function UserTable({ userProfiles }: { userProfiles: UserProfileInterface[] }) {
-    const handleDelete = useCallback(async () => {
-        toast.success("User deleted")
-    }, [])
 
 
     return (
@@ -39,7 +36,6 @@ export default function UserTable({ userProfiles }: { userProfiles: UserProfileI
                             return (
                                 <TableRow key={i}>
                                     <TableCell>{i + 1}</TableCell>
-
                                     <TableCell>{user.role}</TableCell>
                                     <TableCell>
                                         <Chip className=" text-white" color={user.activated ? "success" : "danger"}>{user.activated ? "Active" : "Suspended"}</Chip>

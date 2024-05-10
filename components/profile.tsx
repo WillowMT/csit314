@@ -53,6 +53,11 @@ export default function Profile({ email, firstName }: { email: string, firstName
                             }}
                         />
                     </DropdownItem>
+                    <DropdownItem key="getPropertyInfo">
+                        <Link href={'/agent/getPropertyInfo'}>
+                            My Listings
+                        </Link>
+                    </DropdownItem>
                     <DropdownItem key="settings">
                         <Link href={'/account'}>
                             Settings

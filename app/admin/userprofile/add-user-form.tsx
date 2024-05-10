@@ -2,27 +2,24 @@
 
 import React, { useEffect } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Select, SelectItem } from "@nextui-org/react";
-import { countries } from "@/utils/countries";
 import { useFormState, useFormStatus } from "react-dom";
-import Link from "next/link";
-import { submit } from "../../signup/_action";
+
 import toast from "react-hot-toast";
+import * as globalController from '@/utils/controllers/globalControllers'
+import { createRole } from "./_action";
 
 export default function AddUserForm() {
     const { isOpen, onOpen,onClose, onOpenChange } = useDisclosure();
-    const [state, formAction] = useFormState(submit, null);
+    const [state, formAction] = useFormState(createRole, null);
 
     useEffect(() => {
-        if (!state?.message) return
+        if (!state) return
 
-        if (state?.success) {
-            toast.success('Account created successfully')
-             onClose()
+        if (state) {
+            toast.success('Role Created Successfully')
+            onClose()
         }
 
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
-        }
     }, [state])
 
     return (
@@ -52,6 +49,7 @@ export default function AddUserForm() {
                                             labelPlacement={'outside'}
                                             placeholder="Activated"
                                             defaultSelectedKeys={['true']}
+                                            isDisabled
                                         >
                                             <SelectItem value={"true"} key={"true"}>
                                                 active

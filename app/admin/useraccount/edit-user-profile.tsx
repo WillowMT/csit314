@@ -4,17 +4,17 @@ import React, { useEffect } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Select, SelectItem, Switch } from "@nextui-org/react";
 import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
-import { submit } from "../../signup/_action";
+import { createUser } from "./_action";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { UserInterface } from "@/utils/demo";
 
 export default function EditUserAccount({ user }: { user: UserInterface }) {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const [state, formAction] = useFormState(submit, null);
+    const [state, formAction] = useFormState(createUser, null);
 
-    const [active, setActive] = useState(user.profile.activated)
-    const [role, setRole] = useState(user.profile.role)
+    const [active, setActive] = useState(user.activated || false)
+    // const [role, setRole] = useState(user.profile.role || "")
 
     useEffect(() => {
         if (!state?.message) return
@@ -117,7 +117,7 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                                 defaultValue={user.email}
                                             />
                                             {
-                                                user.ceaNumber && (
+                                                user.ceaNumber && user.agency && user.license && (
                                                     <>
                                                         <Input
                                                             name="agency"
@@ -135,7 +135,7 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                                             label="license"
                                                             labelPlacement={'outside'}
                                                             placeholder="license"
-                                                            defaultValue={user.license.toString()}
+                                                            defaultValue={user.license}
                                                         />
                                                         <Input
                                                             name="ceaNumber"
@@ -144,7 +144,7 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                                             label="ceaNumber"
                                                             labelPlacement={'outside'}
                                                             placeholder="ceaNumber"
-                                                            defaultValue={user.ceaNumber.toString()}
+                                                            defaultValue={user.ceaNumber}
                                                         />
                                                     </>
                                                 )
