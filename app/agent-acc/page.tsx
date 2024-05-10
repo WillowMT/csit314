@@ -1,3 +1,4 @@
+import PropertyBox from "../user-acc/property-box";
 import Navigation from "@/components/nav";
 import './agent_acc_style.css';
 
@@ -37,7 +38,7 @@ export default function AgentAccountPage() {
                         <div className="tab-panel" id="tab1-panel">
                             {/* Content for My Listings tab */}
                             <div className="listing-content">
-                                <p>My Listed Content</p>
+                                <PropertyBox></PropertyBox>
                             </div>
                         </div>
                         

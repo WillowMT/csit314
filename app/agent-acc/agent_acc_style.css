@@ -51,7 +51,7 @@ p, li, section, button{
 }
 
 /* profile picture */
-.acc img{
+.acc .profile-pic{
     width: 200px;
     border-radius: 6rem;
 }
