@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import {Card, CardBody, CardFooter, Image, Chip, Link} from "@nextui-org/react";
+import {Card, CardBody, CardFooter, Image, Chip, Link, Avatar, Divider} from "@nextui-org/react";
 
 export default function PropertyBox() {
   const list = [
@@ -11,6 +11,9 @@ export default function PropertyBox() {
       type: "HDB",
       shortlist: "123",
       link: "buy_1",
+      rea_name: "Agent Johnson",
+      rea_avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+      on_sale: true,
     },
     {
       title: "Property 2",
@@ -18,6 +21,9 @@ export default function PropertyBox() {
       img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
       type: "HDB",
       shortlist: "123",
+      rea_name: "Jonny Wade",
+      rea_avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+      on_sale: false,
     },
     {
       title: "Property 3",
@@ -25,76 +31,9 @@ export default function PropertyBox() {
       img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
       type: "HDB",
       shortlist: "123",
-    },
-    {
-      title: "Property 4",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 5",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 6",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 7",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 8",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 8",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 8",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 8",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 8",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
-    },
-    {
-      title: "Property 8",
-      address: "123 Figuenrter Street, Gedasg, 1235",
-      img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
-      type: "HDB",
-      shortlist: "123",
+      rea_name: "John Witch",
+      rea_avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+      on_sale: true,
     },
   ];
 
@@ -113,15 +52,23 @@ export default function PropertyBox() {
             />
             <div className='flex w-full justify-between'>
             <b className='pl-3 text-large'>{item.title}</b>
-            <Chip color="warning" variant="solid" className="text-default-1000 right-2 top-12">{item.type}</Chip>
+            <Chip color="default" variant="solid" className="text-default-1000 right-2 top-2">{item.type}</Chip>
             </div>
-          </CardBody>
-          <CardFooter className="flex-col text-small place-items-start">
-            <div className='flex w-full justify-start'>
+            <div className='flex w-full justify-start pl-3'>
               <span>{item.address}</span>
             </div>
-            <p className='w-full text-start text-xs'>{item.shortlist} shortlist</p>
+            <p className='w-full text-start text-xs pl-3 pb-3'>{item.shortlist} shortlist</p>
+          </CardBody>
+          <Divider className="my-0" />
+          <CardFooter className="pb-1 h-12 flex-row text-small place-content-start bg-brand-200 rounded-none">
+            <Avatar src={item.rea_avatar}></Avatar>
+            <p className='pl-3'>{item.rea_name}</p>
           </CardFooter>
+          <div className=' flex w-full pb-3 bg-brand-200'>
+              <div className='flex w-full justify-end pr-3'>
+                <Chip className={item.on_sale==true ? " bg-success-300":" bg-red-500"}>{item.on_sale==true ? "On Sale":"Sold"}</Chip>
+              </div>
+            </div>
         </Card>
       ))}
     </div>
