@@ -46,6 +46,7 @@ export function createRandomProperty() {
         price: faker.number.int({ min: 100000, max: 1000000 }),
         imageUrl: faker.image.url(),
         activated: faker.helpers.arrayElement([true, false]),
+        propertyType: faker.helpers.arrayElement(['HDB', 'CONDO', 'LANDED'])
     };
 
 }

@@ -46,6 +46,7 @@ model Property {
   squareFt    Int
   builtYear   Int
   price       Int
+  propertyType String @default("HDB")
   imageUrl    String
   activated Boolean @default(true)
   shortList   Shortlist[]

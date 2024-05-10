@@ -1,14 +1,17 @@
 import { PropertyInterface } from '@/utils/demo'
-import { Button } from '@nextui-org/react'
+import { Button, Chip } from '@nextui-org/react'
 
 export default function PropertyCard({ property }: { property: PropertyInterface }) {
     return (
-        <div className="flex border m-4 rounded-lg overflow-hidden h-[300px]">
+        <div className="flex border m-4 rounded-lg w-fit md:w-full overflow-hidden md:h-[300px] flex-col md:flex-row mx-auto">
             <img className=' max-w-[400px] object-contain' src={property.imageUrl} alt="Property Image" />
-            <div className=''>
-                <div className=" p-8 flex flex-col h-[300px]">
-                    <div className='flex-grow space-y-4 '>
-                        <h2 className=' text-xl'>{property.name}</h2>
+            <div className=' w-full'>
+                <div className=" p-8 flex flex-col min-h-[300px]">
+                    <div className='flex-grow space-y-4 mb-4'>
+                        <div className=' flex flex-col md:flex-row space-y-4 md:space-y-0'>
+                            <span className=' mr-auto text-xl md:text-3xl'>{property.name}</span>
+                            <Chip color="primary">{property.propertyType}</Chip>
+                        </div>
                         <p>Address: {property.address}</p>
                         <p className=' max-w-[400px]'>Details: {property.squareFt} sq.ft</p>
                         <div className="property-details space-x-4 text-slate-800/60">

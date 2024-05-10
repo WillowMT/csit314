@@ -23,8 +23,8 @@ export default function Page() {
                 </div>
                 <Link className="new-listing" href={"/createproperty"}>Create New Listing</Link>
             </div>
-            <div className="">
-                <h1 className=" text-center text-4xl">Properties listed by you</h1>
+            <div className="p-10">
+                <h1 className=" text-center text-4xl my-4">Properties listed by you</h1>
                 <div className=" space-y-4">
                     {
                         demo.properties.map((property, i) => {
