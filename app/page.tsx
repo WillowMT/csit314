@@ -5,9 +5,9 @@ export default function Page() {
   return (
     <div>
       <Navigation />
-        <div>
-          <h1>Hello World</h1>
-        </div>
+      <div>
+        <h1>Hello Worldd</h1>
+      </div>
     </div>
   )
 }
