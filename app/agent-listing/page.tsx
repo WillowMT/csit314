@@ -5,8 +5,8 @@ import { useState } from "react";
 import { demo } from "@/utils/demo";
 import './agent.css';
 
-//view property listings by agent #61 sprint 3
-//main page for agent
+
+//displays property listings created by agent
 export default async function MainRealEstateAgentPage() {
     return (
         <div className="flexContainer">
@@ -25,7 +25,7 @@ export default async function MainRealEstateAgentPage() {
                 <h1>Properties listed by you</h1>
                 <br></br>
                 <div className="property">
-                    <img src="your-image-url.jpg" alt="Property Image" />
+                    <img src="your-image-url" alt="Property Image" />
                     <div className="property-info">
                         <h2>Property Name: </h2>
                         <h2>Property Type: </h2>
@@ -45,7 +45,7 @@ export default async function MainRealEstateAgentPage() {
                 </div>
                 <br></br>
                 <div className="property">
-                    <img src="your-image-url.jpg" alt="Property Image" />
+                    <img src="your-image-url" alt="Property Image" />
                     <div className="property-info">
                         <h2>Property Name: </h2>
                         <h2>Property Type: </h2>
@@ -65,7 +65,7 @@ export default async function MainRealEstateAgentPage() {
                 </div>
                 <br></br>
                 <div className="property">
-                    <img src="your-image-url.jpg" alt="Property Image" />
+                    <img src="your-image-url" alt="Property Image" />
                     <div className="property-info">
                         <h2>Property Name: </h2>
                         <h2>Property Type: </h2>
