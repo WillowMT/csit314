@@ -1,7 +1,6 @@
 import Navigation from "@/components/nav";
 import Link from "next/link";
 import Searchbar from "../searchagentproperty/page";
-import * as controller from '@/utils/controllers/globalControllers'
 import { useState } from "react";
 import { demo } from "@/utils/demo";
 import './agent.css';
