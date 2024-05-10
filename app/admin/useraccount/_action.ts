@@ -1,10 +1,11 @@
 'use server'
 
-import * as globalController from '@/utils/controllers/globalControllers'
+import { CreateUserAccController, EditAccountInfoController, SuspendUserAccountController } from '@/utils/controllers/user'
 import { encryptPassword } from '@/utils/hash'
 
 import prisma from "@/utils/prisma"
 import { revalidatePath } from "next/cache"
+
 //showdis
 export async function createUser(prev:any, form:FormData) {
     const email = form.get('email') as string
@@ -42,10 +43,10 @@ export async function createUser(prev:any, form:FormData) {
         role
     }
 
-    console.log(userObj);
     
     // pass object to controller
-    const result = await globalController.createUserAccController.createUserAccount(userObj)
+    const createUserAccController = new CreateUserAccController()
+    const result = await createUserAccController.createUserAccount(userObj)
 
     revalidatePath('/admin/useraccount')
 
@@ -58,13 +59,21 @@ export async function suspendUser(prev:any, formData:FormData) {
     'use server'
     const email = formData.get('email') as string
 
-    // TODO: suspend user controller
-    return await prisma.user.update({
-        where: {
-            email: email
-        },
-        data: {
-            activated: false
-        }
-    })
+    const suspendUserAccountController = new SuspendUserAccountController()
+
+    return await suspendUserAccountController.suspendUserAccount(email)
+}
+
+export async function editUser(prev:any, formData: FormData) {
+    const firstName = formData.get('firstName') as string
+    const lastName = formData.get('lastName') as string
+    const phoneNumber = formData.get('phoneNumber') as string
+    const email = formData.get('email') as string
+    const agency = formData.get('agency') as string | undefined
+    const license = formData.get('license') as string | undefined
+    const ceaNumber = formData.get('ceaNumber') as string | undefined
+
+    const editAccountInfoController = new EditAccountInfoController()
+    return await editAccountInfoController.saveInfoChange({firstName, lastName, phoneNumber, email, agency, license, ceaNumber})
+
 }

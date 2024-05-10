@@ -1,5 +1,4 @@
 import Navigation from "@/components/nav";
-import { Button } from "@nextui-org/react";
 import { getSession } from "@/utils/auth";
 import Link from "next/link";
 

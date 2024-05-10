@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect } from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Select, SelectItem, Switch } from "@nextui-org/react";
-import { useFormState, useFormStatus } from "react-dom";
+import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Input, Select, SelectItem } from "@nextui-org/react";
+import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { UserProfileInterface } from "@/utils/demo";
@@ -12,8 +12,8 @@ export default function EditUserProfile({ profile }: { profile: UserProfileInter
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
     const [state, formAction] = useFormState(updateRole, null);
 
-    const [active, setActive] = useState(profile.activated)
-    const [role, setRole] = useState(profile.role)
+    const [active] = useState(profile.activated)
+    const [role] = useState(profile.role)
 
     useEffect(() => {
         if (!state) return
@@ -66,58 +66,55 @@ export default function EditUserProfile({ profile }: { profile: UserProfileInter
 
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="py-4">
                 <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">Update User</ModalHeader>
-                            <ModalBody>
-                                <div>
-                                    <form action={formAction}>
-                                        <div className="">
-                                            <Input
-                                                isRequired
-                                                name="role"
-                                                className="mb-8  mx-auto hidden"
-                                                type="string"
-                                                label="Role"
-                                                labelPlacement={'outside'}
-                                                placeholder="Role"
-                                                defaultValue={role}
-                                            />
-                                            <Input
-                                                isRequired
-                                                name="newrole"
-                                                className="mb-8  mx-auto"
-                                                type="string"
-                                                label="Role"
-                                                labelPlacement={'outside'}
-                                                placeholder="Role"
-                                                defaultValue={role}
-                                            />
-                                            <Select
-                                                name="activated"
-                                                className="mb-4 max-w-[400px] mx-auto"
-                                                defaultSelectedKeys={[active ? "true" : "false"]}
-                                                label="Activated"
-                                                labelPlacement={'outside'}
-                                                placeholder="Activated"
-                                            >
-                                                <SelectItem value={"true"} key={"true"}>
-                                                    active
-                                                </SelectItem>
-                                                <SelectItem value={"false"} key={"false"}>
-                                                    suspended
-                                                </SelectItem>
+                    <ModalHeader className="flex flex-col gap-1">Update User</ModalHeader>
+                    <ModalBody>
+                        <div>
+                            <form action={formAction}>
+                                <div className="">
+                                    <Input
+                                        isRequired
+                                        name="role"
+                                        className="mb-8  mx-auto hidden"
+                                        type="string"
+                                        label="Role"
+                                        labelPlacement={'outside'}
+                                        placeholder="Role"
+                                        defaultValue={role}
+                                    />
+                                    <Input
+                                        isRequired
+                                        name="newrole"
+                                        className="mb-8  mx-auto"
+                                        type="string"
+                                        label="Role"
+                                        labelPlacement={'outside'}
+                                        placeholder="Role"
+                                        defaultValue={role}
+                                    />
+                                    <Select
+                                        name="activated"
+                                        className="mb-4 max-w-[400px] mx-auto"
+                                        defaultSelectedKeys={[active ? "true" : "false"]}
+                                        label="Activated"
+                                        labelPlacement={'outside'}
+                                        placeholder="Activated"
+                                    >
+                                        <SelectItem value={"true"} key={"true"}>
+                                            active
+                                        </SelectItem>
+                                        <SelectItem value={"false"} key={"false"}>
+                                            suspended
+                                        </SelectItem>
 
-                                            </Select>
-                                            <Button type="submit" className=" text-white bg-green-400 w-fit h-fit p-2 rounded-lg">
-                                                Save
-                                            </Button>
-                                        </div>
-                                    </form>
+                                    </Select>
+                                    <Button type="submit" className=" text-white bg-green-400 w-fit h-fit p-2 rounded-lg">
+                                        Save
+                                    </Button>
                                 </div>
-                            </ModalBody>
-                        </>
-                    )}
+                            </form>
+                        </div>
+                    </ModalBody>
+
                 </ModalContent>
             </Modal>
         </>

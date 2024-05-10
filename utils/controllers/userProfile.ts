@@ -1,43 +1,30 @@
 import { userProfileEntity } from "../entity";
 
-class CreateUserProfileController {
+export class CreateUserProfileController {
     async recordUserProfile(role:string) {
         return await userProfileEntity.createUserProfile({role})
     }
 }
-class ViewUserProfileController {
+export class ViewUserProfileController {
     async getUserProfile() {
         return await userProfileEntity.getUserProfile()
     }
 }
 
-class UpdateUserProfileController {
+export class UpdateUserProfileController {
     async saveRoleName(role:string, newrole:string, activated:boolean) {
         return await userProfileEntity.setRoleName({role, newrole, activated})
     }
 }
 
-class UserProfileSearchController {
+// TODO: implement controller
+export class UserProfileSearchController {
     async SearchUserProfile(role:string){
         return await userProfileEntity.matchUserProfile({role})
     }
 }
-class SuspendProfileController{
+export class SuspendProfileController{
     async SuspendProfile(role:string){
         return await userProfileEntity.suspendProfile({role})
     }
-}
-
-const createUserProfileController = new CreateUserProfileController()
-const viewUserProfileController = new ViewUserProfileController()
-const updateUserProfileController = new UpdateUserProfileController()
-const userProfileSearchController= new UserProfileSearchController()
-const suspendProfileController= new SuspendProfileController()
-
-export {
-    createUserProfileController,
-    viewUserProfileController,
-    updateUserProfileController,
-    userProfileSearchController,
-    suspendProfileController
 }
