@@ -2,14 +2,15 @@ import Navigation from "@/components/nav";
 import Link from "next/link";
 import './agentRAndR.css';
 
-export default function displayREARandRPage() {
+// display agent's reviews and ratings
+export default function REAReviewandRatings() {
     return (
         <div className="flexContainer">
             <Navigation />
             <div className="firstElement">
                 <div className="midTabs1">
                     <div className="tab1">
-                        <Link className="left" href={"/agentpage"}>Properties</Link>
+                        <Link className="left" href={"/agentmainpage"}>Properties</Link>
                         <Link className="right" href={"/agentReviewAndRating"}>Reviews</Link>
                     </div>
                 </div>

@@ -1,17 +1,17 @@
 import Navigation from "@/components/nav";
 import Link from "next/link";
+import Searchbar from "../searchagentproperty/page";
+import * as controller from '@/utils/controllers/globalControllers'
+import { useState } from "react";
+import { demo } from "@/utils/demo";
 import './agent.css';
 
-export default function displayAgentPage() {
+//main page for agent
+export default async function MainRealEstateAgentPage() {
     return (
         <div className="flexContainer">
             <Navigation />
-            <div className="topElement">
-                <div className="crave-search-bar">
-                    <input className="searchbox" type="text" placeholder="Search Location" />
-                    <button className="custom-button">Search</button>
-                </div>
-            </div>
+            <Searchbar />
             <div className="middleElement">
                 <div className="midTabs">
                     <div className="tab">
@@ -27,19 +27,19 @@ export default function displayAgentPage() {
                 <div className="property">
                     <img src="your-image-url.jpg" alt="Property Image" />
                     <div className="property-info">
-                        <h2>Property Name</h2>
-                        <h2>Property Type</h2>
-                        <h2>Address</h2>
-                        <h2>Property Description</h2>
+                        <h2>Property Name: </h2>
+                        <h2>Property Type: </h2>
+                        <h2>Address: </h2>
+                        <h2>Property Description: </h2>
                         <div className="property-details">
-                            <p>Price</p>
-                            <p>Room</p>
-                            <p>Showers</p>
-                            <p>Measurements</p>
+                            <p>Price: </p>
+                            <p>Room: </p>
+                            <p>Showers: </p>
+                            <p>Measurements: </p>
                         </div>
                     </div>
                     <div className="action-buttons">
-                        <button>Edit</button>
+                        <Link href={"/editproperty"}>Edit</Link>
                         <button>Remove</button>
                     </div>
                 </div>
@@ -47,19 +47,19 @@ export default function displayAgentPage() {
                 <div className="property">
                     <img src="your-image-url.jpg" alt="Property Image" />
                     <div className="property-info">
-                        <h2>Property Name</h2>
-                        <h2>Property Type</h2>
-                        <h2>Address</h2>
-                        <h2>Property Description</h2>
+                        <h2>Property Name: </h2>
+                        <h2>Property Type: </h2>
+                        <h2>Address: </h2>
+                        <h2>Property Description: </h2>
                         <div className="property-details">
-                            <p>Price</p>
-                            <p>Room</p>
-                            <p>Showers</p>
-                            <p>Measurements</p>
+                            <p>Price: </p>
+                            <p>Room: </p>
+                            <p>Showers: </p>
+                            <p>Measurements: </p>
                         </div>
                     </div>
                     <div className="action-buttons">
-                        <button>Edit</button>
+                        <Link href={"/editproperty"}>Edit</Link>
                         <button>Remove</button>
                     </div>
                 </div>
@@ -67,19 +67,19 @@ export default function displayAgentPage() {
                 <div className="property">
                     <img src="your-image-url.jpg" alt="Property Image" />
                     <div className="property-info">
-                        <h2>Property Name</h2>
-                        <h2>Property Type</h2>
-                        <h2>Address</h2>
-                        <h2>Property Description</h2>
+                        <h2>Property Name: </h2>
+                        <h2>Property Type: </h2>
+                        <h2>Address: </h2>
+                        <h2>Property Description: </h2>
                         <div className="property-details">
-                            <p>Price</p>
-                            <p>Room</p>
-                            <p>Showers</p>
-                            <p>Measurements</p>
+                            <p>Price: </p>
+                            <p>Room: </p>
+                            <p>Showers: </p>
+                            <p>Measurements: </p>
                         </div>
                     </div>
                     <div className="action-buttons">
-                        <button>Edit</button>
+                        <Link href={"/editproperty"}>Edit</Link>
                         <button>Remove</button>
                     </div>
                 </div>

@@ -1,12 +1,11 @@
 import Link from "next/link";
-import './createProperty.css';
 
-// create property listings from agent side
-export default function createPropertyListings() {
+// edit property info from agent side
+export default function editPropertyListings() {
     return (
         <div className="flexContainer">
             <div className="first-Element">
-                <h2>Create Porperty</h2>
+                <h2>Edit Porperty</h2>
             </div>
             <div className="middleColumn">
                 <div className="leftColumn">
@@ -43,7 +42,7 @@ export default function createPropertyListings() {
             </div>
             <div className="buttons">
                 <div className="return">
-                    <Link href={"/agentpage"}>Return</Link>
+                    <Link href={"/agentmainpage"}>Return</Link>
                 </div>
                 <div className="submit">
                     <button>Submit</button>
