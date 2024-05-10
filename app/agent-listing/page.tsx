@@ -29,7 +29,7 @@ export default function Page() {
                     {
                         demo.properties.map((property, i) => {
                             return (
-                                <PropertyCard property={property} />
+                                <PropertyCard key={i} property={property} />
                             )
                         })
                     }
