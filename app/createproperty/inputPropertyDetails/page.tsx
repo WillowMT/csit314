@@ -1,8 +1,22 @@
 import Link from "next/link";
 import './createProperty.css';
 
-// create property listings from agent side
-export default function createPropertyListings() {
+// create property by agent #60 sprint 3
+// data for mongo DB
+const initialPropertyData = {
+    name: "Property Name",
+    location: "Property Location",
+    price: "Property Price",
+    type: "Property Type",
+    measurement: "Property Measurement",
+    rooms: "Number of Rooms",
+    bathrooms: "Number of Bathrooms",
+    image: "URL link to image",
+    description: "Property Description"
+  };
+
+// handles inputing properties
+export default function inputPropertyDetails() {
     return (
         <div className="flexContainer">
             <div className="first-Element">
