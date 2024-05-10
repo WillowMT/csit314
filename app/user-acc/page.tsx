@@ -1,3 +1,4 @@
+import PropertyBox from "../user-acc/property-box";
 import Navigation from "@/components/nav";
 import './user_acc_style.css'
 import { demo } from "@/utils/demo";
@@ -30,7 +31,8 @@ export default async function UserAccountPage() {
                 </div>
 
                 <div className="tabs">
-                    <input type="radio" name="tab" id="tab1" defaultChecked/>
+
+                    <input type="radio" name="tab" id="tab1" defaultChecked />
                     <label htmlFor="tab1" className="tab-title">My Listings</label>
 
                     <input type="radio" name="tab" id="tab2" />
@@ -40,10 +42,10 @@ export default async function UserAccountPage() {
 
                     <div className="tab-content">
                         <div className="tab-panel" id="tab1-panel">
-                            {/* Content for Short Lists */}
+                            {/* Content for My Listings tab */}
                             <div>
-                                {/* Short Listed Content */}
-                                <p>My Listed Content</p>
+                                {/* My Listings Content */}
+                                <PropertyBox></PropertyBox>
                             </div>
                         </div>
 
@@ -51,7 +53,7 @@ export default async function UserAccountPage() {
                             {/* Content for Short Lists */}
                             <div>
                                 {/* Short Listed Content */}
-                                <p>Short Listed Content</p>
+                                <PropertyBox></PropertyBox>
                             </div>
                         </div>
 
