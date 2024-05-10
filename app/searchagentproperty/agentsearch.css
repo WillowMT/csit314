@@ -1,0 +1,47 @@
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Sets the height to 100% of the viewport height */
+}
+
+.top-element {
+    display: flex;
+    justify-content: center;
+    flex: 1; /* Takes up all available vertical space */
+    height: 100px;
+    width: 100px;
+    background-color: lightblue;
+}
+
+
+.crave-search-bar {
+    flex: 1;
+    text-align: center;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    background-color: #b9b9b9; /* Background color */
+    padding: 50px 30px; /* Padding */
+}
+
+.crave-search-bar .searchbox{
+    text-align: center;
+    flex: 1; /* Take up remaining space */
+    border: none; /* No border */
+    border-radius: 25px; /* Crave edges */
+    width: 500px;
+    outline: none; /* Remove outline */
+    padding: 5px; /* Padding */
+}
+
+.crave-search-bar .custom-button {
+    flex: 1;
+    text-align: center;
+    background-color: #b39a7b; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border-top-right-radius: 25px; /* Crave edge on the right */
+    border-bottom-right-radius: 25px; /* Crave edge on the right */
+    padding: 5px 10px; /* Padding */
+    cursor: pointer; /* Cursor style */
+}
+
+

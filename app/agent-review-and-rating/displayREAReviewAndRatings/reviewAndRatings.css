@@ -1,0 +1,24 @@
+.review {
+    border: 1px solid #ccc; /* Example border style */
+    padding: 10px; 
+    border-radius: 25px;
+    margin-bottom: 20px;
+}
+
+.reviewContent {
+    display: flex;
+}
+
+.username,
+.ratings,
+.comment-box {
+    flex: 1;
+    padding: 10px; /* Add padding for spacing */
+}
+
+.comment-box {
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    width: 700px;
+    padding: 40px;
+}

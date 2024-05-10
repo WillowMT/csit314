@@ -1,16 +1,18 @@
 import Navigation from "@/components/nav";
 import Link from "next/link";
 import './agentRAndR.css';
+//import reviews from "./displayREAReviewAndRatings/form";
 
-export default function displayREARandRPage() {
+// display agent's reviews and ratings
+export default function REAReviewandRatings() {
     return (
         <div className="flexContainer">
             <Navigation />
             <div className="firstElement">
                 <div className="midTabs1">
                     <div className="tab1">
-                        <Link className="left" href={"/agentpage"}>Properties</Link>
-                        <Link className="right" href={"/agentReviewAndRating"}>Reviews</Link>
+                        <Link className="left" href={"/agent-listing"}>Properties</Link>
+                        <Link className="right" href={"/agent-review-and-rating"}>Reviews</Link>
                     </div>
                 </div>
             </div>

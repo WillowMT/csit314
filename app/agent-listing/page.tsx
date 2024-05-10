@@ -1,24 +1,21 @@
 import Navigation from "@/components/nav";
 import Link from "next/link";
+import Searchbar from "../searchagentproperty/page";
 import './agent.css';
 import { demo } from "@/utils/demo";
 import PropertyCard from "./property-card";
 
 export default function Page() {
+
     return (
         <div className="flexContainer">
             <Navigation />
-            <div className="topElement">
-                <div className="crave-search-bar">
-                    <input className="searchbox" type="text" placeholder="Search Location" />
-                    <button className="custom-button">Search</button>
-                </div>
-            </div>
+            <Searchbar />
             <div className="middleElement">
                 <div className="midTabs">
                     <div className="tab">
                         <Link className="tab-left" href={"/agentpage"}>Properties</Link>
-                        <Link className="tab-right" href={"/agentReviewAndRating"}>Reviews</Link>
+                        <Link className="tab-right" href={"/agent-review-and-rating"}>Reviews</Link>
                     </div>
                 </div>
                 <Link className="new-listing" href={"/createproperty"}>Create New Listing</Link>
