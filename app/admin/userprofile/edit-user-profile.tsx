@@ -1,32 +1,26 @@
 'use client'
 
 import React, { useEffect } from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Select, SelectItem, Switch } from "@nextui-org/react";
-import { countries } from "@/utils/countries";
-import { useFormState, useFormStatus } from "react-dom";
-import Link from "next/link";
-import { submit } from "../../signup/_action";
+import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Input, Select, SelectItem } from "@nextui-org/react";
+import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { UserProfileInterface } from "@/utils/demo";
+import { updateRole } from "./_action";
 
 export default function EditUserProfile({ profile }: { profile: UserProfileInterface }) {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const [state, formAction] = useFormState(submit, null);
+    const [state, formAction] = useFormState(updateRole, null);
 
-    const [active, setActive] = useState(profile.activated)
-    const [role, setRole] = useState(profile.role)
+    const [active] = useState(profile.activated)
+    const [role] = useState(profile.role)
 
     useEffect(() => {
-        if (!state?.message) return
+        if (!state) return
 
-        if (state?.success) {
-            toast.success('Account created successfully')
+        if (state) {
+            toast.success('Edit Role Successfully!')
             onClose()
-        }
-
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
         }
     }, [state])
 
@@ -72,63 +66,57 @@ export default function EditUserProfile({ profile }: { profile: UserProfileInter
 
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="py-4">
                 <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">Update User</ModalHeader>
-                            <ModalBody>
-                                <div>
-                                    <form action="">
-                                        <div className="">
-                                            <Input
-                                                isRequired
-                                                name="role"
-                                                className="mb-8  mx-auto"
-                                                type="string"
-                                                label="Role"
-                                                labelPlacement={'outside'}
-                                                placeholder="Role"
-                                                defaultValue={role}
-                                            />
-                                            <Select
-                                                name="activated"
-                                                className="mb-4 max-w-[400px] mx-auto"
-                                                defaultSelectedKeys={[active ? "true" : "false"]}
-                                                label="Activated"
-                                                labelPlacement={'outside'}
-                                                placeholder="Activated"
-                                            >
-                                                <SelectItem value={"true"} key={"true"}>
-                                                    active
-                                                </SelectItem>
-                                                <SelectItem value={"false"} key={"false"}>
-                                                    suspended
-                                                </SelectItem>
+                    <ModalHeader className="flex flex-col gap-1">Update User</ModalHeader>
+                    <ModalBody>
+                        <div>
+                            <form action={formAction}>
+                                <div className="">
+                                    <Input
+                                        isRequired
+                                        name="role"
+                                        className="mb-8  mx-auto hidden"
+                                        type="string"
+                                        label="Role"
+                                        labelPlacement={'outside'}
+                                        placeholder="Role"
+                                        defaultValue={role}
+                                    />
+                                    <Input
+                                        isRequired
+                                        name="newrole"
+                                        className="mb-8  mx-auto"
+                                        type="string"
+                                        label="Role"
+                                        labelPlacement={'outside'}
+                                        placeholder="Role"
+                                        defaultValue={role}
+                                    />
+                                    <Select
+                                        name="activated"
+                                        className="mb-4 max-w-[400px] mx-auto"
+                                        defaultSelectedKeys={[active ? "true" : "false"]}
+                                        label="Activated"
+                                        labelPlacement={'outside'}
+                                        placeholder="Activated"
+                                    >
+                                        <SelectItem value={"true"} key={"true"}>
+                                            active
+                                        </SelectItem>
+                                        <SelectItem value={"false"} key={"false"}>
+                                            suspended
+                                        </SelectItem>
 
-                                            </Select>
-                                            <div className=" text-white bg-green-400 w-fit h-fit p-2 rounded-lg">
-                                                Save
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </Select>
+                                    <Button type="submit" className=" text-white bg-green-400 w-fit h-fit p-2 rounded-lg">
+                                        Save
+                                    </Button>
                                 </div>
-                            </ModalBody>
-                        </>
-                    )}
+                            </form>
+                        </div>
+                    </ModalBody>
+
                 </ModalContent>
             </Modal>
         </>
-    );
-}
-
-
-
-function Btn() {
-    const { pending } = useFormStatus();
-    return (
-        <div className="  grid place-items-center">
-            <Button type="submit" className=" rounded-full bg-brand-200 font-bold text-white">
-                {pending ? 'Loading...' : 'Create Account'}
-            </Button>
-        </div>
     );
 }

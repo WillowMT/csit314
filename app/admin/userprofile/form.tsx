@@ -2,9 +2,8 @@
 
 import { useFormStatus } from "react-dom";
 import { deleteUser } from "./_action";
-import { ChangeEvent } from "react";
 
-export default function UserRow({id, email, role}:{id:string, email:string,role:string}) {
+export default function UserRow({id, email}:{id:string, email:string}) {
 
     return(
         <div>

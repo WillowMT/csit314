@@ -1,6 +1,8 @@
 'use server'
-import * as controller from '@/utils/controllers/globalControllers'
 
+
+
+import { CreateUserProfileController, SuspendProfileController, UpdateUserProfileController } from "@/utils/controllers/userProfile"
 import prisma from "@/utils/prisma"
 import { revalidatePath } from "next/cache"
 
@@ -17,11 +19,32 @@ export async function deleteUser(form:FormData) {
 }
 
 
+export async function createRole(prev:any, form:FormData) {
+    const role = form.get('role') as string
+
+    const createUserProfileController = new CreateUserProfileController()
+
+    return await createUserProfileController.recordUserProfile(role)
+}
+
+
 
 export async function updateRole(prev:any, form:FormData) {
-    console.log('holka');
-    const email = form.get('email') as string
-    const isActive = form.get('isActive') as string
-    
-    return {success:true}
+
+    const role = form.get('role') as string
+    const newrole = form.get('newrole') as string
+    const activated = form.get('activated') as string
+
+    const updateUserProfileController = new UpdateUserProfileController()
+
+    return await updateUserProfileController.saveRoleName(role, newrole, activated === 'true')
+}
+
+
+export async function suspendProfile(prev:any, form:FormData) {
+    const role = form.get('role') as string
+
+    const suspendProfileController = new SuspendProfileController()
+
+    return await suspendProfileController.SuspendProfile(role)
 }

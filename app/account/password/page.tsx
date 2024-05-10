@@ -1,4 +1,3 @@
-import Navigation from "@/components/nav";
 import Form from "./form";
 
 export default function Page() {

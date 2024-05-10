@@ -8,7 +8,9 @@ describe("Property Controller Test", async () => {
 
     test("View Seller Property Controller", async () => {
         const properties = await globalController.viewSellerPropertyController.getOwnedProperty({ email: "" })
+        expect(properties).toBeNull()
 
     })
 
 })
+

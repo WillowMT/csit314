@@ -12,6 +12,7 @@ export class User {
         const user = await prisma.user.findUnique({
             where: {
                 email
+                ,activated:true
             }
         })
 
@@ -33,7 +34,6 @@ export class User {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 phoneNumber: user.phoneNumber,
-                country: user.country,
                 ceaNumber:user.ceaNumber,
                 agency: user.agency,
                 license: user.license
@@ -47,6 +47,16 @@ export class User {
         return await prisma.user.findUnique({
             where: {
                 email
+            }
+        })
+    }
+    //#179, #180, #181, #182 For personal account info access
+    async getAccountInfo({userId}: {
+        userId: string
+    }) {
+        return await prisma.user.findUnique({
+            where: {
+                id:userId
             }
         })
     }
@@ -114,7 +124,7 @@ export class User {
             }
         }) as UserInterface[]
     }
-    //buyer adds property to shortlist
+    //#36 buyer adds property to shortlist
     async addPropertyToShortList({ email, propertyId }: { email: string, propertyId: string }) {
         const id = await this.getUserId({ email })
         return await prisma.shortlist.create({
@@ -124,11 +134,24 @@ export class User {
             }
         })
     }
-    //buyer search agent. (Can be reused for #49??)
+    //#49 seller search agent. (Can be reused for #49??)
     async searchAgent({ fname }: { fname: string }) {
+        const profile = await prisma.userProfile.findFirst({
+            where: {
+                role: "AGENT"
+            },
+            select: {
+                id: true  // Select only the ID field
+            }
+        });
+
+        // Check if a userProfile was found and extract the ID, otherwise use null
+        const profileId = profile ? profile.id : null;
         return await prisma.user.findMany({
             where: {
-                firstName: fname
+                firstName: fname,
+                profileId:profileId,
+                activated:true
             }
         })
     }
@@ -146,6 +169,8 @@ export class User {
 
     // anonymous rating, make it so that either rating or review is optional, since tutor tell us to split rating and review.
     // rating default 0 ,and for null review just give "".
+    // or just make it a duplicate function lol
+    //#53
     async createRating({ email, rating, review }: {
         email: string, rating: number, review: string
     }) {
@@ -161,6 +186,7 @@ export class User {
         })
     }
     //why do we have to do this too ...can you help figure out what to do with this one, by that i mean should we just combine them
+    //54
     async createReview({ email, rating, review }: {
         email: string, rating: number, review: string
     }) {
@@ -177,10 +203,11 @@ export class User {
     }
 
     //#74
-    async matchUserAccount({ fname }: { fname: string }) {
+    async matchUserAccount({ fname }: { fname:string }) {
         return await prisma.user.findMany({
             where: {
-                firstName: fname
+                firstName: fname,
+                activated:true
             }
         })
     }
@@ -226,6 +253,7 @@ export class User {
                 id: {
                     in: propertyIds
                 }
+                ,activated:true
             }
         });
 
@@ -263,13 +291,14 @@ export class User {
                 id: {
                     in: propertyIds
                 }
+                ,activated:true
             }
         });
 
         return properties;
     }
     //#50 
-    async getSoldOwnedProperty({ email }: { email: string }) {
+    async getAgentSoldProperty({ email }: { email: string }) {
         const user = await prisma.user.findUnique({
             where: {
                 email: email
@@ -299,14 +328,49 @@ export class User {
                 id: {
                     in: propertyIds
                 },
-                onSale: false
+                onSale: false,
+                activated:true
             }
         });
 
         return properties;
     }
-
-
+    //#252 get the list of shortlisted properties
+    async getShortlist({userId}:{userId:string}){
+        const shortlistedpropid=await prisma.shortlist.findMany({
+            where:{
+                userId:userId
+            },
+            select:{
+                propertyId:true
+            }
+        })
+        const shortlistedpropids=shortlistedpropid.map(propertyId=>propertyId.propertyId)
+        const shortlistedprops=await prisma.property.findMany({
+            where:{
+                id:{
+                    in:shortlistedpropids
+                },
+                activated:true
+            }
+        })
+        return shortlistedprops
+    }
+    //#253 delete shortlist
+    async deleteShortlist({userId,propertyId}:{userId:string, propertyId:string}){
+        const shortlist =  await prisma.shortlist.findFirst({
+            where:{
+                    userId:userId,
+                    propertyId:propertyId
+                }                
+        })
+        if (!shortlist) return null
+        return await prisma.shortlist.delete({
+            where:{
+                id:shortlist.id
+            }
+        })
+    }
 }
 
 export class UserProfile {
@@ -343,13 +407,14 @@ export class UserProfile {
         })
     }
     // TODO: implement this
-    async setRoleName({ role, newrole }: { role: string, newrole: string }) {
+    async setRoleName({ role, newrole, activated }: { role: string, newrole: string, activated:boolean }) {
         return await prisma.userProfile.updateMany({
             where: {
                 role: role
             },
             data: {
-                role: newrole
+                role: newrole,
+                activated
             }
         });
     }
@@ -372,7 +437,8 @@ export class Property {
     async getSoldProperty() {
         return await prisma.property.findMany({
             where: {
-                onSale: false
+                onSale: false,
+                activated:true
             }
         })
     }
@@ -380,6 +446,7 @@ export class Property {
     async getOnSaleProperty() {
         return await prisma.property.findMany({
             where: {
+                activated:true,
                 onSale: true
             }
         })
@@ -388,6 +455,7 @@ export class Property {
     async getSoldPropertybyLoc({ address }: { address: string }) {
         return await prisma.property.findMany({
             where: {
+                activated:true,
                 onSale: false,
                 address: {
                     contains: address
@@ -399,6 +467,7 @@ export class Property {
     async getOnSalePropertybyLoc({ address }: { address: string }) {
         return await prisma.property.findMany({
             where: {
+                activated:true,
                 onSale: true,
                 address: {
                     contains: address
@@ -430,14 +499,7 @@ export class Property {
             }
         });
     }
-    //this function is to view individual account information, should alr have their id in session because of login right? #179-#182 (decided to make them all into one function)
-    async getUserAccountInfo({ userId }: { userId: string }) {
-        return await prisma.user.findUnique({
-            where: {
-                id: userId
-            }
-        })
-    }
+    
 
     //just a few more entity functions... (8 more, from the property)
     //#60 
@@ -459,29 +521,124 @@ export class Property {
 
         if (!owner?.id) return null
 
-        const propertyListing = await prisma.property.create({
-            data: property
-        })
-
-        const listing = await prisma.listing.create({
-            data: {
-                userId: lister.id,
-                propertyId: propertyListing.id
+                const propertyListing= await prisma.property.create({
+                    data:property
+                })
+                const Listing= await prisma.listing.create({
+                    data:lister
+                })
+                const Ownership=await prisma.ownership.create({
+                    data:owner
+                })
+                return {propertyListing,Listing,Ownership}
             }
-        })
-
-        const ownership = await prisma.ownership.create({
-            data: {
-                userId: owner.id,
-                propertyId: propertyListing.id
+    //#63
+    async suspendListedProperty({propertyId}:{propertyId:string}){
+         return await prisma.property.update({
+            where:{
+                id:propertyId
+            },
+            data:{
+                activated:false
             }
-        })
-
-        return { propertyListing, listing, ownership }
+        })       
     }
-
-
-
+    //#64
+    async searchListedPropertyByAddress({email,address}:{email:string,address:string}){
+        const lister=await prisma.user.findUnique({
+            where:{
+                email:email
+            },
+            select:{
+                id:true  
+            }
+        })
+        const listerID=lister?lister.id:undefined
+        const listedPropIds=await prisma.listing.findMany({
+            where:{
+                userId:listerID
+            },
+            select:{
+                propertyId:true
+            }
+        })
+        const listedPropIdList = listedPropIds.map(listing => listing.propertyId);
+        return await prisma.property.findMany({
+            where:{
+                address:address,
+                id:{
+                    in: listedPropIdList 
+                }
+            }
+        })
+    }
+    //#62
+    async setPropInfoChange({id,name,address,description,onSale,
+        leaseYear,squareFt,builtYear,price,imageUrl}:
+    {id:string,name:string,address:string,description:string,onSale:boolean,
+        leaseYear:number,squareFt:number,builtYear:number,price:number,imageUrl:string
+    }){
+        return await prisma.property.update({
+            where:{
+                id:id
+            },
+            data:{
+                name,
+                address,
+                description,
+                onSale,
+                leaseYear,
+                squareFt,
+                builtYear,
+                price,
+                imageUrl
+            }
+        })
+    }
+    //#55
+    async getPropertyShortlistCount({propertyid}:{propertyid:string}){
+        return await prisma.shortlist.count({
+            where:{
+                propertyId:propertyid
+            }
+        })
+    }
+    //#56
+    async getPropertyViews({propertyid}:{propertyid:string}){
+        return await prisma.property.findFirst({
+            where:{
+                id:propertyid
+            },
+            select:{
+                views:true
+            }
+        })
+    }
+    //#45
+    async calculateMortgage({propertyid, loantermyears, monthlyinterest}:{propertyid:string,loantermyears:number,monthlyinterest:number})
+    {
+        const propprice=await prisma.property.findFirst({
+            where:{
+                id:propertyid
+            },
+            select:{
+                price:true
+            }
+        })
+        const propertyprice=propprice!==null?propprice.price:0
+        const numerator=monthlyinterest*Math.pow(1+(monthlyinterest/100),loantermyears*12)
+        const denominator=Math.pow(1+(monthlyinterest/100),loantermyears*12)-1
+        const monthlyPayment= propertyprice*(numerator/denominator)
+        return monthlyPayment
+    }
+    //#243, 242, 241 - >you can use for buyer, seller, or real estate agent.
+    async getPropertyInfo({propertyid}:{propertyid:string}){
+        return await prisma.property.findFirst({
+            where:{
+                id:propertyid
+            }
+        })
+    }
 }
 //showdis
 export const userEntity = new User()

@@ -3,19 +3,11 @@ import "../globals.css";
 import "./agent.css";
 
 import {
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
     Button,
-    useDisclosure,
     Input,
-    Select,
-    SelectItem,
 } from "@nextui-org/react";
 
-export default function Page() {
+export default function ViewAndEditAgentAccountPage() {
     return (
         <div className="">
             <Navigation />

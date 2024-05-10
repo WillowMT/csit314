@@ -8,7 +8,7 @@ describe("Agent Controller Test", async () => {
     const passwordHash = await encryptPassword(demoUser.passwordHash)
 
     const demoProperty = createRandomProperty()
-    var userid: string
+    let userid: string
 
     const demoRating = createRatingsAndReviews()
 

@@ -1,26 +1,23 @@
 'use client'
 
-import { Button, Input } from "@nextui-org/react";
 import { submit } from './action'
 import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import toast from 'react-hot-toast'
 import { UserInterface } from "@/utils/demo";
+import { countries } from '@/utils/countries'
+import {
+    Button, Input, Select, SelectItem
+} from "@nextui-org/react";
 
 
-export default function UserForm(user:UserInterface) {
+export default function UserForm(user: UserInterface) {
     const [state, formAction] = useFormState(submit, null);
-    
+
     useEffect(() => {
-        if (!state?.message) return
+        if (!state) return
 
-        if (state?.success) {
-            toast.success('User info updated')
-        }
-
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
-        }
+        toast.success('User updated successfully')
     }, [state])
 
 
@@ -50,10 +47,9 @@ export default function UserForm(user:UserInterface) {
                         defaultValue={user.lastName}
                     />
                     <Input
-
                         name="phoneNumber"
                         className="mb-8 max-w-[400px] mx-auto"
-                        type="number"
+                        type="text"
                         label="Phone Number"
                         labelPlacement={'outside'}
                         placeholder="Phone Number"
@@ -62,14 +58,50 @@ export default function UserForm(user:UserInterface) {
 
                     <Input
                         name="email"
-                        className="mb-8 max-w-[400px] mx-auto hidden"
+                        className="mb-8 max-w-[400px] mx-auto"
                         type="email"
                         label="Email"
                         labelPlacement={'outside'}
                         placeholder="Email"
                         defaultValue={user.email}
                     />
+
+                    <Select
+                        name="country"
+                        className="mb-4 max-w-[400px] mx-auto"
+                        defaultSelectedKeys={['Singapore']}
+                        label="Country"
+                        labelPlacement={'outside'}
+                        placeholder="Country"
+                    >
+                        {countries.map((country) => (
+                            <SelectItem key={country.name} value={country.name}>
+                                {country.name}
+                            </SelectItem>
+                        ))}
+                    </Select>
+
+                    <Input
+                        name="password"
+                        className="mb-8 max-w-[400px] mx-auto"
+                        type="password"
+                        label="Password"
+                        labelPlacement={'outside'}
+                        placeholder="Password"
+                        defaultValue=""
+                    />
+
+                    <Input
+                        name="confirm-password"
+                        className="mb-8 max-w-[400px] mx-auto"
+                        type="password"
+                        label="Confirm Password"
+                        labelPlacement={'outside'}
+                        placeholder="Confirm Password"
+                        defaultValue=""
+                    />
                 </div>
+
                 {/* {
                     agent && (
 

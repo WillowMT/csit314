@@ -1,11 +1,9 @@
 'use client'
 
-import { Table, TableBody, TableCell, TableHeader, TableColumn, TableRow, Button, Chip, Switch, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react"
-import { useCallback } from "react";
-import toast from "react-hot-toast";
+import { Table, TableBody, TableCell, TableHeader, TableColumn, TableRow, Chip, Input } from "@nextui-org/react"
 import EditUserAccount from "./edit-user-profile";
-import { useEffect, useState } from "react";
-import { UserInterface } from "@/utils/demo";
+import { useState } from "react";
+import { UserInterface, UserProfileInterface } from "@/utils/demo";
 import AddUserForm from "./add-user-form";
 import SuspendButton from "./suspend-button";
 
@@ -24,9 +22,10 @@ const columns = [
 
 
 
-export default function UserTable({ users }: { users: UserInterface[] }) {
+export default function UserTable({ users, roles }: { users: UserInterface[], roles: UserProfileInterface[]}) {
     const [filteredName, setFilteredName] = useState("")
     const [filteredUsers, setFilteredUsers] = useState(users)
+    
 
     return (
         <div className="">
@@ -43,7 +42,7 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
                 setFilteredUsers(filtered)
             }} />
             <div className=" mb-4">
-                <AddUserForm />
+                <AddUserForm roles={roles} />
             </div>
 
             <Table aria-label="Example table with custom cells">
@@ -58,7 +57,6 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
                 <TableBody>
                     {
                         filteredUsers.map((user: UserInterface, i: any) => {
-                            const isActive = user.activated || false
                             return (
                                 <TableRow key={i}>
                                     <TableCell>{i + 1}</TableCell>
@@ -73,7 +71,7 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
                                     <TableCell className=" space-x-4">
                                         <div className="flex place-content-center place-items-center space-x-2">
                                             <EditUserAccount user={user} />
-                                            <SuspendButton />
+                                            <SuspendButton email={user.email} />
                                         </div>
                                     </TableCell>
                                 </TableRow>

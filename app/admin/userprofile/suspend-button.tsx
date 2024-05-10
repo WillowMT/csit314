@@ -3,13 +3,13 @@
 import React from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
 import { useEffect } from "react";
-import { suspendUser } from "./_action";
+import { suspendProfile } from "./_action";
 import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
 
-export default function SuspendButton({email}: {email: string}) {
+export default function SuspendButton({role}: {role: string}) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const [state, formAction] = useFormState(suspendUser, null);
+    const [state, formAction] = useFormState(suspendProfile, null);
 
     useEffect(() => {
         if (!state) return
@@ -32,9 +32,9 @@ export default function SuspendButton({email}: {email: string}) {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Suspend User</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Suspend Profile</ModalHeader>
                             <ModalBody>
-                                <p>Are you sure you want to suspend user?</p>
+                                <p>Are you sure you want to suspend profile?</p>
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="success" variant="flat" onPress={onClose}>
@@ -42,8 +42,8 @@ export default function SuspendButton({email}: {email: string}) {
                                 </Button>
                                 <form action={formAction}>
                                     <Input 
-                                    name="email"
-                                    defaultValue={email}
+                                    name="role"
+                                    defaultValue={role}
                                     className="hidden"
                                     />
                                     <Button type="submit" color="danger" onPress={onClose}>
