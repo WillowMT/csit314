@@ -1,8 +1,9 @@
 import { expect, test, describe } from 'vitest'
 import prisma from '@/utils/prisma'
-import * as globalController from '@/utils/controllers/globalControllers'
 import { createRandomUser, createRandomProperty } from '@/utils/demo'
 import { encryptPassword } from '@/utils/hash'
+import * as UserController from '@/utils/controllers/user'
+import { faker } from '@faker-js/faker'
 
 describe("User Controller Test", async () => {
     const demoUser = createRandomUser()
@@ -12,8 +13,10 @@ describe("User Controller Test", async () => {
     let userid:string
 
     test("Create User Account Controller Test", async () => {
+
+        const createUserAccController = new UserController.CreateUserAccController()
     
-        const newUser = await globalController.createUserAccController.createUserAccount({
+        const newUser = await createUserAccController.createUserAccount({
             email: demoUser.email,
             passwordHash,
             firstName: demoUser.firstName,
@@ -32,13 +35,16 @@ describe("User Controller Test", async () => {
     })
     
     test("View User Account Controller Test" , async () => {
-        const users = await globalController.viewUserAccountController.getUserInfo()
+        const viewUserAccountController = new UserController.ViewUserAccountController()
+        const users = await viewUserAccountController.getUserInfo()
         expect(users).toBeDefined()
     })
     
     test("Edit Account Info Controller Test", async () => {
+        const ediAccountInfoController = new UserController.EditAccountInfoController()
+        const createUserAccController = new UserController.CreateUserAccController()
     
-        const newUser = await globalController.createUserAccController.createUserAccount({
+        const newUser = await createUserAccController.createUserAccount({
             email: demoUser.email,
             passwordHash,
             firstName: demoUser.firstName,
@@ -47,26 +53,33 @@ describe("User Controller Test", async () => {
             phoneNumber: demoUser.phoneNumber,
             role: "USER"
         })
+
+        const firstName = faker.name.firstName()
     
-        const updatedUser = await globalController.ediAccountInfoController.saveInfoChange({
+        const updatedUser = await ediAccountInfoController.saveInfoChange({
             email: demoUser.email,
-            firstName: "User",
+            firstName: firstName,
             lastName: "Doe",
             country: "Singapore",
             phoneNumber: "12345678"
         })
     
-        expect(updatedUser.user).toBeDefined()
-        expect(updatedUser.user?.firstName).toBe("User")
+        expect(updatedUser).toBeDefined()
+        expect(updatedUser.firstName).toBe(firstName)
     })
     
     test("User Account Search Controller Test", async () => {
-        const user = await globalController.userAccountSearchController.SearchUserAcount("User")
+
+        const userAccountSearchController = new UserController.UserAccountSearchController()
+        const user = await userAccountSearchController.SearchUserAcount("User")
         expect(user).toBeDefined()
         expect(user.length).toBeGreaterThan(0)
     })
     
     test("Shortlist Controller Test", async () => {
+
+        const shortlistController = new UserController.ShortlistController()
+
         // create property 
         const property = await prisma.property.create({
             data: {
@@ -88,7 +101,7 @@ describe("User Controller Test", async () => {
 
 
         // shortlist property
-        const shortlist = await globalController.shortlistController.shortlist(demoUser.email, property.id)
+        const shortlist = await shortlistController.shortlist(demoUser.email, property.id)
 
         expect(shortlist).toBeDefined()
         expect(shortlist.id).toBeDefined()
