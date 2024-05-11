@@ -25,8 +25,8 @@ export default function Form() {
                 <CardBody className="">
 
                     <form action={formAction} className="w-full px-4 py-[7rem]">
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <div className="mb-[1.75rem]">
+                        <div className="grid grid-cols-1 gap-4">
+                            <div className="mb-[1.75rem] hidden">
 
                                 <Select
                                     isRequired

@@ -1,12 +1,15 @@
 import Navigation from "@/components/nav"
+import { redirect } from "next/navigation"
 
 
-export default function Page() {
+export default async function Page() {
+  redirect('/buy')
+
   return (
     <div>
       <Navigation />
       <div>
-        <h1>Hello Worldd</h1>
+        Redirect Page
       </div>
     </div>
   )

@@ -5,7 +5,9 @@ import Link from "next/link";
 import { SessionData } from "@/utils/lib";
 import { logout } from "@/utils/auth";
 
-export default function Profile({ email, firstName }: { email: string, firstName: string }) {
+export default function Profile({ email, firstName, role }: { email: string, firstName: string, role: string }) {
+    console.log(role);
+    
     return (
         <Dropdown
             radius="sm"
@@ -60,7 +62,7 @@ export default function Profile({ email, firstName }: { email: string, firstName
                     </DropdownItem>
                     <DropdownItem key="">
                         <Link href={'/account/edit'}>
-                            Edit
+                            Edit Profile
                         </Link>
                     </DropdownItem>
                     <DropdownItem

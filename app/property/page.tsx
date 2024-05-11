@@ -1,20 +1,11 @@
-import Navigation from "@/components/nav";
-import { demo } from "@/utils/demo";
+
+import { redirect } from "next/navigation";
 
 export default async function Page() {
+
+    redirect('/')
+
     return(
-        <div className="">
-            <Navigation />
-            <h1>Property Page</h1>
-            <pre>
-                {
-                    demo.properties.map((property: any) => {
-                        return (
-                            JSON.stringify(property, null, 2)
-                        )
-                    })
-                }
-            </pre>
-        </div>
+        <div>Rediect Page</div>
     )
 }

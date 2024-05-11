@@ -2,7 +2,7 @@
 import React from "react";
 import { Textarea, Button } from "@nextui-org/react";
 
-export default function MortageCal() {
+export default function MortageCal({price}:{price:number}) {
     const [interest_value, setInterestValue] = React.useState("");
     const [year_value, setYearValue] = React.useState("");
     const [monthlyPayment, setMonthlyPayment] = React.useState("");
@@ -10,14 +10,14 @@ export default function MortageCal() {
     const calculateMonthlyPayment = () => {
         const interestRate = parseFloat(interest_value) / 100 / 12;
         const termInYears = parseFloat(year_value);
-        const monthlyPayment = 120000000 *
+        const monthlyPayment = price *
             interestRate * Math.pow(1 + interestRate, termInYears) /
             (1 - Math.pow(1 + interestRate, -12 * termInYears));
         setMonthlyPayment(monthlyPayment.toFixed(2));
     };
 
     return (
-        <div className="w-[350px] flex flex-col gap-2 items-center">
+        <div className="w-[350px] flex flex-col gap-2 items-center space-y-4">
         <Textarea
             label="Interest Rate"
             labelPlacement="outside"
