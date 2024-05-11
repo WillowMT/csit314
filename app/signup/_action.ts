@@ -16,6 +16,7 @@ export async function submit(previousState:any, form: FormData) {
     const ceaNumber = form.get('ceaNumber') as string | null
     const agency = form.get('agency') as string | null
     const license = form.get('license') as string | null
+    const role = form.get('role') as string
 
     const userObj = {
         email,
@@ -28,6 +29,7 @@ export async function submit(previousState:any, form: FormData) {
         ceaNumber,
         agency,
         license,
+        role
     }
     
 

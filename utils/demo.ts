@@ -1,7 +1,8 @@
 
 import { faker } from '@faker-js/faker';
+import { encryptPassword } from './hash';
 
-export function createRandomUser():UserInterface {
+export function createRandomUser(): UserInterface {
     return {
         id: faker.string.uuid(),
         profileId: faker.string.uuid(),
@@ -18,7 +19,8 @@ export function createRandomUser():UserInterface {
             role: faker.helpers.arrayElement(['USER', 'AGENT', 'ADMIN']),
             activated: faker.helpers.arrayElement([true, false])
         } as { role: string, activated: boolean } | undefined,
-        activated: faker.helpers.arrayElement([true, false])
+        activated: faker.helpers.arrayElement([true, false]),
+        publicId: faker.string.nanoid()
     };
 }
 
@@ -75,14 +77,17 @@ type UserInterface = {
     agency?: string | undefined;
     license?: string | undefined;
     profile?: {
-        role:string, activated:boolean
+        role: string, activated: boolean
     } | undefined;
     activated?: boolean;
+    publicId?: string;
 }
 
 type UserProfileInterface = ReturnType<typeof createRandomUserProfile>
 
 type PropertyInterface = ReturnType<typeof createRandomProperty>
+
+type RatingsAndReviewsInterface = ReturnType<typeof createRatingsAndReviews>
 
 
 // generate demo data
@@ -93,7 +98,7 @@ const userProfiles = [...new Array(5)].map(() => createRandomUserProfile());
 
 const properties = [...new Array(20)].map(() => createRandomProperty());
 
-const ratingsAndReviews = []
+const ratingsAndReviews = [...new Array(20)].map(() => createRatingsAndReviews());
 
 const shortlist = []
 
@@ -102,7 +107,7 @@ const listing = []
 const ownership = []
 
 export const demo = {
-    user, userProfiles, properties
+    user, userProfiles, properties,ratingsAndReviews
 }
 
 export type {

@@ -16,14 +16,14 @@ export class SearchAgentController {
 //#53, #40
 export class RateAgentController {
     // create review for agent x
-    async rate(email: string, rating: number, review: string) {
+    async rate(email: string, rating: number, review?: string) {
         return await userEntity.createRating({ email, rating, review })
     }
 }
 //#54, #41
 export class ReviewAgentController {
     // create review for agent x
-    async writeReview(email: string, rating: number, review: string) {
+    async writeReview(email: string, rating?: number, review?: string) {
         return await userEntity.createRating({ email, rating, review })
     }
 }

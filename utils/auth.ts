@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import prisma from "./prisma";
 import { User } from "./entity";
 import { redirect } from "next/navigation";
-import {loginUser, create} from "./lib"
+import { loginUser, create } from "./lib"
 
 export async function getSession(shouldSleep = true) {
     const session = await getIronSession<SessionData>(cookies(), sessionOptions);
@@ -34,7 +34,7 @@ export async function logout() {
     redirect("/")
 }
 
-export async function login(prevState:any, formData: FormData) {
+export async function login(prevState: any, formData: FormData) {
 
     const session = await getSession();
 
@@ -44,7 +44,7 @@ export async function login(prevState:any, formData: FormData) {
     const password = formData.get("password") as string;
 
 
-    const result = await loginUser(email,password, role.toUpperCase())
+    const result = await loginUser(email, password, role.toUpperCase())
 
     if (result.error) {
         return result;
@@ -60,10 +60,11 @@ export async function login(prevState:any, formData: FormData) {
             lastName: true,
             country: true,
             phoneNumber: true,
+            profile: true
         }
     })
 
-    
+
 
     session.email = userInfo?.email || ""
     session.firstName = userInfo?.firstName || ""
@@ -71,6 +72,8 @@ export async function login(prevState:any, formData: FormData) {
     session.country = userInfo?.country || ""
     session.phoneNumber = userInfo?.phoneNumber || ""
     session.isLoggedIn = true;
+    session.role = userInfo?.profile?.role || ""
+    session.activated = userInfo?.profile?.activated || true
     await session.save();
     redirect("/")
 }

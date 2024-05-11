@@ -4,14 +4,15 @@ import {
     Tabs, Tab, Card, CardBody, Button, Link, Input, Select, SelectItem
 } from "@nextui-org/react";
 import { useFormState, useFormStatus } from "react-dom";
-import { submit } from "./_action";
 import { countries } from '@/utils/countries'
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast'
+import { UserProfileInterface } from "@/utils/demo";
+import { createUser } from "../admin/useraccount/_action";
 
 
-export default function Form() {
-    const [state, formAction] = useFormState(submit, null);
+export default function Form({ roles }: { roles: UserProfileInterface[] }) {
+    const [state, formAction] = useFormState(createUser, null);
     const [country, setCountry] = useState('Singapore')
     const [dialCode, setDialCode] = useState('+65')
 
@@ -24,15 +25,10 @@ export default function Form() {
 
 
     useEffect(() => {
-        if (!state?.message) return
+        if (!state) return
 
-        if (state?.success) {
-            toast.success('Account created successfully')
-        }
+        toast.success('Account created successfully')
 
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
-        }
     }, [state])
 
 
@@ -99,6 +95,23 @@ export default function Form() {
                                         placeholder="Phone Number"
                                         startContent={<span className=" text-gray-500 text-sm">{dialCode}</span>}
                                     />
+                                    <Select
+                                        isRequired
+                                        name="role"
+                                        className="mb-4 max-w-[400px] mx-auto"
+                                        defaultSelectedKeys={['BUYER']}
+                                        label="Role"
+                                        labelPlacement={'outside'}
+                                        placeholder="Role"
+                                    >
+                                        {//Todo: Link to UserProfile table through a controller, viewUserProfileController, and use its getUserProfile() function??
+                                            //Make sure in the prisma tables BUYER, SELLER, SYSADMIN, REALESTATEAGENT always exists...
+                                            roles.map((item) => (
+                                                <SelectItem key={item.role} value={item.role}>
+                                                    {item.role}
+                                                </SelectItem>
+                                            ))}
+                                    </Select>
                                     <Input
                                         isRequired
                                         name="password"
@@ -108,6 +121,8 @@ export default function Form() {
                                         labelPlacement={'outside'}
                                         placeholder="Password"
                                     />
+
+
                                     <Input
                                         isRequired
                                         name="passwordConfirm"

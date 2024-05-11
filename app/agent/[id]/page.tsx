@@ -1,8 +1,17 @@
-import PropertyBox from "../user-acc/property-box";
 import Navigation from "@/components/nav";
 import './agent_acc_style.css';
+import { demo } from "@/utils/demo";
+import PropertyCard from "@/app/account/property-card";
+import { getSession } from "@/utils/auth";
 
-export default function AgentAccountPage() {
+export default async function Page({params}:{params:{id:string}}) {
+
+    const session = await getSession()
+
+    if (!session) {
+        return <div>Access Denied</div>
+    }
+
 
     return (
         <div>
@@ -15,7 +24,7 @@ export default function AgentAccountPage() {
 
             <section className="acc">
                 <img src={`https://api.dicebear.com/8.x/initials/svg?seed=${"Jhon Doe"}`} className='profile-pic' />
-                <p className="name">First Name Last Name</p>
+                <p className="name">{session.firstName} {session.lastName}</p>
                 <div className="contact-info">
                     <p className="bx bx-phone"></p>
                     <p className="ph-no">+65-123-456</p>
@@ -38,7 +47,17 @@ export default function AgentAccountPage() {
                         <div className="tab-panel" id="tab1-panel">
                             {/* Content for My Listings tab */}
                             <div className="listing-content">
-                                <PropertyBox></PropertyBox>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {/* My Listings Content */}
+                                    {
+                                        demo.properties.map((property, i) => {
+                                            if (i % 2 === 0) return
+                                            return (
+                                                <PropertyCard key={i} property={property} role={"agent"} />
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                         
@@ -60,7 +79,7 @@ export default function AgentAccountPage() {
                                             <span className="rating-counter"></span>
                                         </div>
                                     </div>
-                                    <textarea name="review" id="review" placeholder="Review this agent..."></textarea>
+                                    <textarea name="review" id="review" placeholder="Review this session..."></textarea>
                                     <button type="submit" className="submit">Submit</button>
                                 </form>
                             </div>

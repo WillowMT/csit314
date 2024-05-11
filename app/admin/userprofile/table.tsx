@@ -18,7 +18,7 @@ export default function UserTable({ userProfiles }: { userProfiles: UserProfileI
 
 
     return (
-        <div className=" max-w-[400px]">
+        <div className=" max-w-[500px]">
             <Table aria-label="Example table with custom cells">
                 <TableHeader>
                     {

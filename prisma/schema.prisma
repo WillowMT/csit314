@@ -26,32 +26,34 @@ model User {
   agency          String?             @default("")
   license         String?             @default("")
   activated       Boolean             @default(true)
+  publicId        String              @unique @default(cuid())
   ratingAndReview RatingsAndReviews[]
   shortList       Shortlist[]
   listing         Listing[]
   ownership       Ownership[]
-  profile UserProfile? @relation(fields: [profileId], references: [id])
+  profile         UserProfile?        @relation(fields: [profileId], references: [id])
 }
 
 model Property {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  address     String
-  description String
-  onSale      Boolean     @default(true)
-  views       Int?        @default(0)
-  bedroom     Int
-  bathroom    Int
-  leaseYear   Int
-  squareFt    Int
-  builtYear   Int
-  price       Int
-  propertyType String @default("HDB")
-  imageUrl    String
-  activated Boolean @default(true)
-  shortList   Shortlist[]
-  listing     Listing[]
-  ownership   Ownership[]
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  address      String
+  description  String
+  onSale       Boolean     @default(true)
+  views        Int?        @default(0)
+  bedroom      Int
+  bathroom     Int
+  leaseYear    Int
+  squareFt     Int
+  builtYear    Int
+  price        Int
+  propertyType String      @default("HDB")
+  imageUrl     String
+  activated    Boolean     @default(true)
+  publicId     String      @unique @default(cuid())
+  shortList    Shortlist[]
+  listing      Listing[]
+  ownership    Ownership[]
 }
 
 model RatingsAndReviews {
@@ -69,22 +71,23 @@ model Shortlist {
   propertyId String    @db.ObjectId
   user       User?     @relation(fields: [userId], references: [id])
   property   Property? @relation(fields: [propertyId], references: [id])
-  @@unique([userId,propertyId])
+
+  @@unique([userId, propertyId])
 }
 
 // agent
 model Listing {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   userId     String?   @db.ObjectId
-  propertyId String    @db.ObjectId @unique
+  propertyId String    @unique @db.ObjectId
   user       User?     @relation(fields: [userId], references: [id])
   property   Property? @relation(fields: [propertyId], references: [id])
 }
 
 model Ownership {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String?    @db.ObjectId
-  propertyId String    @db.ObjectId @unique
+  userId     String?   @db.ObjectId
+  propertyId String    @unique @db.ObjectId
   user       User?     @relation(fields: [userId], references: [id])
   property   Property? @relation(fields: [propertyId], references: [id])
 }
@@ -93,5 +96,5 @@ model UserProfile {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   activated Boolean
   role      String  @unique
-  user User[]
+  user      User[]
 }

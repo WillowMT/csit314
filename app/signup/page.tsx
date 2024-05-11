@@ -1,8 +1,12 @@
+import { ViewUserProfileController } from "@/utils/controllers/userProfile";
 import Form from "./form";
 import Link from "next/link";
 
 
 export default async function Page() {
+
+    const viewUserProfileController = new ViewUserProfileController()
+    const roles = await viewUserProfileController.getUserProfile()
 
     return (
         <div className="">
@@ -15,7 +19,7 @@ export default async function Page() {
                 <h1 className="  align-middle">Sign Up</h1>
             </div>
             <p className=" text-center text-xs sm:text-sm mb-4 text-black/60">Choose the role you want to Sign up as</p>
-            <Form />
+            <Form roles={roles} />
         </div>
     );
 }

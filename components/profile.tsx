@@ -53,19 +53,14 @@ export default function Profile({ email, firstName }: { email: string, firstName
                             }}
                         />
                     </DropdownItem>
-                    <DropdownItem key="user-acc">
-                        <Link href={'/user-acc'}>
-                            User Account
-                        </Link>
-                    </DropdownItem>
-                    <DropdownItem key="agent-acc">
-                        <Link href={'/agent-acc'}>
-                            Agent Account
-                        </Link>
-                    </DropdownItem>
-                    <DropdownItem key="settings">
+                    <DropdownItem key="">
                         <Link href={'/account'}>
-                            Account Settings
+                            Account
+                        </Link>
+                    </DropdownItem>
+                    <DropdownItem key="">
+                        <Link href={'/account/edit'}>
+                            Edit
                         </Link>
                     </DropdownItem>
                     <DropdownItem

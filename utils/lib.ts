@@ -12,7 +12,8 @@ export const defaultSession: SessionData = {
     lastName: "",
     role: "",
     country: "",
-    phoneNumber: ""
+    phoneNumber: "",
+    activated: true
 };
 
 export const sessionOptions: SessionOptions = {

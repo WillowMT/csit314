@@ -67,7 +67,7 @@ export default function UserTable({ users, roles }: { users: UserInterface[], ro
                                     <TableCell>{user.ceaNumber}</TableCell>
                                     <TableCell>{user.agency}</TableCell>
                                     <TableCell>{user.license}</TableCell>
-                                    <TableCell>{user.activated ? <Chip color="success">Active</Chip> : <Chip color="danger">Suspended</Chip>}</TableCell>
+                                    <TableCell>{user.activated ? <Chip className="text-white" color="success">Active</Chip> : <Chip className="text-white" color="danger">Suspended</Chip>}</TableCell>
                                     <TableCell className=" space-x-4">
                                         <div className="flex place-content-center place-items-center space-x-2">
                                             <EditUserAccount user={user} />

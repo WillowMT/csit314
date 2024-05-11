@@ -11,17 +11,11 @@ import toast from 'react-hot-toast'
 export default function PropertyForm() {
     const [state, formAction] = useFormState(submit, null);
 
-    
+
     useEffect(() => {
-        if (!state?.message) return
+        if (!state) return
 
-        if (state?.success) {
-            toast.success('Property created successfully')
-        }
-
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
-        }
+        toast.success('Property created successfully')
     }, [state])
 
 
@@ -29,7 +23,7 @@ export default function PropertyForm() {
 
         <form action={formAction} className="mt-14 mb-8">
             <div className=" bg-brand-100 mx-4 my-8 py-8 rounded-md">
-                    <h1 className="text-center text-3xl mb-20">Property Registration</h1>
+                <h1 className="text-center text-3xl mb-20">Property Registration</h1>
                 <div className=" grid md:grid-cols-2">
                     <Input
                         isRequired
@@ -38,7 +32,7 @@ export default function PropertyForm() {
                         type="string"
                         label="Name"
                         labelPlacement={'outside'}
-                        placeholder="Name"    
+                        placeholder="Name"
                     />
                     <Input
                         isRequired
@@ -47,7 +41,7 @@ export default function PropertyForm() {
                         type="string"
                         label="Address"
                         labelPlacement={'outside'}
-                        placeholder="Address"    
+                        placeholder="Address"
                     />
                     <Input
                         isRequired
@@ -56,7 +50,7 @@ export default function PropertyForm() {
                         type="string"
                         label="Description"
                         labelPlacement={'outside'}
-                        placeholder="Description"    
+                        placeholder="Description"
                     />
                     <Input
                         isRequired
@@ -65,7 +59,7 @@ export default function PropertyForm() {
                         type="number"
                         label="Bedroom"
                         labelPlacement={'outside'}
-                        placeholder="Bedroom"    
+                        placeholder="Bedroom"
                     />
                     <Input
                         isRequired
@@ -74,10 +68,10 @@ export default function PropertyForm() {
                         type="number"
                         label="Bathroom"
                         labelPlacement={'outside'}
-                        placeholder="Bathroom"    
+                        placeholder="Bathroom"
                     />
 
-                    
+
                     <Input
                         isRequired
                         name="leaseYear"
@@ -85,7 +79,7 @@ export default function PropertyForm() {
                         type="number"
                         label="Lease Year"
                         labelPlacement={'outside'}
-                        placeholder="Lease Year"    
+                        placeholder="Lease Year"
                     />
                     <Input
                         isRequired
@@ -94,7 +88,7 @@ export default function PropertyForm() {
                         type="number"
                         label="Square Feet"
                         labelPlacement={'outside'}
-                        placeholder="Square Feet"    
+                        placeholder="Square Feet"
                     />
                     <Input
                         isRequired
@@ -103,7 +97,7 @@ export default function PropertyForm() {
                         type="number"
                         label="Built Year"
                         labelPlacement={'outside'}
-                        placeholder="Built Year"    
+                        placeholder="Built Year"
                     />
                     <Input
                         isRequired
@@ -112,7 +106,16 @@ export default function PropertyForm() {
                         type="number"
                         label="Price"
                         labelPlacement={'outside'}
-                        placeholder="Price"    
+                        placeholder="Price"
+                    />
+                    <Input
+                        isRequired
+                        name="propertyType"
+                        className="mb-8 max-w-[400px] mx-auto"
+                        type="string"
+                        label="Property Type"
+                        labelPlacement={'outside'}
+                        placeholder="Property Type"
                     />
                     <Input
                         isRequired
@@ -121,7 +124,7 @@ export default function PropertyForm() {
                         type="string"
                         label="Image Url"
                         labelPlacement={'outside'}
-                        placeholder="Image Url"    
+                        placeholder="Image Url"
                     />
                 </div>
             </div>

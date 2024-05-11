@@ -120,7 +120,8 @@ export class User {
                         activated: true
                     }
                 },
-                activated: true
+                activated: true,
+                publicId: true
             }
         }) as UserInterface[]
     }
@@ -172,16 +173,15 @@ export class User {
     // or just make it a duplicate function lol
     //#53
     async createRating({ email, rating, review }: {
-        email: string, rating: number, review: string
+        email: string, rating?: number, review?: string
     }) {
         const id = await this.getUserId({ email })
-        if (!id) return null
 
         return await prisma.ratingsAndReviews.create({
             data: {
-                userId: id,
-                rating,
-                review
+                userId: id || null,
+                rating: rating || null,
+                review: review || ""
             }
         })
     }

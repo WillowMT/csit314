@@ -11,6 +11,7 @@ export interface SessionData {
     agency?: string;
     jobDesignation?: string;
     isLoggedIn: boolean;
+    activated: boolean;
 }
 
 export interface UserFormData {
