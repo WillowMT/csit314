@@ -63,7 +63,7 @@ export default function PropertyBox() {
             </div>
             <div className='flex justify-start pr-3 pt-2'>
               <p className='text-start text-xs pl-3 pb-3'>{item.shortlist} <i className='bx bxs-bookmark-star'></i></p>
-              <p className='text-start text-xs pl-3 pb-3'>{item.view} <p className='bx bx-show-alt'></p></p>
+              <p className='text-start text-xs pl-3 pb-3'>{item.view} <i className='bx bx-show-alt'></i></p>
             </div>
           </CardBody>
           <Divider className="my-0" />

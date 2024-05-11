@@ -2,7 +2,7 @@ import Navigation from "@/components/nav";
 import './style.css';
 import React from "react";
 import AgentCard from './agentCard';
-import {Divider, Chip, Card, CardHeader, CardBody, CardFooter, Input, Textarea} from "@nextui-org/react";
+import {Divider, Chip, Card, CardHeader, Image} from "@nextui-org/react";
 import ShortList from "./shortlistIcon";
 import MortageCal from "./mortgageCal";
 
@@ -13,7 +13,7 @@ const YourPage = () => {
             <Navigation />
             <div className="flex justify-center w-full">
                 <div className="flex p-3 justify-left w-full">
-                        <div className="image"><img src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 1" /></div>
+                        <div className="image"><Image src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 1"></Image></div>
                         <div className="w-[300px]"></div>
                         <Card className="py-4 w-[400px]">
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
