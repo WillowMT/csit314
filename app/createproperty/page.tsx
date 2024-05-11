@@ -1,6 +1,7 @@
 import Link from "next/link";
 import './createProperty.css';
 
+// create property by agent #60 sprint 3
 // create property listings from agent side
 export default function createPropertyListings() {
     return (

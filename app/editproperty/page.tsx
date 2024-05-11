@@ -1,6 +1,7 @@
 import Link from "next/link";
 import './editProperty.css';
 
+// editing property by agnet #62 sprint 4
 // edit property info from agent side
 export default function editPropertyListings() {
     return (
