@@ -17,14 +17,14 @@ export class BuyerViewSoldPropertyController {
         return await propertyEntity.getSoldProperty()
     }
 }
-//buyer search sold property
+//#37 buyer search sold property
 export class SoldPropertySearchController {
     async searchSoldProperty(location:string) {    
         return await propertyEntity.getSoldPropertybyLoc({ address: location })
     }
 
 }
-//buyer search on sale property
+//#35 buyer search on sale property
 export class OnSalePropertySearchController {
     async searchOnSaleProperty(location:string) {
         return await propertyEntity.getOnSalePropertybyLoc({ address: location })

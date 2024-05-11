@@ -213,14 +213,112 @@ export class User {
     }
     //#73
     async suspendUserAccount({ email }: { email: string }) {
-        return await prisma.user.update({
+        const agentProfile = await prisma.userProfile.findFirst({
+            where: {
+                role: "AGENT"
+            },
+            select: {
+                id: true
+            }
+        });
+    
+        const sellerProfile = await prisma.userProfile.findFirst({
+            where: {
+                role: "SELLER"
+            },
+            select: {
+                id: true
+            }
+        });
+    
+        const agentProfileId = agentProfile ? agentProfile.id : null;
+        const sellerProfileId = sellerProfile ? sellerProfile.id : null;
+    
+        const user = await prisma.user.findFirst({
             where: {
                 email: email
             },
-            data: {
-                activated: false
+            select: {
+                id: true,
+                profileId: true
             }
-        })
+        });
+    
+        const userProfileId = user ? user.profileId : null;
+    
+        if (userProfileId === agentProfileId) {
+            // Logic for AGENT user profile
+            const userId = user ? user.id : null;
+            const listings = await prisma.listing.findMany({
+                where: {
+                    userId: userId
+                },
+                select: {
+                    propertyId: true
+                }
+            });
+            const propertyIds = listings.map(listing => listing.propertyId);
+            const deactivateListedProperties = await prisma.property.updateMany({
+                where: {
+                    id: {
+                        in: propertyIds
+                    }
+                },
+                data: {
+                    activated: false
+                }
+            });
+            const deactivateAgent = await prisma.user.update({
+                where: {
+                    email: email
+                },
+                data: {
+                    activated: false
+                }
+            });
+            return { deactivateListedProperties, deactivateAgent };
+        } else if (userProfileId === sellerProfileId) {
+            // Logic for SELLER user profile
+            const ownerId = user ? user.id : null;
+            const ownedproperties = await prisma.ownership.findMany({
+                where: {
+                    userId: ownerId
+                },
+                select: {
+                    propertyId: true
+                }
+            });
+            const propertyIds = ownedproperties.map(property => property.propertyId);
+            const deactivateOwnedProperties = await prisma.property.updateMany({
+                where: {
+                    id: {
+                        in: propertyIds
+                    }
+                },
+                data: {
+                    activated: false
+                }
+            });
+            const deactivateSeller = await prisma.user.update({
+                where: {
+                    email: email
+                },
+                data: {
+                    activated: false
+                }
+            });
+            return { deactivateOwnedProperties, deactivateSeller };
+        } else {
+            // Default case for other user profiles
+            return await prisma.user.update({
+                where: {
+                    email: email
+                },
+                data: {
+                    activated: false
+                }
+            });
+        }
     }
     //seller's owned properties #52 (previously getCreatedProperty ,f-ing confusing...)
     async getOwnedProperty({ email }: { email: string }) {
