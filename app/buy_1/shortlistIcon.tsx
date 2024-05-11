@@ -1,20 +1,22 @@
 'use client'
 import React from "react";
-import {Button, Image} from "@nextui-org/react";
+import {Button, Tooltip} from "@nextui-org/react";
 
 export default function ShortList() {
   const [isFollowed, setIsFollowed] = React.useState(false);
 
   return (
+    <Tooltip showArrow={true} content={isFollowed ? "Remove from shortlist":"Add to shortlist"}>
         <Button
-          className={isFollowed ? " text-foreground border-default-200" : ""}
-          color="warning"
-          radius="md"
+          radius="sm"
           size="sm"
-          variant={isFollowed ? "solid" : "bordered"}
+          variant="solid"
           onPress={() => setIsFollowed(!isFollowed)}
         >
-            <Image className=" size-6" src="https://icons.veryicon.com/png/o/object/material-design-icons/add-49.png"></Image>
+          <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
+            <p>{isFollowed ? <i className='bx bxs-bookmark-star text-xl'></i> : <i className='bx bx-bookmark text-xl' ></i>}</p>
         </Button>
+    </Tooltip>
+        
   );
 }

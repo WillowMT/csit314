@@ -10,6 +10,7 @@ export default function PropertyBox() {
       img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
       type: "HDB",
       shortlist: "123",
+      view: "999",
       link: "buy_1",
       rea_name: "Agent Johnson",
       rea_avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
@@ -21,6 +22,7 @@ export default function PropertyBox() {
       img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
       type: "HDB",
       shortlist: "123",
+      view: "999",
       rea_name: "Jonny Wade",
       rea_avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
       on_sale: false,
@@ -31,6 +33,7 @@ export default function PropertyBox() {
       img: "https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912",
       type: "HDB",
       shortlist: "123",
+      view: "999",
       rea_name: "John Witch",
       rea_avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
       on_sale: true,
@@ -41,6 +44,7 @@ export default function PropertyBox() {
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
       {list.map((item, index) => (
         <Card shadow="sm" key={index} as={Link} href={item.link} isPressable>
+          <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
           <CardBody className="overflow-visible p-0">
             <Image
               shadow="sm"
@@ -50,14 +54,17 @@ export default function PropertyBox() {
               className="w-full object-fill h-[200px]"
               src={item.img}
             />
-            <div className='flex w-full justify-between'>
+            <div className='flex w-full justify-between pt-2 pr-2'>
             <b className='pl-3 text-large'>{item.title}</b>
-            <Chip color="default" variant="solid" className="text-default-1000 right-2 top-2">{item.type}</Chip>
+            <Chip color="default" variant="solid" className="text-default-1000">{item.type}</Chip>
             </div>
             <div className='flex w-full justify-start pl-3'>
               <span>{item.address}</span>
             </div>
-            <p className='w-full text-start text-xs pl-3 pb-3'>{item.shortlist} shortlist</p>
+            <div className='flex justify-start pr-3 pt-2'>
+              <p className='text-start text-xs pl-3 pb-3'>{item.shortlist} <i className='bx bxs-bookmark-star'></i></p>
+              <p className='text-start text-xs pl-3 pb-3'>{item.view} <i className='bx bx-show-alt'></i></p>
+            </div>
           </CardBody>
           <Divider className="my-0" />
           <CardFooter className="pb-1 h-12 flex-row text-small place-content-start bg-brand-200 rounded-none">

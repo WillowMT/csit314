@@ -2,29 +2,38 @@ import Navigation from "@/components/nav";
 import './style.css';
 import React from "react";
 import AgentCard from './agentCard';
-import {Divider, Chip, Checkbox} from "@nextui-org/react";
-import {PlusIcon} from './PlusIcon.jsx';
+import {Divider, Chip, Card, CardHeader, Image} from "@nextui-org/react";
+import ShortList from "./shortlistIcon";
+import MortageCal from "./mortgageCal";
 
 const YourPage = () => {
 
     return(
         <div>
             <Navigation />
-            <div className="image_layout">
-                <div className="image_box">
-                    <div className="image"><img src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 1" /></div>
-                    <div className="image"><img src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg' alt="image 2" /></div>
-                    <div className="image"><img src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 3" /></div>
-                    <div className="image"><img src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 4" /></div>
-                    <div className="image"><img src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 5" /></div>
-                    <div className="image"><img src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 5" /></div>
-                    <div className="image"><img src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 5" /></div>
+            <div className="flex justify-center w-full">
+                <div className="flex p-3 justify-left w-full">
+                        <div className="image"><Image src='https://www.bankrate.com/2023/06/12125257/buying-a-house-worth-it.jpg?auto=webp&optimize=high&crop=16:9&width=912' alt="image 1"></Image></div>
+                        <div className="w-[300px]"></div>
+                        <Card className="py-4 w-[400px]">
+                        <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
+                            <p className="text-medium font-bold">Mortgage Calculator</p>
+                            <MortageCal></MortageCal>
+                        </CardHeader>
+                        </Card>
+                        
                 </div>
             </div>
-                <div className=" flex justify-center">
-                    <div className="w-[1300px]">
+            
+                <div className=" flex justify-left pl-4">
+                    <div className="w-full">
                         <div className="space-y-1">
-                            <h4 className="text-3xl font-bold pl-4">Property 1</h4>
+                            <div className="flex flex-row">
+                                <h4 className="text-3xl font-bold pl-4 pr-3">Property 1</h4>
+                                
+                                <ShortList></ShortList>
+                            </div>
+                            
                             <p className="text-large pl-4">123 Figuenrter Street, Gedasg, 1235</p>
                         </div>
                         <br></br>
@@ -60,10 +69,27 @@ const YourPage = () => {
                             <div className="pl-4">
                                 <AgentCard></AgentCard>
                             </div>
-                        <Divider className="my-5" />
-                        <div className="pl-4">
-                            <Checkbox icon={<PlusIcon size={undefined} height={undefined} width={undefined}></PlusIcon>} color="warning">Add to shortlist</Checkbox>
+                        <Divider className="my-3" />
+                        <div className="text-medium pb-2 pl-4">
+                            <h1>Description</h1>
+                            <div className="pl-3">
+                                <p>* 2.5-storey gem bathed in natural light with unique skylight.</p>
+
+                                <p>* 5 bedrooms + helper's room for ultimate comfort.</p>
+
+                                <p>* Unlike most Inter-Terrace, this house is bright and breezy, with Skylight bathes the home in natural light around the stairs.</p>
+
+                                <p>* Modernised bathrooms for a touch of luxury.</p>
+
+                                <p>* Excellent Connectivity: Just an apprx. 2 mins walk to the nearest bus-stop, and not forgetting the convenient access to NEX or Woodleigh mall, amenities, and Woodleigh or Serangoon MRT stations, Bus-Interchange,
+                                Various Expressway like CTE, PIE, KPE.</p>
+
+                                <p>Prime Location for Families & Investors:
+                                <br></br>- Top local schools nearby (Yangzheng Primary, St. Gabriel's Primary & Secondary, Maris Stella High School, Zhonghua Secondary, Nanyang JC, Raffles Institution, Raffles Girls' Secondary and More)
+                                <br></br>- International schools like Australian Int'l School, Stamford American School, International French School, NEXUS, etc</p>
+                            </div>
                         </div>
+                        <Divider className="my-3" />
                     </div>
                 </div>
         </div>
