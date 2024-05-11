@@ -14,7 +14,7 @@ export default function ShortList() {
           onPress={() => setIsFollowed(!isFollowed)}
         >
           <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
-            <p>{isFollowed ? <i className='bx bxs-bookmark-star text-xl'></i> : <i className='bx bx-bookmark text-xl' ></i>}</p>
+            <p>{isFollowed ? <p className='bx bxs-bookmark-star text-xl'></p> : <p className='bx bx-bookmark text-xl' ></p>}</p>
         </Button>
     </Tooltip>
         
