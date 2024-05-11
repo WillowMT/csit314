@@ -1,6 +1,6 @@
 import Navigation from "@/components/nav";
 import Link from "next/link";
-import Searchbar from "../searchagentproperty/page";
+import Searchbar from "../searchcreatedproperties/page";
 import './agent.css';
 import { demo } from "@/utils/demo";
 import PropertyCard from "./property-card";

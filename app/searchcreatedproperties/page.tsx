@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+//seacrh property for agent #64 sprint 4
 //search property by location from agent side
 export default function inputSearchProperty() {
     return (

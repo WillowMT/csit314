@@ -37,7 +37,7 @@ const removeProperty = (id) => {
   const updatedProperties = removeProperty(propertyIdToRemove);
   console.log(updatedProperties); */
 
-export default async function Page() {
+export default async function removePropertyListing() {
   return(
     <div>
       Remove property listing page.
