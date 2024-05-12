@@ -1,4 +1,5 @@
 'use client'
+
 import React from "react";
 import {
     Card, CardBody, Button, Link, Input, Select, SelectItem
@@ -15,11 +16,12 @@ export default function Form() {
         <div className="flex w-full flex-col my-4 py-8">
             <Card className="mx-4" >
                 <CardBody className="">
+                    <form action={async (e) => {
+                        const { success } = await login(e)
+                        if (!success) {
+                            toast.error('Login Failed')
+                        }
 
-                    <form action={(e) => {
-                        login(e).catch((err: Error) => {
-                            toast.error(err.message)
-                        })
                     }} className="w-full px-4 py-[7rem]">
                         <div className="grid grid-cols-1 gap-4">
                             <div className=" space-y-[4rem]">
