@@ -5,6 +5,7 @@ import { encryptPassword } from '@/utils/hash'
 
 import prisma from "@/utils/prisma"
 import { revalidatePath } from "next/cache"
+import { redirect } from 'next/navigation'
 
 //showdis
 export async function createUser(form:FormData) {
@@ -75,4 +76,10 @@ export async function editUser(prev:any, formData: FormData) {
     const editAccountInfoController = new EditAccountInfoController()
     return await editAccountInfoController.saveInfoChange({firstName, lastName, phoneNumber, email, agency, license, ceaNumber})
 
+}
+
+
+export async function push(form:FormData) {
+    const search = form.get('search') as string
+    redirect(`/admin/useraccount/${search}`)
 }

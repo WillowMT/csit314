@@ -2,26 +2,29 @@
 import React from "react";
 import { Button, Tooltip } from "@nextui-org/react";
 import toast from "react-hot-toast";
-import { hello } from "./action";
+import { shortlist } from "./action";
 
-export default function ListingButton() {
-  const [isFollowed, setIsFollowed] = React.useState(false);
+export default function ListingButton({propertyId}: {propertyId: string}) {
 
   return (
-    <Tooltip showArrow={true} content={isFollowed ? "Remove from shortlist" : "Add to shortlist"}>
+    <Tooltip showArrow={true} content={"Add to shortlist"}>
       <Button
         radius="sm"
         size="sm"
         color="secondary"
-        variant={isFollowed ? "solid" : "flat"}
+        variant={"flat"}
         isIconOnly
         onPress={async () => {
-          setIsFollowed(!isFollowed)
-          hello()
-          toast.success(isFollowed ? "Removed from shortlist" : "Added to shortlist")
+          const { success, message } = await shortlist(propertyId)
+          if (success) {
+            toast.success('Property added to shortlist')
+          }
+          else {
+            toast.error(message)
+          }
         }}
       >
-        <BookmarkIcon isFollowed={isFollowed} />
+        <BookmarkIcon isFollowed={false} />
       </Button>
     </Tooltip>
 

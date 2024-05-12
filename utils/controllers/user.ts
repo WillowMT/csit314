@@ -13,7 +13,7 @@ export class EditAccountInfoController {
 //#70 
 export class CreateUserAccController {
     async createUserAccount(user: UserInterface) {
-        const usr = await userEntity.createUserAccount(user)
+        return await userEntity.createUserAccount(user)
 
     }
 }
@@ -34,7 +34,7 @@ export class UserAccountSearchController {
 // TODO: Implement login functionality
 export class LoginAccountController {
     async getUser(email: string, password: string) {
-
+        return await userEntity.login({ email, password })
     }
 }
 //#36
@@ -51,23 +51,10 @@ export class SuspendUserAccountController {
 }
 //#72 System admin uses this to edit account information
 export class UpdateUserAccountController {
-    async saveInfoChange({ email, firstName, lastName, phoneNumber, ceaNumber, agency, license, country }: {
-        email: string;
-        firstName: string;
-        lastName: string;
-        phoneNumber: string;
-        country: string;
-        ceaNumber?: string | undefined;
-        agency?: string | undefined;
-        license?: string | undefined;
-
-    }) {
+    async saveInfoChange(user:UserInterface) {
         try {
-
-            const usr = await userEntity.setInfo({ email, firstName, lastName, phoneNumber, country, ceaNumber, agency, license })
-
+            const usr = await userEntity.setInfo(user)
             return { success: true, message: "User info updated", user: usr };
-
         } catch (e) {
             return { success: false, message: "Error updating user info", user: null };
         }

@@ -6,6 +6,8 @@ import { useState } from "react";
 import { UserInterface, UserProfileInterface } from "@/utils/demo";
 import AddUserForm from "./add-user-form";
 import SuspendButton from "./suspend-button";
+import { useRouter } from "next/navigation";
+import { push } from "./_action";
 
 const columns = [
     { name: "ID" },
@@ -20,27 +22,15 @@ const columns = [
     { name: "ACTIONS" },
 ];
 
-
-
-export default function UserTable({ users, roles }: { users: UserInterface[], roles: UserProfileInterface[]}) {
-    const [filteredName, setFilteredName] = useState("")
-    const [filteredUsers, setFilteredUsers] = useState(users)
-    
+export default function UserTable({ users, roles }: { users: UserInterface[], roles: UserProfileInterface[] }) {
+    const router = useRouter()
 
     return (
         <div className="">
-            <Input className="my-4 max-w-[400px]" placeholder="Search..." onChange={(e) => {
-                const value = e.target.value
-                setFilteredName(value)
-                if (value === "") {
-                    setFilteredUsers(users)
-                    return
-                }
-                const filtered = users.filter((user) => {
-                    return user.firstName.toLowerCase().includes(value.toLowerCase())
-                })
-                setFilteredUsers(filtered)
-            }} />
+            <form action={push}>
+                <Input name="search" className="my-4 max-w-[400px]" placeholder="Search..." />
+
+            </form>
             <div className=" mb-4">
                 <AddUserForm roles={roles} />
             </div>
@@ -56,7 +46,7 @@ export default function UserTable({ users, roles }: { users: UserInterface[], ro
                 </TableHeader>
                 <TableBody>
                     {
-                        filteredUsers.map((user: UserInterface, i: any) => {
+                        users.map((user: UserInterface, i: any) => {
                             return (
                                 <TableRow key={i}>
                                     <TableCell>{i + 1}</TableCell>

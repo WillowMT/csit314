@@ -4,6 +4,7 @@ import prisma from "@/utils/prisma";
 import { comparePassword } from "@/utils/hash";
 import { getSession } from "@/utils/auth";
 import { redirect } from "next/navigation";
+import { LoginAccountController } from "@/utils/controllers/user";
 
 export async function login(formData: FormData) {
 
@@ -11,28 +12,8 @@ export async function login(formData: FormData) {
         const email = formData.get('email') as string
         const password = formData.get('password') as string
 
-        const user = await prisma.user.findUnique({
-            where: {
-                email
-            },
-            include: {
-                profile: {
-                    select: {
-                        role: true
-                    }
-                }
-            }
-        })
-
-        if (!user) {
-            throw new Error("User not found")
-        }
-
-        const passwordMatch = await comparePassword(password, user.passwordHash)
-
-        if (!passwordMatch) {
-            throw new Error("Password does not match")
-        }
+        const loginAccountController = new LoginAccountController()
+        const user = await loginAccountController.getUser(email, password)
 
         const session = await getSession()
 
@@ -50,11 +31,10 @@ export async function login(formData: FormData) {
         session.ceaNumber = user.ceaNumber || ""
 
         await session.save()
-        // redirect('/buy')
+
         return { success: true }
     } catch (error: any) {
         console.log(error);
-
         return { success: false }
     }
 

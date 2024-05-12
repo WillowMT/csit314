@@ -66,7 +66,7 @@ export default function UserTabs({ role }: { role: string }) {
                             demo.ratingsAndReviews.map((rating, i) => {
                                 return (
                                     <div key={i} className=" space-y-4 mb-4 border-b pb-4">
-                                        <div className=" italic text-slate-600/60">Anonymous</div>
+                                        <div className=" italic text-slate-600/60 text-sm">Anonymous</div>
                                         <Rate disabled defaultValue={rating.rating} />
                                         <div>{rating.review}</div>
                                     </div>

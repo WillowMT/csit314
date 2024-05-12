@@ -24,8 +24,8 @@ export default async function RootLayout({
                                 </div>
                             </div>
                             <nav className=" flex place-items-end space-x-4 text-white">
-                                <Link className=" underline mb-2 hover:cursor-pointer" href={"/admin/useraccount"}>User Accounts</Link>
-                                <Link className=" underline mb-2 hover:cursor-pointer" href={"/admin/userprofile"}>User Profiles</Link>
+                                <Link className=" underline mb-2 hover:cursor-pointer" href={"/admin/useraccount/all"}>User Accounts</Link>
+                                <Link className=" underline mb-2 hover:cursor-pointer" href={"/admin/userprofile/all"}>User Profiles</Link>
                             </nav>
                         </div>
                         <div className="p-4">

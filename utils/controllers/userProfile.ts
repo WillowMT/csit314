@@ -17,7 +17,6 @@ export class UpdateUserProfileController {
     }
 }
 
-// TODO: implement controller
 export class UserProfileSearchController {
     async SearchUserProfile(role:string){
         return await userProfileEntity.matchUserProfile({role})

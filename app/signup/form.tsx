@@ -8,7 +8,7 @@ import { countries } from '@/utils/countries'
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast'
 import { UserProfileInterface } from "@/utils/demo";
-import { createUser } from "../admin/useraccount/_action";
+import { createUser } from "../admin/useraccount/[...slug]/_action";
 
 
 export default function Form({ roles }: { roles: UserProfileInterface[] }) {

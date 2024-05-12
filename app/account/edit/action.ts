@@ -1,11 +1,14 @@
 'use server'
 
 import { EditAccountInfoController } from "@/utils/controllers/user";
+import { getSession } from "@/utils/auth";
 
 
 // form to update user info in db
 
 export async function submit(prev: any, formData: FormData) {
+
+    const session = await getSession()
 
     const email = formData.get("email") as string;
     const firstName = formData.get("firstName") as string;
@@ -17,14 +20,27 @@ export async function submit(prev: any, formData: FormData) {
     
 
     const userObj = {
-        email,firstName, lastName, phoneNumber, ceaNumber, agency, license, country:""
+        email:session.email,firstName, lastName, phoneNumber, ceaNumber, agency, license, country:""
     }
+
+    // console.log(userObj);
+
+    // return
 
     // update user info in db
 
     const editAccountInfoController = new EditAccountInfoController()
 
     const result = await editAccountInfoController.saveInfoChange(userObj)
+
+    session.firstName = firstName
+    session.lastName = lastName
+    session.phoneNumber = phoneNumber
+    session.license = license
+    session.ceaNumber = ceaNumber
+    session.agency = agency
+
+    await session.save()
 
     return result
 

@@ -2,7 +2,7 @@
 import { faker } from '@faker-js/faker';
 import { encryptPassword } from './hash';
 
-export function createRandomUser(): UserInterface {
+export function createRandomUser(role?: string): UserInterface {
     return {
         id: faker.string.uuid(),
         profileId: faker.string.uuid(),
@@ -16,7 +16,7 @@ export function createRandomUser(): UserInterface {
         agency: faker.company.name() as string | undefined,
         license: faker.string.nanoid() as string | undefined,
         profile: {
-            role: faker.helpers.arrayElement(['USER', 'AGENT', 'ADMIN']),
+            role: role || faker.helpers.arrayElement(['BUYER', 'SELLER', 'AGENT', 'ADMIN']),
             activated: faker.helpers.arrayElement([true, false])
         } as { role: string, activated: boolean } | undefined,
         activated: faker.helpers.arrayElement([true, false]),
@@ -34,10 +34,10 @@ export function createRandomUserProfile() {
 
 export function createRandomProperty() {
     return {
-        id: faker.string.uuid(),
-        name: faker.commerce.productName(),
+        id: faker.string.nanoid(),
+        name: faker.location.secondaryAddress(),
         address: faker.location.streetAddress(),
-        description: faker.commerce.productDescription(),
+        description: faker.lorem.sentence(),
         onSale: faker.helpers.arrayElement([true, false]),
         views: faker.number.int({ min: 100, max: 10000 }),
         bedroom: faker.number.int({ min: 1, max: 4 }),
@@ -81,7 +81,7 @@ type UserInterface = {
     } | undefined;
     activated?: boolean;
     publicId?: string;
-    role?:string
+    role?: string
 }
 
 type UserProfileInterface = ReturnType<typeof createRandomUserProfile>
@@ -108,7 +108,7 @@ const listing = []
 const ownership = []
 
 export const demo = {
-    user, userProfiles, properties,ratingsAndReviews
+    user, userProfiles, properties, ratingsAndReviews
 }
 
 export type {

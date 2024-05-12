@@ -29,7 +29,7 @@ const YourPage = () => {
                             <div className="flex flex-row">
                                 <h4 className="text-3xl font-bold pl-4 pr-3">{property.name}</h4>
 
-                                <ListingButton />
+                                <ListingButton propertyId={property.id} />
                             </div>
 
                             <p className="text-large pl-4">123 Figuenrter Street, Gedasg, 1235</p>
