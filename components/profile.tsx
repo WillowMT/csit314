@@ -70,9 +70,7 @@ export default function Profile({ email, firstName, role }: { email: string, fir
                         color="danger"
                         className=" text-red-500"
                     >
-                        <form action={logout}>
-                            <button type="submit">Logout</button>
-                        </form>
+                        <Link href={"/logout"}>Logout</Link>
                     </DropdownItem>
                 </DropdownSection>
             </DropdownMenu>
