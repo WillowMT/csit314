@@ -10,15 +10,7 @@ import toast from 'react-hot-toast'
 
 export default function Form() {
     const [state, formAction] = useFormState(login, null);
-
-    useEffect(() => {
-        if (!state || !state.error) return;
-
-        if (state.error) {
-            toast.error(state.message)
-        }
-    }, [state])
-
+    
     return (
         <div className="flex w-full flex-col my-4 py-8">
             <Card className="mx-4" >

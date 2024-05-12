@@ -30,7 +30,7 @@ export function sleep(ms: number) {
 
 
 
-export async function loginUser(email: string, password: string, role: string) {
+export async function loginUser(email: string, password: string) {
     // check if user exists
     const user = await prisma.user.findUnique({
         where: {
@@ -39,29 +39,29 @@ export async function loginUser(email: string, password: string, role: string) {
     })
 
     if (!user) {
-        return { error: true, message: "User does not exist" }
+        return null
     }
 
     // check if password matches
     const passwordMatch = await comparePassword(password, user.passwordHash);
 
     if (!passwordMatch) {
-        return { error: true, message: "Password is incorrect" }
+        return null
     }
 
     return {
-        error: false, message: "Login Success!", user: {
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            country: user.country,
-            phoneNumber: user.phoneNumber,
-        }
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        country: user.country,
+        phoneNumber: user.phoneNumber,
+        activated: user.activated
+    
     }
 }
 
 
-export async function create(formObj: UserFormData): Promise<{ success: boolean, message: string }> {
+export async function create(formObj: UserFormData) {
 
     const { email, password, passwordConfirm, firstName, lastName, country, phoneNumber, ceaNumber, agency, license } = formObj;
 
@@ -77,7 +77,7 @@ export async function create(formObj: UserFormData): Promise<{ success: boolean,
     })
 
     if (userExists) {
-        return { success: false, message: "User already exists" }
+        return null
     }
 
     // hash raw password
@@ -97,16 +97,7 @@ export async function create(formObj: UserFormData): Promise<{ success: boolean,
             license,
         }
     })
-
-    // assign default role of USER
-    // await prisma.userProfile.create({
-    //     data: {
-    //         role: "USER",
-    //         activated: true
-    //     }
-    // })
-
-    return { success: true, message: "User created successfully" };
+    return user
 }
 
 export type { SessionData };

@@ -11,6 +11,7 @@ describe("User Controller Test", async () => {
 
     const demoProperty = createRandomProperty()
     let userid:string
+    let firstName = faker.name.firstName()
 
     test("Create User Account Controller Test", async () => {
 
@@ -53,8 +54,6 @@ describe("User Controller Test", async () => {
             phoneNumber: demoUser.phoneNumber,
             role: "USER"
         })
-
-        const firstName = faker.name.firstName()
     
         const updatedUser = await ediAccountInfoController.saveInfoChange({
             email: demoUser.email,
@@ -71,7 +70,7 @@ describe("User Controller Test", async () => {
     test("User Account Search Controller Test", async () => {
 
         const userAccountSearchController = new UserController.UserAccountSearchController()
-        const user = await userAccountSearchController.SearchUserAcount("User")
+        const user = await userAccountSearchController.SearchUserAcount(firstName)
         expect(user).toBeDefined()
         expect(user.length).toBeGreaterThan(0)
     })

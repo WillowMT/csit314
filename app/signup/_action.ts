@@ -34,10 +34,8 @@ export async function submit(previousState:any, form: FormData) {
     
 
     // call user object
-    const {success, message} = await create(userObj)
+    const user = await create(userObj)
 
-
-    revalidatePath('/admin')
-    return {success,message}
+    return user
 
 }

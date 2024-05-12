@@ -130,9 +130,9 @@ p, li, section, button{
     border-right: 2px solid #CCBEAE;
 }
 /* Hide radio buttons */
-input[type="radio"] {
+/* input[type="radio"] {
     display: none;
-}
+} */
 
 /* line */
 .line{
@@ -143,11 +143,11 @@ input[type="radio"] {
 }
 
 /* form starts */
-form{
+/* form{
     width: 600px;
     padding: 1rem;
     background-color: #f0f0f0;
-}
+} */
 .container{
     display: flex;
     justify-content: space-between;
@@ -183,7 +183,7 @@ form{
 	content: "0";
 	transition: all 0.25s ease 0s;	
 }
-.rating-stars label {
+.rating-stars > label {
 	width: 20px;
 	height: 20px;
 	background: #000b;

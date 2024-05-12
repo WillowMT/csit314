@@ -39,15 +39,14 @@ export async function login(prevState: any, formData: FormData) {
     const session = await getSession();
 
     // look for user in db
-    const role = formData.get("role") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
 
-    const result = await loginUser(email, password, role.toUpperCase())
+    const result = await loginUser(email, password)
 
-    if (result.error) {
-        return result;
+    if (!result) {
+        return null;
     }
 
     const userInfo = await prisma.user.findUnique({
@@ -60,7 +59,11 @@ export async function login(prevState: any, formData: FormData) {
             lastName: true,
             country: true,
             phoneNumber: true,
-            profile: true
+            profile: true,
+            agency: true,
+            license:true,
+            activated: true,
+            ceaNumber: true
         }
     })
 
@@ -74,6 +77,11 @@ export async function login(prevState: any, formData: FormData) {
     session.isLoggedIn = true;
     session.role = userInfo?.profile?.role || ""
     session.activated = userInfo?.profile?.activated || true
+    session.agency = userInfo?.agency || ""
+    session.license = userInfo?.license || ""
+    session.ceaNumber = userInfo?.ceaNumber || ""
+    session.activated = userInfo?.activated || true
+    
     await session.save();
     redirect("/")
 }

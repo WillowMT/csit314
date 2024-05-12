@@ -1,10 +1,9 @@
 import { demo } from "@/utils/demo"
 import { PropertyInterface } from "@/utils/demo"
 import { Button, Card, CardBody, Chip } from "@nextui-org/react"
-import EditProperty from "./edit-property"
 
 
-export default function PropertyCard({ property, role }: { property: PropertyInterface, role?: string }) {
+export default function PropertyCardBuyer({ property, role }: { property: PropertyInterface, role?: string }) {
     return (
         <>
             <div className="border w-full m-2 rounded-lg overflow-hidden text-left shadow-md text-sm">
@@ -35,7 +34,6 @@ export default function PropertyCard({ property, role }: { property: PropertyInt
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
                             </svg>
                         </Button>
-                        <EditProperty property={property} />
                         <Button size="sm" color='danger'>Remove</Button>
                     </div>
                 </div>
