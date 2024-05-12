@@ -3,17 +3,15 @@ import React from "react";
 import {
     Tabs, Tab, Card, CardBody, Button, Link, Input, Select, SelectItem
 } from "@nextui-org/react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { countries } from '@/utils/countries'
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast'
 import { UserProfileInterface } from "@/utils/demo";
 import { createUser } from "../admin/useraccount/_action";
-import { signup } from "./_action";
 
 
 export default function Form({ roles }: { roles: UserProfileInterface[] }) {
-    const [state, formAction] = useFormState(createUser, null);
     const [country, setCountry] = useState('Singapore')
     const [dialCode, setDialCode] = useState('+65')
     const [role, setRole] = useState('BUYER')
@@ -26,24 +24,18 @@ export default function Form({ roles }: { roles: UserProfileInterface[] }) {
     }, [country])
 
 
-    useEffect(() => {
-        if (!state) return
-        toast.success('Account created successfully')
-    }, [state])
-
-
     return (
         <div className="flex w-full flex-col">
             <Card className=" p-4 m-4">
                 <CardBody>
                     <form action={
                         async (data) => {
-                            const { success, error } = await signup(data)
+                            const { success, message } = await createUser(data)
                             if (success) {
                                 toast.success('Account created successfully')
                             }
                             else {
-                                toast.error(error)
+                                toast.error(message)
                             }
                         }
                     } className="">
@@ -156,7 +148,7 @@ export default function Form({ roles }: { roles: UserProfileInterface[] }) {
                                     </>
                                 )
                             }
-                            
+
                             <Input
                                 isRequired
                                 name="password"
@@ -171,7 +163,7 @@ export default function Form({ roles }: { roles: UserProfileInterface[] }) {
                                 isRequired
                                 name="passwordConfirm"
                                 className="mb-4 max-w-[400px] mx-auto"
-                                type="passwordConfirm"
+                                type="password"
                                 label="Confirm Password"
                                 labelPlacement={'outside'}
                                 placeholder="Confirm Password"

@@ -8,11 +8,7 @@ import UserTabs from "./tabs";
 
 export default async function Page({params}:{params:{id:string}}) {
 
-    const session = await getSession()
-
-    if (!session) {
-        return <div>Access Denied</div>
-    }
+    const demoUser = demo.user[0]
 
 
     return (
@@ -25,16 +21,16 @@ export default async function Page({params}:{params:{id:string}}) {
             </div>
 
             <section className="acc">
-                <img src={`https://api.dicebear.com/8.x/initials/svg?seed=${session.firstName}`} className='profile-pic' />
-                <p className="name">{session.firstName} {session.lastName} ({session.role})</p>
+                <img src={`https://api.dicebear.com/8.x/initials/svg?seed=${demoUser.firstName}`} className='profile-pic' />
+                <p className="name">{demoUser.firstName} {demoUser.lastName} ({demoUser?.profile?.role})</p>
                 <div className="contact-info">
                     <p className="bx bx-phone"></p>
-                    <p className="ph-no">{session.phoneNumber}</p>
+                    <p className="ph-no">{demoUser.phoneNumber}</p>
                     <p className='bx bxl-gmail'></p>
-                    <p className="email">{session.email}</p>
+                    <p className="email">{demoUser.email}</p>
                 </div>
 
-                <UserTabs role={session.role} />
+                <UserTabs role={demoUser?.profile?.role || "BUYER"} />
 
             </section>
         </div>

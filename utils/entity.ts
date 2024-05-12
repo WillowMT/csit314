@@ -62,15 +62,11 @@ export class User {
     }
     //showdis
     // # 70 system admin creates new user account
-    async createUserAccount({
-        email, firstName, lastName, passwordHash, phoneNumber, country, ceaNumber, agency, license, role
-    }: {
-        email: string, firstName: string, lastName: string, passwordHash: string, phoneNumber: string, country: string, ceaNumber?: string, agency?: string, license?: string, role: string
-    }) {
+    async createUserAccount(user:UserInterface) {
         // Attempt to find the userProfile by role
         const profile = await prisma.userProfile.findFirst({
             where: {
-                role: role
+                role: user.role
             },
             select: {
                 id: true  // Select only the ID field
@@ -83,15 +79,15 @@ export class User {
         // Create the user with the potentially null userProfile ID
         return await prisma.user.create({
             data: {
-                email,
-                firstName,
-                lastName,
-                passwordHash,
-                phoneNumber,
-                country,
-                ceaNumber,
-                agency,
-                license,
+                email:user.email,
+                firstName:user.firstName,
+                lastName:user.lastName,
+                passwordHash:user.passwordHash!,
+                phoneNumber:user.phoneNumber,
+                country:user.country!,
+                ceaNumber:user.ceaNumber,
+                agency:user.agency,
+                license:user.license,
                 profileId: profileId
             }
         })

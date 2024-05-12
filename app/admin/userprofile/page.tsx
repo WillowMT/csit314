@@ -2,15 +2,22 @@ import { Input } from "@nextui-org/react"
 import UserTable from "./table"
 import AddUserForm from "./add-user-form"
 import { ViewUserProfileController } from "@/utils/controllers/userProfile"
+import { getSession } from "@/utils/auth"
+import { redirect } from "next/navigation"
 
 export default async function Page() {
 
-    const viewUserProfileController = new ViewUserProfileController()
-    const profiles = await viewUserProfileController.getUserProfile()
+    // check if admin
+    const session = await getSession()
 
-    if (!profiles) {
+    if (!session || session?.role !== 'ADMIN') {
+        redirect('/buy')
         return;
     }
+
+
+    const viewUserProfileController = new ViewUserProfileController()
+    const profiles = await viewUserProfileController.getUserProfile()
 
 
     return (

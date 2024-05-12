@@ -2,8 +2,19 @@
 import { ViewUserAccountController } from "@/utils/controllers/user";
 import UserTable from "./table"
 import { ViewUserProfileController } from "@/utils/controllers/userProfile";
+import { getSession } from "@/utils/auth";
+import { redirect } from "next/navigation";
 
-export default async function Page() {      
+export default async function Page() {    
+    
+    // check if admin
+    const session = await getSession()
+
+    if (!session || session?.role !== 'ADMIN') {
+        redirect('/buy')
+        return;
+    }
+
 
     const viewUserAccountController = new ViewUserAccountController()
     const users = await viewUserAccountController.getUserInfo()

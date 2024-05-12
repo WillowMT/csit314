@@ -7,7 +7,7 @@ import prisma from "@/utils/prisma"
 import { revalidatePath } from "next/cache"
 
 //showdis
-export async function createUser(prev:any, form:FormData) {
+export async function createUser(form:FormData) {
     const email = form.get('email') as string
     const password = form.get('password') as string
     const passwordConfirm = form.get('passwordConfirm') as string
@@ -42,15 +42,14 @@ export async function createUser(prev:any, form:FormData) {
         license,
         role
     }
-
     
-    // pass object to controller
-    const createUserAccController = new CreateUserAccController()
-    const result = await createUserAccController.createUserAccount(userObj)
-
-    revalidatePath('/admin/useraccount')
-
-    return result
+    try {
+        const createUserAccController = new CreateUserAccController()
+        const result = await createUserAccController.createUserAccount(userObj)
+        return {success:true, message:'User created'}
+    } catch (error) {
+        return {success:false, message:`User creation failed`}
+    }
    
 }
 

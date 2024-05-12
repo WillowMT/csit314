@@ -58,16 +58,6 @@ export default function UserForm({ session }: { session: SessionData }) {
                         defaultValue={session.phoneNumber}
                     />
 
-                    <Input
-                        name="email"
-                        className="mb-8 w-[400px] mr-auto"
-                        type="email"
-                        label="Email"
-                        labelPlacement={'outside'}
-                        placeholder="Email"
-                        defaultValue={session.email}
-                    />
-
                     <Select
                         name="country"
                         className="mb-4 w-[400px] mr-auto"

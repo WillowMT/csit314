@@ -10,21 +10,7 @@ import { UserProfileInterface } from "@/utils/demo";
 
 export default function AddUserForm({ roles }: { roles: UserProfileInterface[] }) {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const [state, formAction] = useFormState(createUser, null);
     const [role, setRole] = useState('BUYER')
-
-    useEffect(() => {
-        if (!state?.message) return
-
-        if (state?.success) {
-            toast.success('Account created successfully')
-            onClose()
-        }
-
-        if (!state?.success && state?.message) {
-            toast.error(state?.message || 'An error occurred. Please try again.')
-        }
-    }, [state])
 
     return (
         <>
@@ -33,7 +19,17 @@ export default function AddUserForm({ roles }: { roles: UserProfileInterface[] }
                 <ModalContent>
                     <ModalHeader className="flex flex-col gap-1">Create User</ModalHeader>
                     <ModalBody>
-                        <form action={formAction} className="max-h-[400px] overflow-scroll">
+                        <form action={
+                            async (data) => {
+                                const { success, message } = await createUser(data)
+                                if (success) {
+                                    toast.success('Account created successfully')
+                                }
+                                else {
+                                    toast.error(message)
+                                }
+                            }
+                        } className="max-h-[400px] overflow-scroll">
                             <div className="grid md:grid-cols-2 gap-4">
 
                                 <Input

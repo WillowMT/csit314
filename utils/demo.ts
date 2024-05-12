@@ -81,6 +81,7 @@ type UserInterface = {
     } | undefined;
     activated?: boolean;
     publicId?: string;
+    role?:string
 }
 
 type UserProfileInterface = ReturnType<typeof createRandomUserProfile>
