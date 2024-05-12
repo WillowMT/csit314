@@ -6,7 +6,6 @@ import Profile from "./profile"
 export default async function Navigation() {
     const session = await getSession()
 
-
     return (
         <div className=" bg-brand-200">
             <nav className=" flex p-4">
@@ -29,7 +28,7 @@ export default async function Navigation() {
                 </div>
                 <div className="">
                     {
-                        session.isLoggedIn ?
+                        session.email ?
                             <Profile role={session.role} email={session.email} firstName={session.firstName} />
                             :
                             <div>

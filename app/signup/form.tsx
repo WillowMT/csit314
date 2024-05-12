@@ -111,19 +111,19 @@ export default function Form({ roles }: { roles: UserProfileInterface[] }) {
                                     ))}
                             </Select>
 
-                            <Input
-                                name="agency"
-                                isRequired
-                                className="mb-4 max-w-[400px] mx-auto"
-                                type="agency"
-                                label="Agency"
-                                labelPlacement={'outside'}
-                                placeholder="Agency"
-                            />
 
                             {
                                 role.includes("AGENT") && (
                                     <>
+                                        <Input
+                                            name="agency"
+                                            isRequired
+                                            className="mb-4 max-w-[400px] mx-auto"
+                                            type="agency"
+                                            label="Agency"
+                                            labelPlacement={'outside'}
+                                            placeholder="Agency"
+                                        />
                                         <Input
                                             isRequired
                                             name="license"
@@ -142,18 +142,19 @@ export default function Form({ roles }: { roles: UserProfileInterface[] }) {
                                             labelPlacement={'outside'}
                                             placeholder="CEA Number"
                                         />
-                                        <Input
-                                            isRequired
-                                            name="password"
-                                            className="mb-4 max-w-[400px] mx-auto"
-                                            type="password"
-                                            label="Password"
-                                            labelPlacement={'outside'}
-                                            placeholder="Password"
-                                        />
                                     </>
                                 )
                             }
+                            
+                            <Input
+                                isRequired
+                                name="password"
+                                className="mb-4 max-w-[400px] mx-auto"
+                                type="password"
+                                label="Password"
+                                labelPlacement={'outside'}
+                                placeholder="Password"
+                            />
 
                             <Input
                                 isRequired

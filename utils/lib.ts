@@ -7,7 +7,6 @@ export const role = ['USER','SELLER','BUYER','REA_AGENT']
 
 export const defaultSession: SessionData = {
     email: "",
-    isLoggedIn: false,
     firstName: "",
     lastName: "",
     role: "",
@@ -66,7 +65,7 @@ export async function create(formObj: UserFormData) {
     const { email, password, passwordConfirm, firstName, lastName, country, phoneNumber, ceaNumber, agency, license } = formObj;
 
     if (password !== passwordConfirm) {
-        return { success: false, message: "Passwords do not match" }
+        throw new Error("Passwords do not match")
     }
 
     // check if user exists already
@@ -77,7 +76,7 @@ export async function create(formObj: UserFormData) {
     })
 
     if (userExists) {
-        return null
+        throw new Error("User already exists")
     }
 
     // hash raw password

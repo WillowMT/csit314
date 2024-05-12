@@ -10,7 +10,6 @@ export interface SessionData {
     ceaNumber?: string;
     agency?: string;
     jobDesignation?: string;
-    isLoggedIn: boolean;
     activated: boolean;
 }
 

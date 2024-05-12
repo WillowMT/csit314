@@ -17,8 +17,6 @@ export default async function EditUserAccountPage() {
         license: session.license,
         ceaNumber: session.ceaNumber,
         agency: session.agency,
-        jobDesignation: session.jobDesignation,
-        isLoggedIn: session.isLoggedIn,
         activated: session.activated
     }
 

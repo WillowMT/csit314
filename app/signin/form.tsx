@@ -5,36 +5,19 @@ import {
 } from "@nextui-org/react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useEffect } from "react";
-import { login } from "@/utils/auth";
+import { login } from "./action";
 import toast from 'react-hot-toast'
 
 export default function Form() {
-    const [state, formAction] = useFormState(login, null);
-    
+    // const [state, formAction] = useFormState(login, null);
+
     return (
         <div className="flex w-full flex-col my-4 py-8">
             <Card className="mx-4" >
                 <CardBody className="">
 
-                    <form action={formAction} className="w-full px-4 py-[7rem]">
+                    <form action={login} className="w-full px-4 py-[7rem]">
                         <div className="grid grid-cols-1 gap-4">
-                            <div className="mb-[1.75rem] hidden">
-
-                                <Select
-                                    isRequired
-                                    name="role"
-                                    className="max-w-[400px] mx-auto"
-                                    defaultSelectedKeys={['User']}
-                                    label="Login As"
-                                    labelPlacement={'outside'}
-                                    placeholder="Login As"
-                                >
-                                    {['User', 'Agent'].map((item) => {
-                                        return <SelectItem key={item} value={item}>{item}</SelectItem>
-                                    })}
-                                </Select>
-                            </div>
-
                             <div className=" space-y-[4rem]">
                                 <Input
                                     isRequired
