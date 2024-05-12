@@ -97,16 +97,6 @@ export default function UserForm({ session }: { session: SessionData }) {
                                     defaultValue={session.agency}
                                 />
                                 <Input
-                                    name="jobDesignation"
-                                    isRequired
-                                    className="mb-8 w-[400px] mr-auto"
-                                    type="jobDesignation"
-                                    label="Job Designation"
-                                    labelPlacement={'outside'}
-                                    placeholder="Job Designation"
-                                    defaultValue={session.jobDesignation}
-                                />
-                                <Input
                                     isRequired
                                     name="license"
                                     className="mb-8 w-[400px] mr-auto"

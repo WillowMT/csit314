@@ -1,7 +1,7 @@
 'use client'
 
 import { Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownSection, DropdownItem, User } from "@nextui-org/react";
-import Link from "next/link";
+// import a from "next/link";
 import { SessionData } from "@/utils/lib";
 import { logout } from "@/utils/auth";
 
@@ -56,21 +56,21 @@ export default function Profile({ email, firstName, role }: { email: string, fir
                         />
                     </DropdownItem>
                     <DropdownItem key="">
-                        <Link href={'/account'}>
+                        <a href={'/account'}>
                             Account
-                        </Link>
+                        </a>
                     </DropdownItem>
                     <DropdownItem key="">
-                        <Link href={'/account/edit'}>
+                        <a href={'/account/edit'}>
                             Edit Profile
-                        </Link>
+                        </a>
                     </DropdownItem>
                     <DropdownItem
                         key="new_project"
                         color="danger"
                         className=" text-red-500"
                     >
-                        <Link href={"/logout"}>Logout</Link>
+                        <a href={"/logout"}>Logout</a>
                     </DropdownItem>
                 </DropdownSection>
             </DropdownMenu>

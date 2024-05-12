@@ -14,6 +14,7 @@ export async function submit(prev: any, formData: FormData) {
         const price = formData.get("price") as string
         const imageUrl = formData.get("imageUrl") as string
         const propertyType = formData.get("propertyType") as string
+        const ownerEmail = formData.get("ownerEmail") as string
 
 
 }

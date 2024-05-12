@@ -9,7 +9,6 @@ export interface SessionData {
     license?: string;
     ceaNumber?: string;
     agency?: string;
-    jobDesignation?: string;
     activated: boolean;
 }
 

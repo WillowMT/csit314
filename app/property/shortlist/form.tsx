@@ -126,6 +126,15 @@ export default function PropertyForm() {
                         labelPlacement={'outside'}
                         placeholder="Image Url"
                     />
+                    <Input
+                        isRequired
+                        name="ownerEmail"
+                        className="mb-8 max-w-[400px] mx-auto"
+                        type="string"
+                        label="Owner Email"
+                        labelPlacement={'outside'}
+                        placeholder="Owner Email"
+                    />
                 </div>
             </div>
             <Btn />

@@ -16,7 +16,11 @@ export default function Form() {
             <Card className="mx-4" >
                 <CardBody className="">
 
-                    <form action={login} className="w-full px-4 py-[7rem]">
+                    <form action={(e) => {
+                        login(e).catch((err: Error) => {
+                            toast.error(err.message)
+                        })
+                    }} className="w-full px-4 py-[7rem]">
                         <div className="grid grid-cols-1 gap-4">
                             <div className=" space-y-[4rem]">
                                 <Input
