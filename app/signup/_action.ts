@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { create } from "@/utils/lib";
 
-export async function submit(previousState:any, form: FormData) {
+export async function signup(form: FormData) {
     'use server'
 
     // extract data from form
@@ -31,11 +31,13 @@ export async function submit(previousState:any, form: FormData) {
         license,
         role
     }
-    
 
     // call user object
-    const user = await create(userObj)
-
-    return user
+    try {
+        await create(userObj)
+        return {success:true}
+    } catch (error:any) {
+        return {success:false, error:error.message}
+    }
 
 }

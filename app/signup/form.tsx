@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import toast from 'react-hot-toast'
 import { UserProfileInterface } from "@/utils/demo";
 import { createUser } from "../admin/useraccount/_action";
+import { signup } from "./_action";
 
 
 export default function Form({ roles }: { roles: UserProfileInterface[] }) {
@@ -35,7 +36,17 @@ export default function Form({ roles }: { roles: UserProfileInterface[] }) {
         <div className="flex w-full flex-col">
             <Card className=" p-4 m-4">
                 <CardBody>
-                    <form action={formAction} className="">
+                    <form action={
+                        async (data) => {
+                            const { success, error } = await signup(data)
+                            if (success) {
+                                toast.success('Account created successfully')
+                            }
+                            else {
+                                toast.error(error)
+                            }
+                        }
+                    } className="">
                         <div className="grid md:grid-cols-2 gap-4">
 
                             <Input

@@ -50,10 +50,12 @@ export async function login(formData: FormData) {
         session.ceaNumber = user.ceaNumber || ""
 
         await session.save()
-        redirect('/buy')
-        return {success: true}
+        // redirect('/buy')
+        return { success: true }
     } catch (error: any) {
-        return {success:false}
+        console.log(error);
+
+        return { success: false }
     }
 
 
