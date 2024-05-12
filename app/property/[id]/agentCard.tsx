@@ -2,17 +2,25 @@
 import React from "react";
 import { Card, CardHeader, CardBody, Avatar, Button, Chip } from "@nextui-org/react";
 import Link from "next/link";
+import { UserInterface } from "@/utils/demo";
 
-export default function AgentCard() {
+export default function AgentCard({user}: {user: UserInterface}) {
+
+  console.log(user);
+
+  if (!user) {
+    return
+  }
+  
 
   return (
     <Card className="max-w-[300px]">
       <CardHeader className="justify-between">
         <div className="flex gap-4">
-          <Avatar isBordered radius="full" size="lg" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+          <Avatar isBordered radius="full" size="lg" src={`https://api.dicebear.com/8.x/initials/svg?seed=${user.firstName}`} />
           <div>
-            <h4 className="text-medium font-semibold">Willy Wonker</h4>
-            <Link href="/agent/12312">
+            <h4 className="text-medium font-semibold">{user.firstName} {user.lastName}</h4>
+            <Link href={`/agent/${user.publicId}`}>
               <Button
                 className={"border-default-200"}
                 color="default"

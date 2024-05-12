@@ -1,16 +1,14 @@
 'use client'
 import { Tab, Chip, Tabs } from "@nextui-org/react";
-import { demo } from "@/utils/demo";
+import { PropertyInterface, demo } from "@/utils/demo";
 import PropertyCard from "./property-card";
 import { Rate } from 'antd'
 import RatingForm from "./rating-form";
 import ReviewForm from "./review-form";
-import PropertyCardBuyer from "./property-card-buyer";
 
 
-export default function UserTabs({ role }: { role: string }) {
-
-
+export default function UserTabs({ email, role, properties, ratingAndReview }:{email:string, role:string, properties:any[], ratingAndReview:any}) {
+    
     return (
         <div className="flex w-full flex-col mt-4">
             <Tabs
@@ -35,10 +33,9 @@ export default function UserTabs({ role }: { role: string }) {
                     <div className="">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                             {
-                                demo.properties.map((property, i) => {
-                                    if (i % 2 === 0) return
+                                properties.map((p, i) => {
                                     return (
-                                        <PropertyCard key={i} property={property} role={role} />
+                                        <PropertyCard key={i} property={p.property} role={role} />
                                     )
                                 })
                             }
@@ -52,18 +49,17 @@ export default function UserTabs({ role }: { role: string }) {
                     title={
                         <div className="flex items-center space-x-2">
                             <span>Ratings and Reviews</span>
-
                         </div>
                     }
                 > <div>
                         <div className=" flex flex-col space-y-4 my-4 border-b pb-4">
                             <h2 className="text-xl">Create Rating and Review</h2>
-                            <RatingForm />
-                            <ReviewForm />
+                            <RatingForm email={email} />
+                            <ReviewForm email={email} />
                         </div>
 
                         {
-                            demo.ratingsAndReviews.map((rating, i) => {
+                            ratingAndReview.map((rating:any, i:number) => {
                                 return (
                                     <div key={i} className=" space-y-4 mb-4 border-b pb-4">
                                         <div className=" italic text-slate-600/60 text-sm">Anonymous</div>
@@ -75,8 +71,6 @@ export default function UserTabs({ role }: { role: string }) {
                         }
                     </div>
                 </Tab>
-
-
             </Tabs>
         </div>
     )

@@ -7,15 +7,31 @@ import ListingButton from "./listting-button";
 import MortageCal from "./mortgageCal";
 import { demo } from "@/utils/demo";
 import { faker } from "@faker-js/faker";
+import prisma from "@/utils/prisma";
 
-const YourPage = () => {
+export default async function Page({ params }: { params: { id: string } }) {
 
-    const property = demo.properties[0]
+    const property = await prisma.property.findUnique({
+        where: {
+            publicId: params.id
+        },
+        include: {
+            shortList: {
+                select: {
+                    user: true
+                }
+            }
+        }
+    })
+
+    if (!property) {
+        return <div>Property not found</div>
+    }
 
     return (
         <div>
             <Navigation />
-    
+
             <div className=" max-w-4xl mx-auto mt-8">
 
                 <div className=" w-full flex place-content-center place-items-center">
@@ -63,7 +79,11 @@ const YourPage = () => {
                         <Divider className="my-5" />
                         <p className="text-medium pb-2 pl-4">Contact Agent</p>
                         <div className="pl-4">
-                            <AgentCard/>
+                            {
+                                property.shortList[0].user && (
+                                    <AgentCard user={property.shortList[0].user || null} />
+                                )
+                            }
                         </div>
                         <Divider className="my-3" />
                         <div className="text-medium pb-2 pl-4">
@@ -100,5 +120,3 @@ const YourPage = () => {
         </div>
     )
 };
-
-export default YourPage;

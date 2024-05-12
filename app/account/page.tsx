@@ -5,14 +5,32 @@ import PropertyCard from "@/app/account/property-card";
 import { getSession } from "@/utils/auth";
 import { Chip, Tab, Tabs } from "@nextui-org/react";
 import UserTabs from "./tabs";
+import prisma from "@/utils/prisma";
 
-export default async function Page({params}:{params:{id:string}}) {
+export default async function Page() {
 
     const session = await getSession()
 
     if (!session) {
         return <div>Access Denied</div>
     }
+
+    const agent = await prisma.user.findUnique({
+        where:{
+            email:session.email
+        },
+        select:{
+            shortList:{
+                select:{
+                    property:true
+                }
+            },
+            ratingAndReview:true
+        }
+    })
+
+    console.log(agent);
+    
 
 
     return (
@@ -34,7 +52,7 @@ export default async function Page({params}:{params:{id:string}}) {
                     <p className="email">{session.email}</p>
                 </div>
 
-                <UserTabs role={session.role} />
+                <UserTabs properties={agent?.shortList} role={session.role} ratingsAndReviews={agent?.ratingAndReview} />
 
             </section>
         </div>

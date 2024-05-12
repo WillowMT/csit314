@@ -5,8 +5,9 @@ import { encryptPassword } from '@/utils/hash'
 import { CreateUserAccController } from '@/utils/controllers/user'
 import { CreatePropertyListingController } from '@/utils/controllers/property'
 import { faker } from '@faker-js/faker'
-import { createRandomUser } from '@/utils/demo'
+import { createRandomUser, createRatingsAndReviews } from '@/utils/demo'
 import { ShortlistController } from '@/utils/controllers/user'
+import { RateAgentController, ReviewAgentController } from '@/utils/controllers/agent'
 
 
 describe("Insert Demo Data", async () => {
@@ -15,6 +16,7 @@ describe("Insert Demo Data", async () => {
     const buyers = new Array(10).fill(0).map(() => createRandomUser("BUYER"))
     const sellers = new Array(10).fill(0).map(() => createRandomUser("SELLER"))
     const admin = new Array(3).fill(0).map(() => createRandomUser("ADMIN"))
+    const reviews = new Array(10).fill(0).map(() => createRatingsAndReviews())
 
     let globalPassword = "test"
 
@@ -84,8 +86,21 @@ describe("Insert Demo Data", async () => {
         for (let i = 0; i < agents.length; i++) {
             const shortlistController = new ShortlistController()
             const properties = await prisma.property.findMany()
-            const result = await shortlistController.shortlist(buyers[i].email, properties[i].id)
+            const result = await shortlistController.shortlist(agents[i].email, properties[i].id)
             expect(result).toBeDefined()
+        }
+    })
+
+    // create ratings and reviews
+    test("Create Ratings and Reviews", async () => {
+        const rateAgentController = new RateAgentController()
+        const reviewAgentController = new ReviewAgentController()
+
+        for (let i = 0; i < agents.length; i++) {
+            const result = await rateAgentController.rate(agents[i].email, reviews[i].rating,"")
+            expect(result).toBeDefined()
+            const result2 = await reviewAgentController.writeReview(agents[i].email, 0, reviews[i].review)
+            expect(result2).toBeDefined()
         }
     })
 

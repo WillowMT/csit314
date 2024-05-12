@@ -8,8 +8,8 @@ import ReviewForm from "./review-form";
 import PropertyCardBuyer from "./property-card-buyer";
 
 
-export default function UserTabs({ role }: { role: string }) {
-
+export default function UserTabs({ role, properties, ratingsAndReviews }: { role: string, properties: any, ratingsAndReviews: any}) {
+    
 
     return (
         <div className="flex w-full flex-col mt-4">
@@ -37,10 +37,9 @@ export default function UserTabs({ role }: { role: string }) {
                             <div className="">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {
-                                        demo.properties.map((property, i) => {
-                                            if (i % 2 === 0) return
+                                        properties.map((p:any, i:any) => {
                                             return (
-                                                <PropertyCard key={i} property={property} role={role} />
+                                                <PropertyCard key={i} property={p.property} role={role} />
                                             )
                                         })
                                     }
@@ -99,12 +98,12 @@ export default function UserTabs({ role }: { role: string }) {
                                 }
 
                                 {
-                                    demo.ratingsAndReviews.map((rating, i) => {
+                                    ratingsAndReviews.map((rating:any, i:number) => {
                                         return (
                                             <div key={i} className=" space-y-4 mb-4 border-b pb-4">
                                                 <div className=" italic text-slate-600/60 text-sm">Anonymous</div>
-                                                <Rate disabled defaultValue={rating.rating} />
-                                                <div>{rating.review}</div>
+                                                <Rate disabled defaultValue={rating?.rating || 0} />
+                                                <div>{rating?.review || ""}</div>
                                             </div>
                                         )
                                     })

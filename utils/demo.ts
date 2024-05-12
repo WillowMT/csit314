@@ -39,7 +39,7 @@ export function createRandomProperty() {
         address: faker.location.streetAddress(),
         description: faker.lorem.sentence(),
         onSale: faker.helpers.arrayElement([true, false]),
-        views: faker.number.int({ min: 100, max: 10000 }),
+        views: faker.number.int({ min: 100, max: 10000 }) as number | null,
         bedroom: faker.number.int({ min: 1, max: 4 }),
         bathroom: faker.number.int({ min: 1, max: 3 }),
         leaseYear: faker.number.int({ min: 1900, max: 2024 }),
@@ -48,7 +48,8 @@ export function createRandomProperty() {
         price: faker.number.int({ min: 100000, max: 1000000 }),
         imageUrl: faker.image.url(),
         activated: faker.helpers.arrayElement([true, false]),
-        propertyType: faker.helpers.arrayElement(['HDB', 'CONDO', 'LANDED'])
+        propertyType: faker.helpers.arrayElement(['HDB', 'CONDO', 'LANDED']),
+        publicId: faker.string.nanoid()
     };
 
 }
@@ -66,16 +67,16 @@ export function createRatingsAndReviews() {
 
 type UserInterface = {
     id?: string;
-    profileId?: string;
+    profileId?: string | null;
     email: string;
     firstName: string;
     lastName: string;
     phoneNumber: string;
     passwordHash?: string;
     country?: string;
-    ceaNumber?: string | undefined;
-    agency?: string | undefined;
-    license?: string | undefined;
+    ceaNumber?: string | undefined | null;
+    agency?: string | undefined | null;
+    license?: string | undefined | null;
     profile?: {
         role: string, activated: boolean
     } | undefined;

@@ -5,11 +5,28 @@ import PropertyCard from "@/app/account/property-card";
 import { getSession } from "@/utils/auth";
 import { Chip, Tab, Tabs } from "@nextui-org/react";
 import UserTabs from "./tabs";
+import prisma from "@/utils/prisma";
 
 export default async function Page({params}:{params:{id:string}}) {
 
-    const demoUser = demo.user[0]
+    const agent = await prisma.user.findUnique({
+        where: {
+            publicId: params.id
+        },
+        include: {
+            profile: true,
+            shortList:{
+                select:{
+                    property:true
+                }
+            },
+            ratingAndReview: true
+        }
+    })
 
+    if (!agent) {
+        return <div>Agent not found</div>
+    }
 
     return (
         <div>
@@ -21,16 +38,15 @@ export default async function Page({params}:{params:{id:string}}) {
             </div>
 
             <section className="acc">
-                <img src={`https://api.dicebear.com/8.x/initials/svg?seed=${demoUser.firstName}`} className='profile-pic' />
-                <p className="name">{demoUser.firstName} {demoUser.lastName} ({demoUser?.profile?.role})</p>
+                <img src={`https://api.dicebear.com/8.x/initials/svg?seed=${agent.firstName}`} className='profile-pic' />
+                <p className="name">{agent.firstName} {agent.lastName}</p>
                 <div className="contact-info">
                     <p className="bx bx-phone"></p>
-                    <p className="ph-no">{demoUser.phoneNumber}</p>
+                    <p className="ph-no">{agent.phoneNumber}</p>
                     <p className='bx bxl-gmail'></p>
-                    <p className="email">{demoUser.email}</p>
+                    <p className="email">{agent.email}</p>
                 </div>
-
-                <UserTabs role={demoUser?.profile?.role || "BUYER"} />
+                <UserTabs email={agent.email} properties={agent.shortList} role={agent?.profile?.role || "BUYER"} ratingAndReview={agent.ratingAndReview} />
 
             </section>
         </div>

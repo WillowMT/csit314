@@ -8,7 +8,7 @@ export default function PropertyCard({ property, role }: { property: PropertyInt
     return (
         <>
             <div className="border w-full m-2 rounded-lg overflow-hidden text-left shadow-md text-sm">
-                <Link href={"/property/123"}>
+                <Link href={`/property/${property.publicId}`}>
                     <img src={property.imageUrl} className=" w-full h-[250px] object-cover" alt="" />
                     <div className=" px-4 py-8 flex flex-col min-h-[250px] w-full">
                         <div className=" flex-grow space-y-2">

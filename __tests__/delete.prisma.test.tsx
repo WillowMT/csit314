@@ -4,6 +4,19 @@ import prisma from '@/utils/prisma'
 
 describe("Delete Database Records", async () => {
 
+    //delete shortlists
+    test("Delete Shortlists", async () => {
+        const shortlists = await prisma.shortlist.findMany()
+        for (const shortlist of shortlists) {
+            const result = await prisma.shortlist.delete({
+                where: {
+                    id: shortlist.id
+                }
+            })
+            expect(result).toBeDefined()
+        }
+    })
+
     // delete ownership
     test("Delete Ownership", async () => {
         const ownership = await prisma.ownership.findMany()
@@ -55,6 +68,21 @@ describe("Delete Database Records", async () => {
             expect(result).toBeDefined()
         }
     })
+
+    // delete reviews
+    test("Delete Reviews", async () => {
+        const reviews = await prisma.ratingsAndReviews.findMany()
+        for (const review of reviews) {
+            const result = await prisma.ratingsAndReviews.delete({
+                where: {
+                    id: review.id
+                }
+            })
+            expect(result).toBeDefined()
+        }
+    })
+
+    
 
 })
 

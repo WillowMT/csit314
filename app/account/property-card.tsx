@@ -2,6 +2,7 @@ import { demo } from "@/utils/demo"
 import { PropertyInterface } from "@/utils/demo"
 import { Button, Card, CardBody, Chip } from "@nextui-org/react"
 import EditProperty from "./edit-property"
+import Link from "next/link"
 
 
 export default function PropertyCard({ property, role }: { property: PropertyInterface, role?: string }) {
@@ -27,16 +28,23 @@ export default function PropertyCard({ property, role }: { property: PropertyInt
                         </p>
                         <div>
                             <Chip size="sm" variant={'bordered'} color={property.onSale ? 'success' : 'danger'}>{property.onSale ? 'On Sale' : 'Sold'}</Chip>
+                            {
+                                !property.activated  && (
+                                    <Chip size="sm" variant={'bordered'} color={'danger'}>Suspended</Chip>
+                                )
+                            }
                         </div>
                     </div>
                     <div className=" space-x-2 inline-flex place-items-center">
                         <Button size="sm" isIconOnly variant="bordered">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-3 h-3">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
-                            </svg>
+                            <Link href={`/property/${property.publicId}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-3 h-3">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
+                                </svg>
+                            </Link>
                         </Button>
                         <EditProperty property={property} />
-                        <Button size="sm" color='danger'>Remove</Button>
+                        <Button size="sm" color='danger'>Suspend</Button>
                     </div>
                 </div>
             </div>
