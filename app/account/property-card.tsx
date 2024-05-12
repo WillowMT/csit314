@@ -1,8 +1,11 @@
-import { demo } from "@/utils/demo"
+'use client'
+
 import { PropertyInterface } from "@/utils/demo"
 import { Button, Card, CardBody, Chip } from "@nextui-org/react"
 import EditProperty from "./edit-property"
 import Link from "next/link"
+import { suspendProperty } from "./action"
+import toast from "react-hot-toast"
 
 
 export default function PropertyCard({ property, role }: { property: PropertyInterface, role?: string }) {
@@ -26,10 +29,10 @@ export default function PropertyCard({ property, role }: { property: PropertyInt
                                 {property.views}
                             </span>
                         </p>
-                        <div>
+                        <div className="space-x-2">
                             <Chip size="sm" variant={'bordered'} color={property.onSale ? 'success' : 'danger'}>{property.onSale ? 'On Sale' : 'Sold'}</Chip>
                             {
-                                !property.activated  && (
+                                !property.activated && (
                                     <Chip size="sm" variant={'bordered'} color={'danger'}>Suspended</Chip>
                                 )
                             }
@@ -44,7 +47,20 @@ export default function PropertyCard({ property, role }: { property: PropertyInt
                             </Link>
                         </Button>
                         <EditProperty property={property} />
-                        <Button size="sm" color='danger'>Suspend</Button>
+                        <Button onClick={
+                            async () => {
+                                await suspendProperty(property.id as string).then(
+                                    () => {
+                                        toast.success('Property suspended')
+                                    }
+                                ).catch
+                                    (
+                                        () => {
+                                            toast.error('Failed to suspend property')
+                                        }
+                                    )
+                            }
+                        } size="sm" color='danger'>Suspend</Button>
                     </div>
                 </div>
             </div>

@@ -44,13 +44,8 @@ export class SearchListedPropertyListingController{
 }
 //#62 REA edit property listing
 export class EditPropertyListingController{
-    async SavePropInfoChange({id,name,address,description,onSale,
-        leaseYear,squareFt,builtYear,price,imageUrl}:
-    {id:string,name:string,address:string,description:string,onSale:boolean,
-        leaseYear:number,squareFt:number,builtYear:number,price:number,imageUrl:string
-    }){
-        return await propertyEntity.setPropInfoChange({id,name,address,description,onSale,
-            leaseYear,squareFt,builtYear,price,imageUrl})
+    async SavePropInfoChange(property:PropertyInterface){
+        return await propertyEntity.setPropInfoChange(property)
     }
 }
 //#63 REA suspend property listing

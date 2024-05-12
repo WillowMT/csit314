@@ -34,7 +34,7 @@ export function createRandomUserProfile() {
 
 export function createRandomProperty() {
     return {
-        id: faker.string.nanoid(),
+        id: faker.string.nanoid() as string | undefined | null,
         name: faker.location.secondaryAddress(),
         address: faker.location.streetAddress(),
         description: faker.lorem.sentence(),
@@ -49,9 +49,8 @@ export function createRandomProperty() {
         imageUrl: faker.image.url(),
         activated: faker.helpers.arrayElement([true, false]),
         propertyType: faker.helpers.arrayElement(['HDB', 'CONDO', 'LANDED']),
-        publicId: faker.string.nanoid()
+        publicId: faker.string.nanoid() as string | undefined | null
     };
-
 }
 
 export function createRatingsAndReviews() {
@@ -85,9 +84,28 @@ type UserInterface = {
     role?: string
 }
 
+type PropertyInterface = {
+    id?: string | undefined | null;
+    name: string;
+    address: string;
+    description: string;
+    onSale: boolean;
+    views?: number | null;
+    bedroom: number;
+    bathroom: number;
+    leaseYear: number;
+    squareFt: number;
+    builtYear: number;
+    price: number;
+    imageUrl: string;
+    activated: boolean;
+    propertyType: string;
+    publicId?: string | undefined | null;
+}
+
 type UserProfileInterface = ReturnType<typeof createRandomUserProfile>
 
-type PropertyInterface = ReturnType<typeof createRandomProperty>
+// type PropertyInterface = ReturnType<typeof createRandomProperty>
 
 type RatingsAndReviewsInterface = ReturnType<typeof createRatingsAndReviews>
 

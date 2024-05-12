@@ -723,26 +723,25 @@ export class Property {
         })
     }
     //#62
-    async setPropInfoChange({ id, name, address, description, onSale,
-        leaseYear, squareFt, builtYear, price, imageUrl }:
-        {
-            id: string, name: string, address: string, description: string, onSale: boolean,
-            leaseYear: number, squareFt: number, builtYear: number, price: number, imageUrl: string
-        }) {
+    async setPropInfoChange(property: PropertyInterface) {
         return await prisma.property.update({
             where: {
-                id: id
+                id: property.id as string
             },
             data: {
-                name,
-                address,
-                description,
-                onSale,
-                leaseYear,
-                squareFt,
-                builtYear,
-                price,
-                imageUrl
+                name: property.name,
+                address: property.address,
+                description: property.description,
+                onSale: property.onSale,
+                leaseYear: property.leaseYear,
+                squareFt: property.squareFt,
+                builtYear: property.builtYear,
+                price: property.price,
+                imageUrl: property.imageUrl,
+                bedroom: property.bedroom,
+                bathroom: property.bathroom,
+                propertyType: property.propertyType,
+                activated: property.activated
             }
         })
     }

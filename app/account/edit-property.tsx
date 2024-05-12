@@ -9,14 +9,6 @@ import { PropertyInterface } from "@/utils/demo";
 
 export default function EditProperty({ property }: { property: PropertyInterface }) {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const [state, formAction] = useFormState(editProperty, null);
-
-    useEffect(() => {
-        if (!state) return
-
-        toast.success('User updated successfully')
-
-    }, [state])
 
     return (
         <>
@@ -27,7 +19,15 @@ export default function EditProperty({ property }: { property: PropertyInterface
                     <ModalHeader className="flex flex-col gap-1">Update Property</ModalHeader>
                     <ModalBody>
                         <div>
-                            <form action={formAction}>
+                            <form action={
+                                async (e) => {
+                                    await editProperty(e, property.id as string).then(() => {
+                                        toast.success("Property updated")
+                                    }).catch(() => {
+                                        toast.error("Property update failed")
+                                    })
+                                }
+                            }>
                                 <div className=" grid grid-cols-2 gap-4 mb-4 max-h-[400px] overflow-y-scroll">
 
                                     <Input
@@ -178,7 +178,6 @@ export default function EditProperty({ property }: { property: PropertyInterface
                             </form>
                         </div>
                     </ModalBody>
-
                 </ModalContent>
             </Modal>
         </>
