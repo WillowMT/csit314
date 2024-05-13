@@ -124,6 +124,19 @@ export class User {
     //#36 buyer adds property to shortlist
     async addPropertyToShortList({ email, propertyId }: { email: string, propertyId: string }) {
         const id = await this.getUserId({ email })
+        if (!id) throw new Error('User not found')
+
+        // check if shortlist already exists
+
+        const shortlist = await prisma.shortlist.findFirst({
+            where: {
+                userId: id,
+                propertyId
+            }
+        }
+        )
+        if (shortlist) throw new Error('Property already in shortlist')
+            
         return await prisma.shortlist.create({
             data: {
                 userId: id,
@@ -452,14 +465,19 @@ export class User {
         return shortlistedprops
     }
     //#253 delete shortlist
-    async deleteShortlist({ userId, propertyId }: { userId: string, propertyId: string }) {
+    async deleteShortlist({ email, propertyId }: { email: string, propertyId: string }) {
+        const id = await this.getUserId({ email })
+
+        if (!id) throw new Error('User not found')
+
         const shortlist = await prisma.shortlist.findFirst({
             where: {
-                userId: userId,
+                userId: id,
                 propertyId: propertyId
             }
         })
-        if (!shortlist) return null
+
+        if (!shortlist) throw new Error('Shortlist not found')
         return await prisma.shortlist.delete({
             where: {
                 id: shortlist.id
@@ -473,24 +491,24 @@ export class User {
             where: {
                 email
             },
-            include:{
-                profile:{
-                    select:{
-                        role:true
+            include: {
+                profile: {
+                    select: {
+                        role: true
                     }
                 }
             }
         })
 
         if (!user) {
-            throw new Error('User not found');  
+            throw new Error('User not found');
         }
 
         // check if password matches
         const passwordMatch = await comparePassword(password, user.passwordHash);
 
         if (!passwordMatch) {
-            throw new Error('Invalid Password');  
+            throw new Error('Invalid Password');
         }
 
         return user

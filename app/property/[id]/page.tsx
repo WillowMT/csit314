@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             publicId: params.id
         },
         include: {
-            shortList: {
+            listing: {
                 select: {
                     user: true
                 }
@@ -80,8 +80,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <p className="text-medium pb-2 pl-4">Contact Agent</p>
                         <div className="pl-4">
                             {
-                                property.shortList[0].user && (
-                                    <AgentCard user={property.shortList[0].user || null} />
+                                property.listing[0].user && (
+                                    <AgentCard user={property.listing[0].user || null} />
                                 )
                             }
                         </div>

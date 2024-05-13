@@ -92,7 +92,7 @@ export class BuyerViewShortlistController {
 }
 //#251 Buyer delete one entry in his shortlist
 export class DeleteShortlistController {
-    async deleteShortlist({ userId, propertyId }: { userId: string, propertyId: string }) {
-        return await userEntity.deleteShortlist({ userId, propertyId })
+    async deleteShortlist({ email, propertyId }: { email: string, propertyId: string }) {
+        return await userEntity.deleteShortlist({ email, propertyId })
     }
 }

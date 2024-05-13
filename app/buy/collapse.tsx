@@ -16,7 +16,7 @@ export default function Collapse() {
                         <h2 className=" text-black text-2xl py-4">Property Filter</h2>
                         <div className="w-[500px] h-[100px] pl-6 rounded-2xl flex justify-center items-center">
                             <Input
-                                className=""
+                                className="max-w-[350px]"
                                 label="Search by location"
                                 isClearable
                                 radius="lg"

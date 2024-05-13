@@ -3,25 +3,25 @@
 import { Button, Input } from "@nextui-org/react";
 import { submit } from './action'
 import { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import toast from 'react-hot-toast'
 
 
 
 export default function PropertyForm() {
-    const [state, formAction] = useFormState(submit, null);
-
-
-    useEffect(() => {
-        if (!state) return
-
-        toast.success('Property created successfully')
-    }, [state])
 
 
     return (
 
-        <form action={formAction} className="mt-14 mb-8">
+        <form action={
+            async (e) => {
+                await submit(e).then(() => {
+                    toast.success("Property added successfully")
+                }).catch(() => {
+                    toast.error("Failed to add property")
+                })
+            }
+        } className="mt-14 mb-8">
             <div className=" bg-brand-100 mx-4 my-8 py-8 rounded-md">
                 <h1 className="text-center text-3xl mb-20">Property Registration</h1>
                 <div className=" grid md:grid-cols-2">

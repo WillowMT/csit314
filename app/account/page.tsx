@@ -20,12 +20,17 @@ export default async function Page() {
             email:session.email
         },
         select:{
-            shortList:{
+            listing:{
                 select:{
                     property:true
                 }
             },
-            ratingAndReview:true
+            ratingAndReview:true,
+            shortList:{
+                select:{
+                    property:true
+                }
+            }
         }
     })
 
@@ -52,7 +57,7 @@ export default async function Page() {
                     <p className="email">{session.email}</p>
                 </div>
 
-                <UserTabs properties={agent?.shortList} role={session.role} ratingsAndReviews={agent?.ratingAndReview} />
+                <UserTabs shortListings={agent?.shortList} listings={agent?.listing} role={session.role} ratingsAndReviews={agent?.ratingAndReview} />
 
             </section>
         </div>

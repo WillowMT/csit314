@@ -3,8 +3,10 @@
 import { SuspendPropertyListingController } from "@/utils/controllers/property"
 import { EditPropertyListingController } from "@/utils/controllers/property"
 import { PropertyInterface } from "@/utils/demo"
+import { DeleteShortlistController } from "@/utils/controllers/user"
+import { getSession } from "@/utils/auth"
 
-export async function editProperty(formData: FormData, id:string) {
+export async function editProperty(formData: FormData, id: string) {
     const name = formData.get('name') as string
     const address = formData.get('address') as string
     const description = formData.get('description') as string
@@ -19,9 +21,9 @@ export async function editProperty(formData: FormData, id:string) {
     const activated = formData.get('activated') === 'true' ? true : false
     const propertyType = formData.get('propertyType') as string
 
-    
+
     const propertyObj: PropertyInterface = {
-        id,name, address, description, onSale, leaseYear, squareFt, builtYear, price, imageUrl, bedroom, bathroom, activated, propertyType
+        id, name, address, description, onSale, leaseYear, squareFt, builtYear, price, imageUrl, bedroom, bathroom, activated, propertyType
     }
 
     console.log(propertyObj);
@@ -34,4 +36,13 @@ export async function editProperty(formData: FormData, id:string) {
 export async function suspendProperty(id: string) {
     const suspendPropertyListingController = new SuspendPropertyListingController()
     return await suspendPropertyListingController.suspendListedProperty({ propertyId: id })
+}
+
+export async function removeShortlist(propertyId: string) {
+    const session = await getSession()
+    const deleteShortlistController = new DeleteShortlistController()
+
+    if (!session.email) throw new Error("Please login first")
+
+    return await deleteShortlistController.deleteShortlist({ email:session.email, propertyId })
 }

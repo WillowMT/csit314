@@ -1,6 +1,9 @@
 import { demo } from "@/utils/demo"
 import { PropertyInterface } from "@/utils/demo"
 import { Button, Card, CardBody, Chip } from "@nextui-org/react"
+import { removeShortlist } from "./action"
+import toast from "react-hot-toast"
+import Link from "next/link"
 
 
 export default function PropertyCardBuyer({ property, role }: { property: PropertyInterface, role?: string }) {
@@ -30,11 +33,26 @@ export default function PropertyCardBuyer({ property, role }: { property: Proper
                     </div>
                     <div className=" space-x-2 inline-flex place-items-center">
                         <Button size="sm" isIconOnly variant="bordered">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-3 h-3">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
-                            </svg>
+                            <Link href={`/property/${property.publicId}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-3 h-3">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
+                                </svg>
+                            </Link>
                         </Button>
-                        <Button size="sm" color='danger'>Remove</Button>
+                        <Button onClick={
+                            async () => {
+                                await removeShortlist(property.id as string).then(
+                                    () => {
+                                        toast.success('Property removed from shortlist')
+                                    }
+                                ).catch
+                                    (
+                                        () => {
+                                            toast.error('Failed to remove property from shortlist')
+                                        }
+                                    )
+                            }
+                        } size="sm" color='danger'>Remove</Button>
                     </div>
                 </div>
             </div>

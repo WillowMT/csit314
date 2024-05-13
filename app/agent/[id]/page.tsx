@@ -15,7 +15,7 @@ export default async function Page({params}:{params:{id:string}}) {
         },
         include: {
             profile: true,
-            shortList:{
+            listing:{
                 select:{
                     property:true
                 }
@@ -46,7 +46,7 @@ export default async function Page({params}:{params:{id:string}}) {
                     <p className='bx bxl-gmail'></p>
                     <p className="email">{agent.email}</p>
                 </div>
-                <UserTabs email={agent.email} properties={agent.shortList} role={agent?.profile?.role || "BUYER"} ratingAndReview={agent.ratingAndReview} />
+                <UserTabs email={agent.email} properties={agent.listing} role={agent?.profile?.role || "BUYER"} ratingAndReview={agent.ratingAndReview} />
 
             </section>
         </div>

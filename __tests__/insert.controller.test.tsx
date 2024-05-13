@@ -86,7 +86,7 @@ describe("Insert Demo Data", async () => {
         for (let i = 0; i < agents.length; i++) {
             const shortlistController = new ShortlistController()
             const properties = await prisma.property.findMany()
-            const result = await shortlistController.shortlist(agents[i].email, properties[i].id)
+            const result = await shortlistController.shortlist(buyers[i].email, properties[i].id)
             expect(result).toBeDefined()
         }
     })

@@ -8,7 +8,7 @@ import ReviewForm from "./review-form";
 import PropertyCardBuyer from "./property-card-buyer";
 
 
-export default function UserTabs({ role, properties, ratingsAndReviews }: { role: string, properties: any, ratingsAndReviews: any}) {
+export default function UserTabs({ role, listings, shortListings, ratingsAndReviews }: { role: string, listings: any, shortListings:any, ratingsAndReviews: any}) {
     
 
     return (
@@ -27,17 +27,17 @@ export default function UserTabs({ role, properties, ratingsAndReviews }: { role
                 {
                     role === 'AGENT' && (
                         <Tab
-                            key="shortlistings"
+                            key="listings"
                             title={
                                 <div className="flex items-center space-x-2">
-                                    <span>ShortListings</span>
+                                    <span>My Listings</span>
                                 </div>
                             }
                         >
                             <div className="">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {
-                                        properties.map((p:any, i:any) => {
+                                        listings.map((p:any, i:any) => {
                                             return (
                                                 <PropertyCard key={i} property={p.property} role={role} />
                                             )
@@ -56,17 +56,16 @@ export default function UserTabs({ role, properties, ratingsAndReviews }: { role
                             key="listings"
                             title={
                                 <div className="flex items-center space-x-2">
-                                    <span>My Listings</span>
+                                    <span>My Shortlists</span>
                                 </div>
                             }
                         >
                             <div className="">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {
-                                        demo.properties.map((property, i) => {
-                                            if (i % 2 !== 0) return
+                                        shortListings.map((p:any, i:any) => {
                                             return (
-                                                <PropertyCardBuyer key={i} property={property} role={role} />
+                                                <PropertyCardBuyer key={i} property={p.property} role={role} />
                                             )
                                         })
                                     }
