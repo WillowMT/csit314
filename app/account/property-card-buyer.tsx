@@ -39,20 +39,24 @@ export default function PropertyCardBuyer({ property, role }: { property: Proper
                                 </svg>
                             </Link>
                         </Button>
-                        <Button onClick={
-                            async () => {
-                                await removeShortlist(property.id as string).then(
-                                    () => {
-                                        toast.success('Property removed from shortlist')
+                        {
+                            role === "BUYER" && (
+                                <Button onClick={
+                                    async () => {
+                                        await removeShortlist(property.id as string).then(
+                                            () => {
+                                                toast.success('Property removed from shortlist')
+                                            }
+                                        ).catch
+                                            (
+                                                () => {
+                                                    toast.error('Failed to remove property from shortlist')
+                                                }
+                                            )
                                     }
-                                ).catch
-                                    (
-                                        () => {
-                                            toast.error('Failed to remove property from shortlist')
-                                        }
-                                    )
-                            }
-                        } size="sm" color='danger'>Remove</Button>
+                                } size="sm" color='danger'>Remove</Button>
+                            )
+                        }
                     </div>
                 </div>
             </div>

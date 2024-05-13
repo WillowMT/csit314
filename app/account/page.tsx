@@ -30,6 +30,11 @@ export default async function Page() {
                 select:{
                     property:true
                 }
+            },
+            ownership:{
+                select:{
+                    property:true
+                }
             }
         }
     })
@@ -57,7 +62,7 @@ export default async function Page() {
                     <p className="email">{session.email}</p>
                 </div>
 
-                <UserTabs shortListings={agent?.shortList} listings={agent?.listing} role={session.role} ratingsAndReviews={agent?.ratingAndReview} />
+                <UserTabs ownership={agent?.ownership} shortListings={agent?.shortList} listings={agent?.listing} role={session.role} ratingsAndReviews={agent?.ratingAndReview} />
 
             </section>
         </div>

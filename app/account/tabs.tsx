@@ -8,7 +8,7 @@ import ReviewForm from "./review-form";
 import PropertyCardBuyer from "./property-card-buyer";
 
 
-export default function UserTabs({ role, listings, shortListings, ratingsAndReviews }: { role: string, listings: any, shortListings:any, ratingsAndReviews: any}) {
+export default function UserTabs({ role, listings, shortListings,ownership, ratingsAndReviews }: { role: string, listings?: any, shortListings?:any,ownership?:any, ratingsAndReviews: any}) {
     
 
     return (
@@ -64,6 +64,31 @@ export default function UserTabs({ role, listings, shortListings, ratingsAndRevi
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {
                                         shortListings.map((p:any, i:any) => {
+                                            return (
+                                                <PropertyCardBuyer key={i} property={p.property} role={role} />
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        </Tab>
+                    )
+                }
+                {
+                    role === 'SELLER' && (
+
+                        <Tab
+                            key="ownership"
+                            title={
+                                <div className="flex items-center space-x-2">
+                                    <span>Owned Properties</span>
+                                </div>
+                            }
+                        >
+                            <div className="">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {
+                                        ownership.map((p:any, i:any) => {
                                             return (
                                                 <PropertyCardBuyer key={i} property={p.property} role={role} />
                                             )
