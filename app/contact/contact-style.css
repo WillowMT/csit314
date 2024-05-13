@@ -35,7 +35,7 @@ p, li, section, button{
     width: 70%;
     margin: 0 auto;
 }
-img{
+.left img{
     object-fit: cover;
     height: 73vh;
     width: 700px;
