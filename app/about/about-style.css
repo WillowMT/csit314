@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidescroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidescroll {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* font styles */
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Century Gothic', sans-serif;
+    font-weight: bold;
+}
+
+p, li, section, button{
+    font-family: 'Montserrat', sans-serif;
+} 
+
+/* header starts*/
+.header .pic {
+    background-image: url(/about-us-header.png);
+    background-position: center;
+    background-size: cover;
+    height: 80vh;
+    position: relative; 
+}
+
+.header .text-container {
+    width: 800px;
+    position: absolute; /* Added position absolute */
+    bottom: 0; /* Positioned at the bottom */
+    left: 0; /* Positioned at the left */
+    padding: 2rem;
+}
+
+.header .pic p {
+    color: white;
+    font-size: 48px;
+    margin-bottom: 1rem;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .header .text-container {
+        width: 90%; 
+    }
+
+    .header .pic p {
+        font-size: 24px; 
+    }
+}
+/* header ends */
+
+/* our founder starts */
+.logo{
+    width: 200px;
+}
+.left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 50%;
+}
+.left .text-container{
+    width: 500px;
+    text-align: center;
+}
+.text-container p{
+    margin-top: 1rem;
+}
+.left .title{
+    font-size: 34px;
+}
+.our-founder{
+    display: flex;
+}
+.right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #CCBEAE;
+    width: 50%;
+    height: 700px;
+}
+.founder{
+    object-fit: cover;
+    padding: 2rem;
+    height: 650px;
+    width: 700px;
+}
+@media screen and (max-width: 991px){
+    .left .text-container{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .our-founder {
+        flex-direction: column; /* Adjust layout for larger screens */
+    }
+    .left {
+        width: 100%; /* Adjust width to full width for smaller screens */
+        align-items: center; /* Center align content vertically */
+        padding: 2rem; /* Add padding for better spacing */
+    }
+    .left .title {
+        font-size: 28px; /* Adjust font size for smaller screens */
+    }
+    .right {
+        width: 100%;
+    }
+}
+/* our founder ends */
+
+/* achievements start */
+.awards{
+    background-image: url(https://images.pexels.com/photos/7267575/pexels-photo-7267575.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+    background-position: center;
+    background-size: cover;
+    height: 80vh;
+}
+.awards p{
+    font-size: 28px;
+    width: 900px;
+    padding: 3rem;
+    color: rgb(255, 255, 255);
+}
+.buildings{
+    background-image: url(https://images.pexels.com/photos/12608932/pexels-photo-12608932.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+    background-position: center;
+    background-size: cover;
+    height: 80vh;
+}
+.buildings p{
+    font-size: 28px;
+    width: 900px;
+    padding: 3rem;
+    color: rgb(255, 255, 255);
+}
+/* achievements end */
+
+/* customer starts */
+.customer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 5rem;
+    text-align: center;
+}
+.customer .title{
+    font-size: 45px;
+}
+.customer .description{
+    font-size: 25px;
+    width: 1000px;
+}
+.customer .contact-us{
+    background-color: #CCBEAE;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.customer .contact-us:hover{
+    background-color: #beb1a2;
+}
+/* customer ends */
