@@ -132,9 +132,11 @@ p, li, section, button{
     background-size: cover;
     height: 80vh;
 }
+.content{
+    width: 900px;
+}
 .awards p{
     font-size: 28px;
-    width: 900px;
     padding: 3rem;
     color: rgb(255, 255, 255);
 }
@@ -146,9 +148,21 @@ p, li, section, button{
 }
 .buildings p{
     font-size: 28px;
-    width: 900px;
     padding: 3rem;
     color: rgb(255, 255, 255);
+}
+@media screen and (max-width: 768px) {
+    .awards p, .buildings p{
+        font-size: 20px;
+    }
+    .content{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 401px) {
+    .awards p, .buildings p{
+        font-size: 16px;
+    }
 }
 /* achievements end */
 
@@ -163,10 +177,11 @@ p, li, section, button{
 }
 .customer .title{
     font-size: 45px;
+    width: 100%;
 }
 .customer .description{
     font-size: 25px;
-    width: 1000px;
+    width: 70%;
 }
 .customer .contact-us{
     background-color: #CCBEAE;
@@ -175,5 +190,23 @@ p, li, section, button{
 }
 .customer .contact-us:hover{
     background-color: #beb1a2;
+}
+@media screen and (max-width: 768px) {
+    .customer .title{
+        font-size: 30px;
+    }
+    .customer .description{
+        font-size: 20px;
+        width: 80%;
+    }
+}
+@media screen and (max-width: 513px) {
+    .customer .title{
+        font-size: 24px;
+    }
+    .customer .description{
+        font-size: 16px;
+        width: 100%;
+    }
 }
 /* customer ends */
