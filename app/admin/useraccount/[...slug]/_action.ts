@@ -1,6 +1,6 @@
 'use server'
 
-import { CreateUserAccController, EditAccountInfoController, SuspendUserAccountController } from '@/utils/controllers/user'
+import { CreateUserAccController, UpdateUserAccountController, SuspendUserAccountController } from '@/utils/controllers/user'
 import { encryptPassword } from '@/utils/hash'
 
 import prisma from "@/utils/prisma"
@@ -73,7 +73,7 @@ export async function editUser(prev:any, formData: FormData) {
     const license = formData.get('license') as string | undefined
     const ceaNumber = formData.get('ceaNumber') as string | undefined
 
-    const editAccountInfoController = new EditAccountInfoController()
+    const editAccountInfoController = new UpdateUserAccountController()
     return await editAccountInfoController.saveInfoChange({firstName, lastName, phoneNumber, email, agency, license, ceaNumber})
 
 }

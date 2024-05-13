@@ -51,13 +51,8 @@ export class SuspendUserAccountController {
 }
 //#72 System admin uses this to edit account information
 export class UpdateUserAccountController {
-    async saveInfoChange(user:UserInterface) {
-        try {
-            const usr = await userEntity.setInfo(user)
-            return { success: true, message: "User info updated", user: usr };
-        } catch (e) {
-            return { success: false, message: "Error updating user info", user: null };
-        }
+    async saveInfoChange(user: UserInterface) {
+        return await userEntity.setInfo(user)
     }
 }
 //#180
