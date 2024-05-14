@@ -37,6 +37,11 @@ export class LoginAccountController {
         return await userEntity.login({ email, password })
     }
 }
+export class LogoutAccountController {
+    async logout(){
+        return await userEntity.logout()
+    }
+}
 //#36
 export class ShortlistController {
     async shortlist(email: string, propertyId: string) {

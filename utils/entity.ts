@@ -514,6 +514,10 @@ export class User {
 
         return user
     }
+    async logout() {
+        const session = await getSession();
+        return session.destroy();
+    }
 
 }
 
