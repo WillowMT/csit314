@@ -17,10 +17,10 @@ export async function submit(prev: any, formData: FormData) {
     const agency = formData.get("agency") as string | ""
     const license = formData.get("license") as string | ""
     const ceaNumber = formData.get("ceaNumber") as string | ""
-    
+    const country=formData.get("country") as string | ""
 
     const userObj = {
-        email:session.email,firstName, lastName, phoneNumber, ceaNumber, agency, license, country:""
+        email:session.email,firstName, lastName, phoneNumber, ceaNumber, agency, license, country
     }
 
     // console.log(userObj);
@@ -39,6 +39,7 @@ export async function submit(prev: any, formData: FormData) {
     session.license = license
     session.ceaNumber = ceaNumber
     session.agency = agency
+    session.country=country
 
     await session.save()
 

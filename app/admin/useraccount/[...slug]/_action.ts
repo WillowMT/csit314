@@ -72,9 +72,9 @@ export async function editUser(prev:any, formData: FormData) {
     const agency = formData.get('agency') as string | undefined
     const license = formData.get('license') as string | undefined
     const ceaNumber = formData.get('ceaNumber') as string | undefined
-
+    const country = formData.get('country') as string
     const editAccountInfoController = new UpdateUserAccountController()
-    return await editAccountInfoController.saveInfoChange({firstName, lastName, phoneNumber, email, agency, license, ceaNumber})
+    return await editAccountInfoController.saveInfoChange({firstName, lastName, phoneNumber, email, agency, license, ceaNumber, country})
 
 }
 

@@ -1,12 +1,12 @@
 'use client'
 
 import React, { useEffect } from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Input } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, Input, Select, SelectItem} from "@nextui-org/react";
 import { useFormState } from "react-dom";
 import { editUser } from "./_action";
 import toast from "react-hot-toast";
 import { UserInterface } from "@/utils/demo";
-
+import {countries} from "@/utils/countries";
 export default function EditUserAccount({ user }: { user: UserInterface }) {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
     const [state, formAction] = useFormState(editUser, null);
@@ -93,16 +93,29 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                         placeholder="Phone Number"
                                         defaultValue={user.phoneNumber.toString()}
                                     />
-
                                     <Input
                                         name="email"
                                         className="mb-8 max-w-[400px] mx-auto hidden"
-                                        type="email"
+                                        type="hidden"
                                         label="Email"
                                         labelPlacement={'outside'}
                                         placeholder="Email"
                                         defaultValue={user.email}
                                     />
+                                    <Select
+                                        name="country"
+                                        className="mb-4 w-[400px] mr-auto"
+                                        defaultSelectedKeys={[user.country?user.country:""]}
+                                        label="Country"
+                                        labelPlacement={'outside'}
+                                        placeholder="Country"
+                                    >
+                                        {countries.map((country) => (
+                                            <SelectItem key={country.name} value={country.name}>
+                                                {country.name}
+                                            </SelectItem>
+                                        ))}
+                                    </Select>
                                     {
                                         user.ceaNumber && user.agency && user.license && (
                                             <>
