@@ -95,11 +95,11 @@ export default function EditUserAccount({ user }: { user: UserInterface }) {
                                     />
                                     <Input
                                         name="email"
-                                        className="mb-8 max-w-[400px] mx-auto"
+                                        className="mb-8 max-w-[400px] mx-auto hidden"
                                         type="hidden"
-                                        label="email"
+                                        label="Email"
                                         labelPlacement={'outside'}
-                                        placeholder="email"
+                                        placeholder="Email"
                                         defaultValue={user.email}
                                     />
                                     <Select
