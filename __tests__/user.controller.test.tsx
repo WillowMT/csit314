@@ -30,9 +30,9 @@ describe("User Controller Test", async () => {
             role: "BUYER"
         })
 
-        userid = newUser.user?.id as string
+        userid = newUser.id as string
     
-        expect(newUser.user).toBeDefined()
+        expect(newUser.id).toBeDefined()
     })
     
     test("View User Account Controller Test" , async () => {

@@ -1,10 +1,11 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/utils/auth";
 import { revalidatePath } from "next/cache";
+import { LogoutAccountController } from "@/utils/controllers/user";
 
 export async function GET() {
-    const session = await getSession()
-    session.destroy()
+    const logoutAccountController= new LogoutAccountController()
+    logoutAccountController.logout()
     revalidatePath("/")
     redirect("/")
 

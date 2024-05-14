@@ -36,7 +36,8 @@ export class User {
                 phoneNumber: user.phoneNumber,
                 ceaNumber: user.ceaNumber,
                 agency: user.agency,
-                license: user.license
+                license: user.license,
+                country:user.country
             }
         })
     }
@@ -75,7 +76,7 @@ export class User {
 
         // Check if a userProfile was found and extract the ID, otherwise use null
         const profileId = profile ? profile.id : null;
-
+        const country= user.country? user.country:"";
         // Create the user with the potentially null userProfile ID
         return await prisma.user.create({
             data: {
@@ -84,7 +85,7 @@ export class User {
                 lastName: user.lastName,
                 passwordHash: user.passwordHash!,
                 phoneNumber: user.phoneNumber,
-                country: user.country!,
+                country: country,
                 ceaNumber: user.ceaNumber,
                 agency: user.agency,
                 license: user.license,
@@ -509,6 +510,10 @@ export class User {
         }
 
         return user
+    }
+    async logout() {
+        const session = await getSession();
+        return session.destroy();
     }
 
 }
