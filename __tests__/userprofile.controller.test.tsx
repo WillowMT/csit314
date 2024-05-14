@@ -23,7 +23,7 @@ describe("User Controller Test", async () => {
 
         const userProfileSearchController = new UserProfile.UserProfileSearchController()
         const profile = await userProfileSearchController.SearchUserProfile('BUYER')
-        expect(profile?.id).toBeDefined()
+        expect(profile[0].id).toBeDefined()
     })
 
     test("Suspend User Profile Controller",async () => {

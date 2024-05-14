@@ -1,11 +1,12 @@
 import { expect, test, describe } from 'vitest'
-import * as globalController from '@/utils/controllers/globalControllers'
+import {CreateUserAccController} from '@/utils/controllers/user'
+import {RateAgentController, ViewRealEstateAgentRatingsAndReviewsController, SearchAgentController} from '@/utils/controllers/agent'
 import { createRandomUser, createRandomProperty, createRatingsAndReviews } from '@/utils/demo'
 import { encryptPassword } from '@/utils/hash'
 
 describe("Agent Controller Test", async () => {
     const demoUser = createRandomUser()
-    const passwordHash = await encryptPassword(demoUser.passwordHash)
+    const passwordHash = await encryptPassword(demoUser.passwordHash?demoUser.passwordHash:"")
 
     const demoProperty = createRandomProperty()
     let userid: string
@@ -13,7 +14,8 @@ describe("Agent Controller Test", async () => {
     const demoRating = createRatingsAndReviews()
 
     test("Create Agent Controller",async () => {
-        const newUser = await globalController.createUserAccController.createUserAccount({
+        const createUserAccController= new CreateUserAccController()
+        const newUser = await createUserAccController.createUserAccount({
             email: demoUser.email,
             passwordHash,
             firstName: demoUser.firstName,
@@ -26,18 +28,20 @@ describe("Agent Controller Test", async () => {
             role: "AGENT"
         })
 
-        userid = newUser.user?.id as string
+        userid = newUser.id as string
 
-        expect(newUser.user).toBeDefined()
+        expect(newUser.id).toBeDefined()
     })
 
     test("Rate Agent Controller Test", async () => {
-        const newRating = await globalController.rateAgentController.writeReview(demoUser.email, demoRating.rating, demoRating.review)
+        const rateAgentController=new RateAgentController()
+        const newRating = await rateAgentController.rate(demoUser.email, demoRating.rating, demoRating.review)
         expect(newRating).toBeDefined()
     })
 
     test("View Real Estate Agent Ratings And Reviews Controller Test", async () => {
-        const ratings = await globalController.viewRealEstateAgentRatingsAndReviewsController.getRatingsAndReviews({
+        const viewRealEstateAgentRatingsAndReviewsController= new  ViewRealEstateAgentRatingsAndReviewsController()
+        const ratings = await viewRealEstateAgentRatingsAndReviewsController.getRatingsAndReviews({
             email: demoUser.email
         })
 
@@ -45,7 +49,8 @@ describe("Agent Controller Test", async () => {
     })
 
     test("Search Agent Controller Test", async () => {
-        const agent = await globalController.searchAgentController.getAgentDetails(demoUser.email)
+        const searchAgentController= new SearchAgentController()
+        const agent = searchAgentController.getAgentDetails(demoUser.email)
         expect(agent).toBeDefined()
     })
 })
