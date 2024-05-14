@@ -1,5 +1,7 @@
 import Navigation from "@/components/nav";
 import './sell_style.css'
+import { redirect } from "next/navigation";
+
 export default function SearchAgentPage() {
     return(
         <div className="">
@@ -14,10 +16,16 @@ export default function SearchAgentPage() {
                         transaction every step of the way
                     </p>
                 </div>
-                <div className="search-container">
-                    <input type="text" placeholder="Enter Agent Name..." />
+                <form className="search-container" action={
+                    async (e) => {
+                        'use server'
+                        const search = e.get('search')
+                        redirect(`/agent/search/${search}`)
+                    }
+                }>
+                    <input name='search' type="text" placeholder="Enter Agent Name..." />
                     <i className='bx bx-search' ></i>
-                </div>
+                </form>
             </section>
             {/* header ends */}
 

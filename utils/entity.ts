@@ -136,7 +136,7 @@ export class User {
         }
         )
         if (shortlist) throw new Error('Property already in shortlist')
-            
+
         return await prisma.shortlist.create({
             data: {
                 userId: id,
@@ -146,24 +146,21 @@ export class User {
     }
     //#49 seller search agent. (Can be reused for #49??)
     async searchAgent({ fname }: { fname: string }) {
-        const profile = await prisma.userProfile.findFirst({
+        return await prisma.userProfile.findFirst({
             where: {
                 role: "AGENT"
             },
-            select: {
-                id: true  // Select only the ID field
+            include:{
+                user:{
+                    where:{
+                        firstName:{
+                            contains:fname
+                        },
+                        activated: true,
+                    }
+                }
             }
         });
-
-        // Check if a userProfile was found and extract the ID, otherwise use null
-        const profileId = profile ? profile.id : null;
-        return await prisma.user.findMany({
-            where: {
-                firstName: fname,
-                profileId: profileId,
-                activated: true
-            }
-        })
     }
     //get the ratingsandreviews of an agent. ratings and reviews are anonymous (this can be reused for #51)
     async getRatingsAndReviews({ email }: { email: string }) {

@@ -51,3 +51,4 @@ export class REAViewRatingsAndReviews{
         return await userEntity.getRatingsAndReviews({email})
     }
 }
+

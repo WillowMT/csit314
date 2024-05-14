@@ -8,8 +8,8 @@ import ReviewForm from "./review-form";
 import PropertyCardBuyer from "./property-card-buyer";
 
 
-export default function UserTabs({ role, listings, shortListings,ownership, ratingsAndReviews }: { role: string, listings?: any, shortListings?:any,ownership?:any, ratingsAndReviews: any}) {
-    
+export default function UserTabs({ role, listings, shortListings, ownership, ratingsAndReviews }: { role: string, listings?: any, shortListings?: any, ownership?: any, ratingsAndReviews: any }) {
+
 
     return (
         <div className="flex w-full flex-col mt-4">
@@ -37,7 +37,7 @@ export default function UserTabs({ role, listings, shortListings,ownership, rati
                             <div className="">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {
-                                        listings.map((p:any, i:any) => {
+                                        listings.map((p: any, i: any) => {
                                             return (
                                                 <PropertyCard key={i} property={p.property} role={role} />
                                             )
@@ -49,31 +49,27 @@ export default function UserTabs({ role, listings, shortListings,ownership, rati
                     )
                 }
 
-                {
-                    role === 'BUYER' && (
-
-                        <Tab
-                            key="listings"
-                            title={
-                                <div className="flex items-center space-x-2">
-                                    <span>My Shortlists</span>
-                                </div>
+                <Tab
+                    key="listings"
+                    title={
+                        <div className="flex items-center space-x-2">
+                            <span>My Shortlists</span>
+                        </div>
+                    }
+                >
+                    <div className="">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            {
+                                shortListings.map((p: any, i: any) => {
+                                    return (
+                                        <PropertyCardBuyer key={i} property={p.property} role={role} />
+                                    )
+                                })
                             }
-                        >
-                            <div className="">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                    {
-                                        shortListings.map((p:any, i:any) => {
-                                            return (
-                                                <PropertyCardBuyer key={i} property={p.property} role={role} />
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-                        </Tab>
-                    )
-                }
+                        </div>
+                    </div>
+                </Tab>
+
                 {
                     role === 'SELLER' && (
 
@@ -88,7 +84,33 @@ export default function UserTabs({ role, listings, shortListings,ownership, rati
                             <div className="">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {
-                                        ownership.map((p:any, i:any) => {
+                                        ownership.map((p: any, i: any) => {
+                                            return (
+                                                <PropertyCardBuyer key={i} property={p.property} role={role} />
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        </Tab>
+                    )
+                }
+                {
+                    role === 'SELLER' && (
+
+                        <Tab
+                            key="soldProperties"
+                            title={
+                                <div className="flex items-center space-x-2">
+                                    <span>Sold Properties</span>
+                                </div>
+                            }
+                        >
+                            <div className="">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {
+                                        ownership.map((p: any, i: any) => {
+                                            if (p.property.onSale === true) return
                                             return (
                                                 <PropertyCardBuyer key={i} property={p.property} role={role} />
                                             )
@@ -122,7 +144,7 @@ export default function UserTabs({ role, listings, shortListings,ownership, rati
                                 }
 
                                 {
-                                    ratingsAndReviews.map((rating:any, i:number) => {
+                                    ratingsAndReviews.map((rating: any, i: number) => {
                                         return (
                                             <div key={i} className=" space-y-4 mb-4 border-b pb-4">
                                                 <div className=" italic text-slate-600/60 text-sm">Anonymous</div>
