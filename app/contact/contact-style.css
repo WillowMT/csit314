@@ -59,3 +59,28 @@ p, li, section, button{
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
+@media screen and (max-width: 768px) {
+    .box {
+        flex-direction: column; 
+    }
+    .left img{
+        height: 30vh;
+    }
+    .right {
+        width: 100%;
+        padding: 2rem;
+    }
+}
+@media screen and (max-width: 472px){
+    .right p{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 385px){
+    .right p{
+        font-size: 10px;
+    }
+    .right{
+        padding: 1rem;
+    }
+}
