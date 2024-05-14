@@ -26,7 +26,7 @@ export default function UserTabs({ email, role, properties, ratingAndReview }:{e
                     key="shortlistings"
                     title={
                         <div className="flex items-center space-x-2">
-                            <span>ShortListings</span>
+                            <span>Create New Property Listing</span>
                         </div>
                     }
                 >
