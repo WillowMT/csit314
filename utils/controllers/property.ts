@@ -86,7 +86,7 @@ export class SellerViewPropertyInfoController{
 }
 //#45 Calculate Property Mortgage Value
 export class CalculateMortgageController{
-    async calculateMortgage({propertyid, loantermyears, monthlyinterest}:{propertyid:string,loantermyears:number,monthlyinterest:number}){
-        return await propertyEntity.calculateMortgage({propertyid, loantermyears, monthlyinterest})
+    async calculateMortgage({price, loantermyears, monthlyinterest}:{price:number,loantermyears:number,monthlyinterest:number}){
+        return await propertyEntity.calculateMortgage({price, loantermyears, monthlyinterest})
     }
 }

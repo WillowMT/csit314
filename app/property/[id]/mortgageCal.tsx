@@ -1,46 +1,55 @@
 'use client'
+
 import React from "react";
-import { Textarea, Button } from "@nextui-org/react";
+import { Textarea, Button, Input } from "@nextui-org/react";
 
-export default function MortageCal({price}:{price:number}) {
-    const [interest_value, setInterestValue] = React.useState("");
-    const [year_value, setYearValue] = React.useState("");
-    const [monthlyPayment, setMonthlyPayment] = React.useState("");
+import { calculateMonthlyPayment } from "./action";
+import { useFormState } from "react-dom";
 
-    const calculateMonthlyPayment = () => {
-        const interestRate = parseFloat(interest_value) / 100 / 12;
-        const termInYears = parseFloat(year_value);
-        const monthlyPayment = price *
-            interestRate * Math.pow(1 + interestRate, termInYears) /
-            (1 - Math.pow(1 + interestRate, -12 * termInYears));
-        setMonthlyPayment(monthlyPayment.toFixed(2));
-    };
+export default function MortageCal({ price }: { price: number }) {
+    const [state, formAction] = useFormState(calculateMonthlyPayment,0)
+
+    
 
     return (
-        <div className="w-[350px] flex flex-col gap-2 items-center space-y-4">
-        <Textarea
-            label="Interest Rate"
-            labelPlacement="outside"
-            placeholder="Enter your monthly interest rate"
-            value={interest_value}
-            onValueChange={(value) => setInterestValue(value)}
-        />
-        <Textarea
-            label="Years of payment"
-            labelPlacement="outside"
-            placeholder="Enter your lease year"
-            value={year_value}
-            onValueChange={(value) => setYearValue(value)}
-        />
-        <Button color="default" onClick={calculateMonthlyPayment}>
-            Calculate
-        </Button>
-        {monthlyPayment && (
-        <p>
-        Estimated monthly payment is <strong>${monthlyPayment}</strong>
-        </p>
-        )}
-        
-        </div>
+        <form action={formAction} className="w-[350px] flex flex-col gap-2 items-center space-y-4">
+            <Input
+                className="h-[50px]"
+                type="number"
+                name="interest"
+                label="Interest Rate"
+                labelPlacement="inside"
+                placeholder="Enter your monthly interest rate"
+                isRequired
+            />
+            <Input
+                className="h-[50px]"
+                type="number"
+                name="years"
+                label="Years of payment"
+                labelPlacement="inside"
+                placeholder="Enter your lease year"
+                isRequired
+            />
+            <Input
+                className="h-[50px] hidden"
+                type="number"
+                name="price"
+                label="Price"
+                labelPlacement="inside"
+                placeholder="Enter your Price"
+                defaultValue={price.toString()}
+                isRequired
+            />
+            <Button color="default" type="submit">
+                Calculate
+            </Button>
+            {state != 0 && (
+                <p>
+                    Estimated monthly payment is <strong>${state.toFixed(2)}</strong>
+                </p>
+            )}
+
+        </form>
     );
 }

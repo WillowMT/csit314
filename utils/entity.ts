@@ -785,19 +785,11 @@ export class Property {
         })
     }
     //#45
-    async calculateMortgage({ propertyid, loantermyears, monthlyinterest }: { propertyid: string, loantermyears: number, monthlyinterest: number }) {
-        const propprice = await prisma.property.findFirst({
-            where: {
-                id: propertyid
-            },
-            select: {
-                price: true
-            }
-        })
-        const propertyprice = propprice !== null ? propprice.price : 0
+    async calculateMortgage({ price, loantermyears, monthlyinterest }: { price: number, loantermyears: number, monthlyinterest: number }) {
+    
         const numerator = monthlyinterest * Math.pow(1 + (monthlyinterest / 100), loantermyears * 12)
         const denominator = Math.pow(1 + (monthlyinterest / 100), loantermyears * 12) - 1
-        const monthlyPayment = propertyprice * (numerator / denominator)
+        const monthlyPayment = price * (numerator / denominator)
         return monthlyPayment
     }
     //#243, 242, 241 - >you can use for buyer, seller, or real estate agent.
