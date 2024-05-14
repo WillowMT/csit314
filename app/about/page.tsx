@@ -30,10 +30,14 @@ export default function Page() {
             </section>
             <section className="achievements">
                 <div className="awards">
-                    <p>Elite Estate proudly secured the &apos;2024 Real Estate Agency of the Year&apos; award, a testament to our unwavering commitment to excellence, exceptional client service, and outstanding performance in the competitive real estate market.</p>
+                    <div className="content">
+                        <p>Elite Estate proudly secured the &apos;2024 Real Estate Agency of the Year&apos; award, a testament to our unwavering commitment to excellence, exceptional client service, and outstanding performance in the competitive real estate market.</p>
+                    </div>
                 </div>
                 <div className="buildings">
-                    <p>Sold 500 condominiums and HDBs within a span of just five years. This remarkable achievement reflects not only our proficiency in the real estate market but also the trust and satisfaction of our valued clients. At Elite Estate, excellence isn&apos;t just a goal—it&apos;s our standard.</p>
+                    <div className="content">
+                        <p>Sold 500 condominiums and HDBs within a span of just five years. This remarkable achievement reflects not only our proficiency in the real estate market but also the trust and satisfaction of our valued clients. At Elite Estate, excellence isn&apos;t just a goal—it&apos;s our standard.</p>
+                    </div>
                 </div>
             </section>
             <section className="customer">
