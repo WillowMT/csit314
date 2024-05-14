@@ -61,7 +61,7 @@ export default function UserForm({ session }: { session: SessionData }) {
                     <Select
                         name="country"
                         className="mb-4 w-[400px] mr-auto"
-                        defaultSelectedKeys={['Singapore']}
+                        defaultSelectedKeys={[session.country]}
                         label="Country"
                         labelPlacement={'outside'}
                         placeholder="Country"
