@@ -38,8 +38,6 @@ export default async function Page() {
             }
         }
     })
-
-    console.log(agent);
     
 
 

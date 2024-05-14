@@ -6,7 +6,6 @@ import { SessionData } from "@/utils/lib";
 import { logout } from "@/utils/auth";
 
 export default function Profile({ email, firstName, role }: { email: string, firstName: string, role: string }) {
-    console.log(role);
     
     return (
         <Dropdown

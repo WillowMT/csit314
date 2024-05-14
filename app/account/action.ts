@@ -26,8 +26,6 @@ export async function editProperty(formData: FormData, id: string) {
         id, name, address, description, onSale, leaseYear, squareFt, builtYear, price, imageUrl, bedroom, bathroom, activated, propertyType
     }
 
-    console.log(propertyObj);
-
     const editPropertyListingController = new EditPropertyListingController()
     return await editPropertyListingController.SavePropInfoChange(propertyObj)
 }

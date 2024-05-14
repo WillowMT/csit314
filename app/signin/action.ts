@@ -34,7 +34,6 @@ export async function login(formData: FormData) {
 
         return { success: true }
     } catch (error: any) {
-        console.log(error);
         return { success: false }
     }
 

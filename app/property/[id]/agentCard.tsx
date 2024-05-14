@@ -6,8 +6,6 @@ import { UserInterface } from "@/utils/demo";
 
 export default function AgentCard({user}: {user: UserInterface}) {
 
-  console.log(user);
-
   if (!user) {
     return
   }
