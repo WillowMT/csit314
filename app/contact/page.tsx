@@ -13,9 +13,9 @@ export default function Page() {
                     </div>
                     <div className="right">
                         <div className="icons">
-                            <p class='bx bxl-facebook'></p>
-                            <p class='bx bxl-instagram' ></p>
-                            <p class='bx bxl-twitter' ></p>
+                            <p className='bx bxl-facebook'></p>
+                            <p className='bx bxl-instagram' ></p>
+                            <p className='bx bxl-twitter' ></p>
                         </div>
                         <p>eliteestate@gmail.com</p>
                         <p>https://www.facebook.com/EliteEstate</p>
