@@ -4,6 +4,7 @@ import { comparePassword, encryptPassword } from "./hash";
 
 import prisma from "./prisma";
 import { PropertyInterface, UserInterface } from "./demo";
+import { error } from "console";
 
 export class User {
     email = ""
@@ -658,7 +659,7 @@ export class Property {
             }
         })
 
-        if (!lister?.id) return null
+        if (!lister?.id) throw new Error("Agent not found!")
 
         const owner = await prisma.user.findUnique({
             where: {
@@ -666,7 +667,7 @@ export class Property {
             }
         })
 
-        if (!owner?.id) return null
+        if (!owner?.id) throw new Error("Owner not found!")
 
         const propertyListing = await prisma.property.create({
             data: {
