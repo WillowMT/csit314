@@ -48,27 +48,30 @@ export default function UserTabs({ role, listings, shortListings, ownership, rat
                         </Tab>
                     )
                 }
-
-                <Tab
-                    key="listings"
-                    title={
-                        <div className="flex items-center space-x-2">
-                            <span>My Shortlists</span>
-                        </div>
-                    }
-                >
-                    <div className="">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {
-                                shortListings.map((p: any, i: any) => {
-                                    return (
-                                        <PropertyCardBuyer key={i} property={p.property} role={role} />
-                                    )
-                                })
+                {
+                    role != 'AGENT' && (
+                        <Tab
+                            key="shortlistings"
+                            title={
+                                <div className="flex items-center space-x-2">
+                                    <span>My Shortlists</span>
+                                </div>
                             }
-                        </div>
-                    </div>
-                </Tab>
+                        >
+                            <div className="">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {
+                                        shortListings.map((p: any, i: any) => {
+                                            return (
+                                                <PropertyCardBuyer key={i} property={p.property} role={role} />
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        </Tab>
+                    )
+                }
 
                 {
                     role === 'SELLER' && (
