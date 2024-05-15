@@ -3,6 +3,33 @@ import { Button, Avatar, Dropdown, DropdownTrigger, DropdownItem, DropdownMenu, 
 import { getSession } from "@/utils/auth"
 import Profile from "./profile"
 
+const roles = ["BUYER", "SELLER", "ADMIN", "AGENT"]
+
+const routes = {
+    "BUYER": [
+        {
+            name: "Buy",
+            route: "/buy"
+        }
+    ],
+    "SELLER": [
+        {
+            name: "Sell",
+            route: "/sell"
+        }
+    ],
+    "ADMIN": [
+        {
+            name: "Admin",
+            route: "/admin"
+        }
+    ],
+    "AGENT": [{
+        name: "Create Shortlist",
+        route: "/property/shortlist"
+    }]
+}
+
 export default async function Navigation() {
     const session = await getSession()
 
@@ -12,9 +39,9 @@ export default async function Navigation() {
                 <div className=" grid place-content-center mr-auto sm:mr-0">
                 </div>
                 <div className="flex list-none space-x-10 mr-auto ml-8 text-sm underline">
-                <Link className="grid place-items-center hover:underline" href={"/buy"} style={{ width: "100px", height: "30px" }}>
-                    <img src="/logo-nav.png" />
-                </Link>
+                    <Link className="grid place-items-center hover:underline" href={"/buy"} style={{ width: "100px", height: "30px" }}>
+                        <img src="/logo-nav.png" />
+                    </Link>
 
                     {
                         session.role === "SELLER" && (

@@ -14,7 +14,7 @@ export default function Collapse() {
         <div>
             <MyAccordion variant="light" color="gray" defaultExpandedKeys={["1"]} isCompact>
                 <AccordionItem key="1" aria-label="Filter" title="">
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center pb-8">
                         <h2 className=" text-black text-2xl py-4">Property Filter</h2>
                         <div className="w-[500px] h-[100px] pl-6 rounded-2xl flex justify-center items-center">
                             <form className="max-w-[350px]" action={
@@ -62,28 +62,16 @@ export default function Collapse() {
                                         <SearchIcon className="text-black/50 mb-0.5 dark:text-black/90 text-slate-400 pointer-events-none flex-shrink-0" />
                                     }
                                 />
-                                <div className="flex flex-row mt-4">
-                                    <RadioGroup orientation="horizontal"
-                                        name="radio"
-                                        color="default"
-                                        value={selected}
-                                        onValueChange={setSelected}
-                                        defaultValue="onsale">
-                                        <Radio onClick={() => {
-                                            router.push('/property/onsale')
-                                        }} value="onsale">On Sale</Radio>
-                                        <Radio onClick={() => {
-                                            router.push('/property/sold')
-                                        }} value="sold">Sold</Radio>
-                                    </RadioGroup>
+                                <div className="flex flex-row mt-4 justify-around">
+                                    <Button onClick={() => {
+                                        router.push('/property/onsale')
+                                    }} value="onsale">On Sale</Button>
+                                    <Button onClick={() => {
+                                        router.push('/property/sold')
+                                    }} value="sold">Sold</Button>
                                 </div>
                             </form>
                         </div>
-                    </div>
-                    <div className="flex py-4 justify-center pr-5">
-                        <Button>
-                            Apply filter
-                        </Button>
                     </div>
                 </AccordionItem>
             </MyAccordion>
