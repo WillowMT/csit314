@@ -13,7 +13,9 @@ export default async function Page() {
 
     const session = await getSession()
 
-    var properties = await prisma.property.findMany({take:20})
+    const buyerViewPropertyInfoController = new BuyerViewPropertyInfoController()
+
+    const properties = await buyerViewPropertyInfoController.getPropertyInfo()
 
 
     return (

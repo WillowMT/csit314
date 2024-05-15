@@ -74,8 +74,8 @@ export class REAViewPropertyInfoController{
 }
 //#241 Buyer view individual property info
 export class BuyerViewPropertyInfoController{
-    async getPropertyInfo({propertyid}:{propertyid:string}){
-        return await propertyEntity.getPropertyInfo({propertyid})
+    async getPropertyInfo(){
+        return await propertyEntity.getAllProperties()
     }
 }
 //#242 Seller view individual property info

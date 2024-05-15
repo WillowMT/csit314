@@ -3,7 +3,6 @@ import React from 'react';
 import './styles.css';
 import PropertyBox from './PropertyBox'
 import PropertyCard from "./property-card";
-import { BuyerViewPropertyInfoController } from "@/utils/controllers/property";
 import { getSession } from "@/utils/auth";
 import { demo } from "@/utils/demo";
 import prisma from "@/utils/prisma";
