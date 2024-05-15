@@ -513,7 +513,7 @@ export class User {
     }
     async logout() {
         const session = await getSession();
-        return session.destroy();
+        await session.destroy();
     }
 
 }
