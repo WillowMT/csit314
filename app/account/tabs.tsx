@@ -49,7 +49,7 @@ export default function UserTabs({ role, listings, shortListings, ownership, rat
                     )
                 }
                 {
-                    role != 'AGENT' && (
+                    role == "BUYER" && (
                         <Tab
                             key="shortlistings"
                             title={

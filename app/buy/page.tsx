@@ -8,10 +8,26 @@ import { BuyerViewPropertyInfoController } from "@/utils/controllers/property";
 import { getSession } from "@/utils/auth";
 import { demo } from "@/utils/demo";
 import prisma from "@/utils/prisma";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
 
     const session = await getSession()
+
+    // redirect agent to create property page
+    if (session.role === 'AGENT') {
+        redirect('/property/shortlist')
+    }
+
+    // redirect admin to admin page
+    if (session.role === 'ADMIN') {
+        redirect('/admin/userprofile')
+    }
+
+    // redirect seller to agent search page
+    if (session.role === 'SELLER') {
+        redirect('/sell')
+    }
 
     const buyerViewPropertyInfoController = new BuyerViewPropertyInfoController()
 
