@@ -787,10 +787,16 @@ export class Property {
     //#45
     async calculateMortgage({ price, loantermyears, monthlyinterest }: { price: number, loantermyears: number, monthlyinterest: number }) {
     
-        const numerator = monthlyinterest * Math.pow(1 + (monthlyinterest / 100), loantermyears * 12)
-        const denominator = Math.pow(1 + (monthlyinterest / 100), loantermyears * 12) - 1
-        const monthlyPayment = price * (numerator / denominator)
-        return monthlyPayment
+        // Convert annual interest rate to a monthly decimal rate
+        const monthlyRate = monthlyinterest / 100 / 12;
+        const numberOfPayments = loantermyears * 12;
+
+        // Calculate the monthly payment using the formula
+        const numerator = monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments);
+        const denominator = Math.pow(1 + monthlyRate, numberOfPayments) - 1;
+        const monthlyPayment = price * (numerator / denominator);
+
+        return monthlyPayment;
     }
     //#243, 242, 241 - >you can use for buyer, seller, or real estate agent.
     async getPropertyInfo({ propertyid }: { propertyid: string }) {
