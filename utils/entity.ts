@@ -801,6 +801,24 @@ export class Property {
     }
     //#243, 242, 241 - >you can use for buyer, seller, or real estate agent.
     async getPropertyInfo({ propertyid }: { propertyid: string }) {
+        var propviews= await prisma.property.findFirst({
+            where:{
+                id:propertyid
+            },
+            select:{
+                views:true
+            }
+        })
+        var propertyviews = propviews?.views ?? 0;
+        propertyviews++
+        await prisma.property.update({
+            where:{
+                id:propertyid
+            },
+            data:{
+                views:propertyviews
+            }
+        })
         return await prisma.property.findFirst({
             where: {
                 id: propertyid
