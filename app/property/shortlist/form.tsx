@@ -15,11 +15,12 @@ export default function PropertyForm() {
 
         <form action={
             async (e) => {
-                await submit(e).then(() => {
-                    toast.success("Property added successfully")
-                }).catch(() => {
-                    toast.error("Failed to add property")
-                })
+                const {success} = await submit(e)
+                if(success){
+                    toast.success('Property Registered Successfully')
+                } else {
+                    toast.error('Failed to Register Property')
+                }
             }
         } className="mt-14 mb-8">
             <div className=" bg-brand-100 mx-4 my-8 py-8 rounded-md">
