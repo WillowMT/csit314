@@ -66,24 +66,16 @@ export class SellerPropertyViewsController{
         return await propertyEntity.getPropertyViews({propertyid})
     }
 }
-//#243 REA view individual property info
-export class REAViewPropertyInfoController{
-    async getPropertyInfo({propertyid}:{propertyid:string}){
-        return await propertyEntity.getPropertyInfo({propertyid})
-    }
-}
-//#241 Buyer view individual property info
-export class BuyerViewPropertyInfoController{
+
+
+//#241,#242,#243 view individual property info
+export class ViewPropertyInfoController{
     async getPropertyInfo(){
         return await propertyEntity.getAllProperties()
     }
 }
-//#242 Seller view individual property info
-export class SellerViewPropertyInfoController{
-    async getPropertyInfo({propertyid}:{propertyid:string}){
-        return await propertyEntity.getPropertyInfo({propertyid})
-    }
-}
+
+
 //#45 Calculate Property Mortgage Value
 export class CalculateMortgageController{
     async calculateMortgage({price, loantermyears, monthlyinterest}:{price:number,loantermyears:number,monthlyinterest:number}){
