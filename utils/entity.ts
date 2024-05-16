@@ -4,6 +4,7 @@ import { comparePassword, encryptPassword } from "./hash";
 
 import prisma from "./prisma";
 import { PropertyInterface, UserInterface } from "./demo";
+import { error } from "console";
 
 export class User {
     email = ""
@@ -658,7 +659,7 @@ export class Property {
             }
         })
 
-        if (!lister?.id) return null
+        if (!lister?.id) throw new Error("Agent not found!")
 
         const owner = await prisma.user.findUnique({
             where: {
@@ -666,7 +667,7 @@ export class Property {
             }
         })
 
-        if (!owner?.id) return null
+        if (!owner?.id) throw new Error("Owner not found!")
 
         const propertyListing = await prisma.property.create({
             data: {
@@ -800,6 +801,24 @@ export class Property {
     }
     //#243, 242, 241 - >you can use for buyer, seller, or real estate agent.
     async getPropertyInfo({ propertyid }: { propertyid: string }) {
+        var propviews= await prisma.property.findFirst({
+            where:{
+                id:propertyid
+            },
+            select:{
+                views:true
+            }
+        })
+        var propertyviews = propviews?.views ?? 0;
+        propertyviews++
+        await prisma.property.update({
+            where:{
+                id:propertyid
+            },
+            data:{
+                views:propertyviews
+            }
+        })
         return await prisma.property.findFirst({
             where: {
                 id: propertyid
