@@ -101,6 +101,7 @@ type PropertyInterface = {
     activated: boolean;
     propertyType: string;
     publicId?: string | undefined | null;
+    shortList?:any[]
 }
 
 type UserProfileInterface = ReturnType<typeof createRandomUserProfile>

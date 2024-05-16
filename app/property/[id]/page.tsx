@@ -24,9 +24,20 @@ export default async function Page({ params }: { params: { id: string } }) {
         }
     })
 
+    
     if (!property) {
         return <div>Property not found</div>
     }
+
+    // update view count
+    await prisma.property.update({
+        where: {
+            publicId: params.id
+        },
+        data: {
+            views: (property.views || 0) + 1
+        }
+    })
 
     return (
         <div>
@@ -44,11 +55,17 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <div className="space-y-1">
                             <div className="flex flex-row">
                                 <h4 className="text-3xl font-bold pl-4 pr-3">{property.name}</h4>
-
                                 <ListingButton propertyId={property.id} />
                             </div>
+                            <span className="inline-flex text-sm place-items-center ml-4 text-black/50">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4 mr-1">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                                {property.views}
+                            </span>
 
-                            <p className="text-large pl-4">123 Figuenrter Street, Gedasg, 1235</p>
+                            <p className="text-large pl-4">{property.address}</p>
                         </div>
                         <br></br>
                         <div className="flex h-2 items-center space-x-4 text-small justify-start pl-4">
@@ -84,26 +101,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     <AgentCard user={property.listing[0].user || null} />
                                 )
                             }
-                        </div>
-                        <Divider className="my-3" />
-                        <div className="text-medium pb-2 pl-4">
-                            <h1>Description</h1>
-                            <div className="pl-3">
-                                <p>* 2.5-storey gem bathed in natural light with unique skylight.</p>
-
-                                <p>* 5 bedrooms + helper&apos;s room for ultimate comfort.</p>
-
-                                <p>* Unlike most Inter-Terrace, this house is bright and breezy, with Skylight bathes the home in natural light around the stairs.</p>
-
-                                <p>* Modernised bathrooms for a touch of luxury.</p>
-
-                                <p>* Excellent Connectivity: Just an apprx. 2 mins walk to the nearest bus-stop, and not forgetting the convenient access to NEX or Woodleigh mall, amenities, and Woodleigh or Serangoon MRT stations, Bus-Interchange,
-                                    Various Expressway like CTE, PIE, KPE.</p>
-
-                                <p>Prime Location for Families & Investors:
-                                    <br></br>- Top local schools nearby (Yangzheng Primary, St. Gabriel&apos;s Primary & Secondary, Maris Stella High School, Zhonghua Secondary, Nanyang JC, Raffles Institution, Raffles Girls&apos; Secondary and More)
-                                    <br></br>- International schools like Australian Int&apos;l School, Stamford American School, International French School, NEXUS, etc</p>
-                            </div>
                         </div>
                         <Divider className="my-3" />
                     </div>

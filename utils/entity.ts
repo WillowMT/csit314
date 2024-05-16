@@ -802,7 +802,9 @@ export class Property {
     }
 
     async getAllProperties() {
-        return await prisma.property.findMany({take:20})
+        return await prisma.property.findMany({take:20,include:{
+            shortList:true
+        }},)
     }
 }
 //showdis
