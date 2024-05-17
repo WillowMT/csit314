@@ -62,6 +62,34 @@ export class User {
             }
         })
     }
+
+    async getAccountInfoEmail({ email }: {
+        email: string
+    }) {
+        return await prisma.user.findUnique({
+            where: {
+                email: email
+            },
+            include: {
+                listing: {
+                    select: {
+                        property: true
+                    }
+                },
+                ratingAndReview: true,
+                shortList: {
+                    select: {
+                        property: true
+                    }
+                },
+                ownership: {
+                    select: {
+                        property: true
+                    }
+                }
+            }
+        })
+    }
     //showdis
     // # 70 system admin creates new user account
     async createUserAccount(user: UserInterface) {

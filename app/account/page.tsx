@@ -1,11 +1,13 @@
 import Navigation from "@/components/nav";
 import './agent_acc_style.css';
-import { demo } from "@/utils/demo";
+import { UserInterface, demo } from "@/utils/demo";
 import PropertyCard from "@/app/account/property-card";
 import { getSession } from "@/utils/auth";
 import { Chip, Tab, Tabs } from "@nextui-org/react";
 import UserTabs from "./tabs";
 import prisma from "@/utils/prisma";
+import {ViewAdminAccountPersonalController, ViewSellerAccountPersonalController, ViewBuyerAccountPersonalController} from "@/utils/controllers/user"
+import { ViewAgentAccountController } from "@/utils/controllers/agent";
 
 export default async function Page() {
 
@@ -15,31 +17,28 @@ export default async function Page() {
         return <div>Access Denied</div>
     }
 
-    const agent = await prisma.user.findUnique({
-        where:{
-            email:session.email
-        },
-        select:{
-            listing:{
-                select:{
-                    property:true
-                }
-            },
-            ratingAndReview:true,
-            shortList:{
-                select:{
-                    property:true
-                }
-            },
-            ownership:{
-                select:{
-                    property:true
-                }
-            }
-        }
-    })
-    
+    let user: UserInterface | null = null
 
+    if (session.role === 'SELLER') {
+        const sellerController = new ViewSellerAccountPersonalController()
+        user = await sellerController.getSellerPersonalAccount({ email: session.email })
+    }
+
+    if (session.role === 'BUYER') {
+        const buyerController = new ViewBuyerAccountPersonalController()
+        user = await buyerController.getBuyerPersonalAccount({ email: session.email })
+    }
+
+    if (session.role === 'ADMIN') {
+        const adminController = new ViewAdminAccountPersonalController()
+        user = await adminController.getAdminPersonalAccount({ email: session.email })
+    }
+
+    if (session.role === 'AGENT') {
+        const agentController = new ViewAgentAccountController()
+        user = await agentController.getAgentDetails({ email: session.email })
+    }
+    
 
     return (
         <div>
@@ -60,7 +59,12 @@ export default async function Page() {
                     <p className="email">{session.email}</p>
                 </div>
 
-                <UserTabs ownership={agent?.ownership} shortListings={agent?.shortList} listings={agent?.listing} role={session.role} ratingsAndReviews={agent?.ratingAndReview} />
+                {
+                    user != null && (
+                        <UserTabs ownership={user?.ownership} shortListings={user?.shortList} listings={user?.listing} role={session.role} ratingsAndReviews={user?.ratingAndReview} />
+                    )
+                }
+
 
             </section>
         </div>

@@ -82,6 +82,10 @@ type UserInterface = {
     activated?: boolean;
     publicId?: string;
     role?: string
+    ownership?: any[] | undefined | null
+    shortList?: any[] | undefined | null
+    listing?: any[] | undefined | null
+    ratingAndReview?: any[] | undefined | null
 }
 
 type PropertyInterface = {

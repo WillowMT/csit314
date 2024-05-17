@@ -62,20 +62,20 @@ export class UpdateUserAccountController {
 }
 //#180
 export class ViewSellerAccountPersonalController {
-    async getSellerPersonalAccount({ userId }: { userId: string }) {
-        return await userEntity.getAccountInfo({ userId })
+    async getSellerPersonalAccount({ email }: { email: string }) {
+        return await userEntity.getAccountInfoEmail({ email })
     }
 }
 //#179
 export class ViewBuyerAccountPersonalController {
-    async getBuyerPersonalAccount({ userId }: { userId: string }) {
-        return await userEntity.getAccountInfo({ userId })
+    async getBuyerPersonalAccount({ email }: { email: string }) {
+        return await userEntity.getAccountInfoEmail({ email })
     }
 }
 //#182
 export class ViewAdminAccountPersonalController {
-    async getAdminPersonalAccount({ userId }: { userId: string }) {
-        return await userEntity.getAccountInfo({ userId })
+    async getAdminPersonalAccount({ email }: { email: string }) {
+        return await userEntity.getAccountInfoEmail({ email })
     }
 }
 //#50 Seller views REA's sold property listings

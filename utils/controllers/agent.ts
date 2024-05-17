@@ -3,8 +3,8 @@ import { propertyEntity, userEntity } from "../entity";
 //#48,#43 (#43 is buyer looking at agent, #48 is seller looking at agent, can split later)
 export class ViewAgentAccountController {
     // used to return the information of the agent...
-    async getAgentDetails({propertyId}:{propertyId:string}) {
-        return await propertyEntity.getAgentDetails({propertyId})
+    async getAgentDetails({email}:{email:string}) {
+        return await userEntity.getAccountInfoEmail({email})
     }
 }
 //#49 Seller searches for agent
