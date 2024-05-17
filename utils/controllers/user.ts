@@ -78,12 +78,14 @@ export class ViewAdminAccountPersonalController {
         return await userEntity.getAccountInfo({ userId })
     }
 }
+//will be removed
 //#50 Seller views REA's sold property listings
 export class SellerViewREASoldListedPropertyController {
     async getSoldProperty({ email }: { email: string }) {
         return await userEntity.getAgentSoldProperty({ email })
     }
 }
+//will be removed
 //#252 Buyer gets his shortlist for viewing
 export class BuyerViewShortlistController {
     async getShortlist({ userId }: { userId: string }) {
