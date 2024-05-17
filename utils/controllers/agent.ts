@@ -39,12 +39,14 @@ export class ViewREAgentAccountPersonalController{
         return await userEntity.getAccountInfo({userId})
     }
 }
+//will be removed
 //#61 REA view properties he personally list
 export class REAViewListedPropertyController{
     async getREAListedProperty({email}:{email:string}){
         return await userEntity.getREAListedProperty({email})
     }
 }
+//will be removed
 //#66, #67 REA view Ratings and Reviews
 export class REAViewRatingsAndReviews{
     async REAgentRatingAndReviews({email}:{email:string}){
