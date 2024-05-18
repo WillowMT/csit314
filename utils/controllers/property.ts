@@ -1,6 +1,7 @@
 import { userEntity, propertyEntity } from "../entity"
 import { PropertyInterface, UserInterface } from "../demo";
 //seller views the properties he owns
+//#52 will be removed
 export class ViewSellerPropertyController {
     async getOwnedProperty({email}:{email:string}) {
         return await userEntity.getOwnedProperty({email})
@@ -36,6 +37,7 @@ export class CreatePropertyListingController{
         return await propertyEntity.createPropertyListing(lister_email,owner_email,property)
     }
 }
+//feature?
 //#64 REA search from his 
 export class SearchListedPropertyListingController{
     async SearchListedPropertyByAddress({email,address}:{email:string,address:string}){
@@ -54,12 +56,14 @@ export class SuspendPropertyListingController{
         return await propertyEntity.suspendListedProperty({propertyId})
     }
 }
+//will be removed
 //#55 Seller views the number of shortlists in his property
 export class SellerPropertyShortlistCountController{
     async getPropertyShortlistCount({propertyid}:{propertyid:string}){
         return await propertyEntity.getPropertyShortlistCount({propertyid})
     }
 }
+//will be removed
 //#56 Seller views the number of views in his property
 export class SellerPropertyViewsController{
     async getPropertyViews({propertyid}:{propertyid:string}){
