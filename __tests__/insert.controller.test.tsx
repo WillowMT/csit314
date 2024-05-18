@@ -3,77 +3,76 @@ import { CreateUserAccController } from '@/utils/controllers/user'
 import { createRandomUser, createRatingsAndReviews } from '@/utils/demo'
 
 
-describe("Insert Demo Data", () => {
-    test("Insert AGENTS", async () => {
-        const agents = new Array(2).fill(0).map(() => createRandomUser("AGENT"))
-        const createUserAccController = new CreateUserAccController()
-        for (const usr of agents) {
-            const result = await createUserAccController.createUserAccount({
-                email: usr.email,
-                firstName: usr.firstName,
-                lastName: usr.lastName,
-                country: usr.country,
-                phoneNumber: usr.phoneNumber,
-                license: usr.license,
-                agency: usr.agency,
-                ceaNumber: usr.ceaNumber,
-                passwordHash: usr.passwordHash,
-                role: "AGENT"
-            })
-            expect(result).toBeDefined()
-        }
-    })
+test("Insert AGENTS", async () => {
+    const agents = new Array(2).fill(0).map(() => createRandomUser("AGENT"))
+    const createUserAccController = new CreateUserAccController()
+    for (const usr of agents) {
+        const result = await createUserAccController.createUserAccount({
+            email: usr.email,
+            firstName: usr.firstName,
+            lastName: usr.lastName,
+            country: usr.country,
+            phoneNumber: usr.phoneNumber,
+            license: usr.license,
+            agency: usr.agency,
+            ceaNumber: usr.ceaNumber,
+            passwordHash: usr.passwordHash,
+            role: "AGENT"
+        })
+        expect(result).toBeDefined()
+    }
+})
 
-    test("Insert BUYERS", async () => {
-        const buyers = new Array(2).fill(0).map(() => createRandomUser("BUYER"))
-        const createUserAccController = new CreateUserAccController()
-        for (const usr of buyers) {
-            const result = await createUserAccController.createUserAccount({
-                email: usr.email,
-                firstName: usr.firstName,
-                lastName: usr.lastName,
-                country: usr.country,
-                phoneNumber: usr.phoneNumber,
-                passwordHash: usr.passwordHash,
-                role: "BUYER"
-            })
-            expect(result).toBeDefined()
-        }
-    })
+test("Insert BUYERS", async () => {
+    const buyers = new Array(2).fill(0).map(() => createRandomUser("BUYER"))
+    const createUserAccController = new CreateUserAccController()
+    for (const usr of buyers) {
+        const result = await createUserAccController.createUserAccount({
+            email: usr.email,
+            firstName: usr.firstName,
+            lastName: usr.lastName,
+            country: usr.country,
+            phoneNumber: usr.phoneNumber,
+            passwordHash: usr.passwordHash,
+            role: "BUYER"
+        })
+        expect(result).toBeDefined()
+    }
+})
 
-    test("Insert SELLERS", async () => {
-        const sellers = new Array(2).fill(0).map(() => createRandomUser("SELLER"))
-        const createUserAccController = new CreateUserAccController()
-        for (const usr of sellers) {
-            const result = await createUserAccController.createUserAccount({
-                email: usr.email,
-                firstName: usr.firstName,
-                lastName: usr.lastName,
-                country: usr.country,
-                phoneNumber: usr.phoneNumber,
-                passwordHash: usr.passwordHash,
-                role: "SELLER"
-            })
-            expect(result).toBeDefined()
-        }
-    })
+test("Insert SELLERS", async () => {
+    const sellers = new Array(2).fill(0).map(() => createRandomUser("SELLER"))
+    const createUserAccController = new CreateUserAccController()
+    for (const usr of sellers) {
+        const result = await createUserAccController.createUserAccount({
+            email: usr.email,
+            firstName: usr.firstName,
+            lastName: usr.lastName,
+            country: usr.country,
+            phoneNumber: usr.phoneNumber,
+            passwordHash: usr.passwordHash,
+            role: "SELLER"
+        })
+        expect(result).toBeDefined()
+    }
+})
 
-    test("Insert ADMIN", async () => {
-        const admin = new Array(3).fill(0).map(() => createRandomUser("ADMIN"))
-        const createUserAccController = new CreateUserAccController()
-        for (const usr of admin) {
-            const result = await createUserAccController.createUserAccount({
-                email: usr.email,
-                firstName: usr.firstName,
-                lastName: usr.lastName,
-                country: usr.country,
-                phoneNumber: usr.phoneNumber,
-                passwordHash: usr.passwordHash,
-                role: "ADMIN"
-            })
-            expect(result).toBeDefined()
-        }
-    })
+test("Insert ADMIN", async () => {
+    const admin = new Array(3).fill(0).map(() => createRandomUser("ADMIN"))
+    const createUserAccController = new CreateUserAccController()
+    for (const usr of admin) {
+        const result = await createUserAccController.createUserAccount({
+            email: usr.email,
+            firstName: usr.firstName,
+            lastName: usr.lastName,
+            country: usr.country,
+            phoneNumber: usr.phoneNumber,
+            passwordHash: usr.passwordHash,
+            role: "ADMIN"
+        })
+        expect(result).toBeDefined()
+    }
+})
 
     // test("Insert Properties", async () => {
     //     expect(agents.length).toBe(sellers.length)
@@ -110,5 +109,4 @@ describe("Insert Demo Data", () => {
     //     }
     // })
 
-})
 
