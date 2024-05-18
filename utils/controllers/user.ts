@@ -86,13 +86,13 @@ export class SellerViewREASoldListedPropertyController {
     }
 }
 //will be removed
-//#252 Buyer gets his shortlist for viewing
+//#251 Buyer gets his shortlist for viewing
 export class BuyerViewShortlistController {
     async getShortlist({ userId }: { userId: string }) {
         return await userEntity.getShortlist({ userId })
     }
 }
-//#251 Buyer delete one entry in his shortlist
+//#252 Buyer delete one entry in his shortlist
 export class DeleteShortlistController {
     async deleteShortlist({ email, propertyId }: { email: string, propertyId: string }) {
         return await userEntity.deleteShortlist({ email, propertyId })

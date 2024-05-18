@@ -57,6 +57,20 @@ export default function UserForm({ session }: { session: SessionData }) {
                         placeholder="Phone Number"
                         defaultValue={session.phoneNumber}
                     />
+                    <Select
+                        name="country"
+                        className="mb-4 w-[400px] mr-auto"
+                        defaultSelectedKeys={[session.country?session.country:""]}
+                        label="Country"
+                        labelPlacement={'outside'}
+                        placeholder="Country"
+                    >
+                        {countries.map((country) => (
+                            <SelectItem key={country.name} value={country.name}>
+                                {country.name}
+                            </SelectItem>
+                        ))}
+                    </Select>
                     {
                         session.role === 'AGENT' && (
 

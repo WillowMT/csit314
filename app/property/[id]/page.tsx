@@ -103,6 +103,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                             }
                         </div>
                         <Divider className="my-3" />
+                        <div>{property.description}</div>
                     </div>
                 </div>
                 <div>

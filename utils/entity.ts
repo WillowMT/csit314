@@ -516,7 +516,8 @@ export class User {
         // check if user exists
         const user = await prisma.user.findUnique({
             where: {
-                email
+                email,
+                activated:true
             },
             include: {
                 profile: {
