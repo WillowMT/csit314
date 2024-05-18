@@ -26,7 +26,7 @@ export default function Collapse() {
                                     }
 
                                     const radio = e.get('radio')
-                                    router.push(`/property/${radio}/${search}`)
+                                    router.push(`/property/onsale/${search}`)
 
                                 }
 
