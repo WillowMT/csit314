@@ -37,7 +37,7 @@ export class CreatePropertyListingController{
         return await propertyEntity.createPropertyListing(lister_email,owner_email,property)
     }
 }
-//feature?
+//will be removed
 //#64 REA search from his 
 export class SearchListedPropertyListingController{
     async SearchListedPropertyByAddress({email,address}:{email:string,address:string}){

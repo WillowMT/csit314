@@ -1,6 +1,6 @@
 import { propertyEntity, userEntity } from "../entity";
 
-//#48,#43 (#43 is buyer looking at agent, #48 is seller looking at agent, can split later)
+//#48,#43, #181 (#43 is buyer looking at agent, #48 is seller looking at agent, #181 is agent personal)
 export class ViewAgentAccountController {
     // used to return the information of the agent...
     async getAgentDetails({email}:{email:string}) {
@@ -33,6 +33,7 @@ export class ViewRealEstateAgentRatingsAndReviewsController {
         return await userEntity.getRatingsAndReviews({email})
     }
 }
+//will be removed
 //#181 
 export class ViewREAgentAccountPersonalController{
     async getAgentPersonalAccount({userId}:{userId:string}){
