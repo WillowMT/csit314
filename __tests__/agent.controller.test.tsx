@@ -1,17 +1,17 @@
-import { expect, test, describe } from 'vitest'
+import { expect, test, describe, beforeEach } from 'vitest'
 import {CreateUserAccController} from '@/utils/controllers/user'
 import {RateAgentController, ViewRealEstateAgentRatingsAndReviewsController, SearchAgentController} from '@/utils/controllers/agent'
-import { createRandomUser, createRandomProperty, createRatingsAndReviews } from '@/utils/demo'
+import { createRandomUser, createRandomProperty, createRatingsAndReviews, UserInterface } from '@/utils/demo'
 import { encryptPassword } from '@/utils/hash'
 
 describe("Agent Controller Test", async () => {
-    const demoUser = createRandomUser()
-    const passwordHash = await encryptPassword(demoUser.passwordHash?demoUser.passwordHash:"")
-
-    const demoProperty = createRandomProperty()
-    let userid: string
-
-    const demoRating = createRatingsAndReviews()
+    let demoUser : UserInterface
+    let passwordHash:string, userid:string
+    
+    beforeEach(async () => {
+        demoUser = createRandomUser("AGENT")
+        passwordHash = await encryptPassword(demoUser.passwordHash as string)
+    })
 
     test("Create Agent Controller",async () => {
         const createUserAccController= new CreateUserAccController()
@@ -34,6 +34,7 @@ describe("Agent Controller Test", async () => {
     })
 
     test("Rate Agent Controller Test", async () => {
+        const demoRating = createRatingsAndReviews()
         const rateAgentController=new RateAgentController()
         const newRating = await rateAgentController.rate(demoUser.email, demoRating.rating, demoRating.review)
         expect(newRating).toBeDefined()

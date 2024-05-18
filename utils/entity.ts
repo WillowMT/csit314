@@ -148,6 +148,10 @@ export class User {
                 },
                 activated: true,
                 publicId: true
+            },
+            take:40,
+            orderBy:{
+                id:"desc"
             }
         }) as UserInterface[]
     }

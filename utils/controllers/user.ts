@@ -78,7 +78,6 @@ export class ViewAdminAccountPersonalController {
         return await userEntity.getAccountInfoEmail({ email })
     }
 }
-//will be removed
 //#50 Seller views REA's sold property listings
 export class SellerViewREASoldListedPropertyController {
     async getSoldProperty({ email }: { email: string }) {

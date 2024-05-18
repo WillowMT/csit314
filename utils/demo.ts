@@ -80,7 +80,7 @@ type UserInterface = {
         role: string, activated: boolean
     } | undefined;
     activated?: boolean;
-    publicId?: string;
+    publicId?: string | undefined | null;
     role?: string
     ownership?: any[] | undefined | null
     shortList?: any[] | undefined | null

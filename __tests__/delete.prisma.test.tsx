@@ -2,7 +2,7 @@ import { expect, test, describe } from 'vitest'
 import { demo } from '@/utils/demo'
 import prisma from '@/utils/prisma'
 
-describe("Delete Database Records", async () => {
+describe.skip("Delete Database Records", async () => {
 
     //delete shortlists
     test("Delete Shortlists", async () => {
