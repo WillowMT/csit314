@@ -49,7 +49,7 @@ export default async function Navigation() {
                         )
                     }
                     <Link className={`place-items-center hover:underline ${session.role.includes("ADMIN") ? "grid" : "hidden"}`} href={"/admin"}>Admin</Link>
-                    <Link className={`place-items-center hover:underline ${session.role.includes("AGENT") ? "grid" : "hidden"}`} href={"/property/shortlist"}>Create Shortlist</Link>
+                    <Link className={`place-items-center hover:underline ${session.role.includes("AGENT") ? "grid" : "hidden"}`} href={"/property/shortlist"}>Create Property Listing</Link>
                 </div>
                 <div className="">
                     {
