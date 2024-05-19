@@ -8,36 +8,15 @@ import MortageCal from "./mortgageCal";
 import { demo } from "@/utils/demo";
 import { faker } from "@faker-js/faker";
 import prisma from "@/utils/prisma";
+import { ViewPropertyInfoController } from "@/utils/controllers/property";
 
 export default async function Page({ params }: { params: { id: string } }) {
-
-    const property = await prisma.property.findUnique({
-        where: {
-            publicId: params.id
-        },
-        include: {
-            listing: {
-                select: {
-                    user: true
-                }
-            }
-        }
-    })
-
+    const viewPropertyInfoController=new ViewPropertyInfoController()
+    const property = await viewPropertyInfoController.getPropertyInfo(params.id)
     
     if (!property) {
         return <div>Property not found</div>
     }
-
-    // update view count
-    await prisma.property.update({
-        where: {
-            publicId: params.id
-        },
-        data: {
-            views: (property.views || 0) + 1
-        }
-    })
 
     return (
         <div>
