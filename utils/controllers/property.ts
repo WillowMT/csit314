@@ -71,11 +71,16 @@ export class SellerPropertyViewsController{
     }
 }
 
-
+export class ViewAllPropertiesController{
+    async getAllProperties(){
+        return await propertyEntity.getAllProperties()
+    }
+}
 //#241,#242,#243 view individual property info
 export class ViewPropertyInfoController{
-    async getPropertyInfo(){
-        return await propertyEntity.getAllProperties()
+    async getPropertyInfo(publicid:string){
+        const publicId={publicid}
+        return await propertyEntity.getPropertyInfo(publicId)
     }
 }
 

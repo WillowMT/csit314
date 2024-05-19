@@ -4,7 +4,7 @@ import './styles.css';
 import PropertyBox from './PropertyBox'
 import Collapse from "./collapse";
 import PropertyCard from "./property-card";
-import { ViewPropertyInfoController } from "@/utils/controllers/property";
+import { ViewAllPropertiesController, ViewPropertyInfoController } from "@/utils/controllers/property";
 import { getSession } from "@/utils/auth";
 import { demo } from "@/utils/demo";
 import prisma from "@/utils/prisma";
@@ -29,9 +29,9 @@ export default async function Page() {
         redirect('/sell')
     }
 
-    const viewPropertyInfoController = new ViewPropertyInfoController()
+    const viewPropertyInfoController = new ViewAllPropertiesController()
 
-    const properties = await viewPropertyInfoController.getPropertyInfo()
+    const properties = await viewPropertyInfoController.getAllProperties()
 
 
     return (
