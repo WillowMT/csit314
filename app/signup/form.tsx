@@ -107,7 +107,8 @@ export default function Form({ roles }: { roles: UserProfileInterface[] }) {
                             >
                                 {//Todo: Link to UserProfile table through a controller, viewUserProfileController, and use its getUserProfile() function??
                                     //Make sure in the prisma tables BUYER, SELLER, SYSADMIN, REALESTATEAGENT always exists...
-                                    roles.map((item) => (
+                                    roles.filter((item) => item.role !== 'ADMIN')
+                                    .map((item) => (
                                         <SelectItem key={item.role} value={item.role}>
                                             {item.role}
                                         </SelectItem>
